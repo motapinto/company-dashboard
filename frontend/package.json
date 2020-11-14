@@ -85,14 +85,6 @@
     "not ie <= 10",
     "not op_mini all"
   ],
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!**/*index.js",
-      "!src/serviceWorker.js",
-      "!src/polyfill.js"
-    ]
-  },
   "engines": {
     "node": ">=10",
     "npm": ">=6"

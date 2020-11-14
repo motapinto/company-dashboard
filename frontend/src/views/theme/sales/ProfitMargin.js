@@ -4,23 +4,12 @@ import { getStyle, hexToRgba } from "@coreui/utils/src";
 
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
-const brandDanger = getStyle("danger") || "#f86c6b";
 
-const MainChartExample = (attributes) => {
-  const random = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+const ProfitMarginChart = (attributes) => {
+  const data = (() => {
+    const data1 = [98, 166, 159, 122, 109, 91, 139, 99, 140, 193, 79, 160];
+    const data2 = [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
 
-  const defaultDatasets = (() => {
-    let elements = 27;
-    const data1 = [];
-    const data2 = [];
-    const data3 = [];
-    for (let i = 0; i <= elements; i++) {
-      data1.push(random(50, 200));
-      data2.push(random(80, 100));
-      data3.push(65);
-    }
     return [
       {
         label: "Gross Profit Margin",
@@ -41,17 +30,17 @@ const MainChartExample = (attributes) => {
     ];
   })();
 
-  const defaultOptions = (() => {
+  const options = (() => {
     return {
       maintainAspectRatio: false,
       legend: {
-        display: false,
+        display: true,
       },
       scales: {
         xAxes: [
           {
             gridLines: {
-              drawOnChartArea: false,
+              drawOnChartArea: true,
             },
           },
         ],
@@ -84,40 +73,24 @@ const MainChartExample = (attributes) => {
   return (
     <CChartLine
       {...attributes}
-      datasets={defaultDatasets}
-      options={defaultOptions}
+      datasets={data}
+      options={options}
       labels={[
-        "Mo",
-        "Tu",
-        "We",
-        "Th",
-        "Fr",
-        "Sa",
-        "Su",
-        "Mo",
-        "Tu",
-        "We",
-        "Th",
-        "Fr",
-        "Sa",
-        "Su",
-        "Mo",
-        "Tu",
-        "We",
-        "Th",
-        "Fr",
-        "Sa",
-        "Su",
-        "Mo",
-        "Tu",
-        "We",
-        "Th",
-        "Fr",
-        "Sa",
-        "Su",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
       ]}
     />
   );
 };
 
-export default MainChartExample;
+export default ProfitMarginChart;
