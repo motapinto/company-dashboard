@@ -9,7 +9,7 @@ const TheFooter = () => {
       </div>
       <div className="mfs-auto">
         <span className="mr-1">Powered by</span>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
           React JS
         </a>
       </div>

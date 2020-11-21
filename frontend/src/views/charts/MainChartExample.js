@@ -4,7 +4,6 @@ import { getStyle, hexToRgba } from "@coreui/utils/src";
 
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
-const brandDanger = getStyle("danger") || "#f86c6b";
 
 const MainChartExample = (attributes) => {
   const random = (min, max) => {
