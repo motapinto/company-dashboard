@@ -32,6 +32,12 @@ export default [
     icon: "cil-graph",
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Procurement Report",
+    to: "/theme/procurement",
+    icon: "cil-graph",
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["Components"],
   },
