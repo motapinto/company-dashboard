@@ -168,9 +168,9 @@ const Procurement = () => {
         </CCol>
       </CRow>
 
-      <CRow>
-        <CCol sm="6" lg="6">
-          <CCard className="h-100 mb-5">
+      <CRow className="h-100">
+        <CCol sm="6" lg="6" className="mb-4">
+          <CCard className="h-100">
             <CCardHeader>
               <h3>Supplier Quality Rating</h3>
             </CCardHeader>
@@ -212,8 +212,8 @@ const Procurement = () => {
           </CCard>
         </CCol>
 
-        <CCol sm="6" lg="6">
-          <CCard>
+        <CCol sm="6" lg="6" className="mb-4">
+          <CCard className="h-100">
             <CCardHeader>
               <h3>Purchases in Time and Budget</h3>
             </CCardHeader>
@@ -260,16 +260,18 @@ const Procurement = () => {
       </CRow>
 
       <CRow>
-        <CCard className="w-100">
-          <CCardHeader className="text-center">
-            <h3>Purchase Order Cycle Time and Lead Time</h3>
-          </CCardHeader>
-          <CCardBody>
-            <LineChart
-              datasets={purchaseOrder}
-            />
-          </CCardBody>
-        </CCard>
+        <CCol>
+          <CCard className="w-100">
+            <CCardHeader className="text-center">
+              <h3>Purchase Order Cycle Time and Lead Time</h3>
+            </CCardHeader>
+            <CCardBody>
+              <LineChart
+                datasets={purchaseOrder}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
       </CRow>
     </>
   );
