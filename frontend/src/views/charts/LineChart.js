@@ -5,30 +5,10 @@ import { getStyle, hexToRgba } from "@coreui/utils/src";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 
-const PurchaseOrderTimeChart = (params, attributes) => {
-  const datasets = ((orderCycle, orderLead) => {
-    return [
-    {
-      label: "Product Order Cycle Time (days)",
-      backgroundColor: hexToRgba(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: brandInfo,
-      borderWidth: 2,
-      data: orderCycle
-    },
-    {
-      label: "Product Order Lead Time (days)",
-      backgroundColor: "transparent",
-      borderColor: brandSuccess,
-      pointHoverBackgroundColor: brandSuccess,
-      borderWidth: 2,
-      data: orderLead
-    }
-  ]})(params.orderCycle, params.orderLead);
-
+const LineChart = (params, attributes) => {
   const defaultOptions = (() => {
     return {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       legend: {
         display: true,
       },
@@ -69,7 +49,7 @@ const PurchaseOrderTimeChart = (params, attributes) => {
   return (
     <CChartLine
       {...attributes}
-      datasets={datasets}
+      datasets={params.datasets}
       options={defaultOptions}
       labels={[
         "Jan",
@@ -89,4 +69,4 @@ const PurchaseOrderTimeChart = (params, attributes) => {
   );
 };
 
-export default PurchaseOrderTimeChart;
+export default LineChart;

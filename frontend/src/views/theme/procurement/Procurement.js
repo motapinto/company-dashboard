@@ -11,7 +11,8 @@ import {
   CChartBar,
   CChartDoughnut
 } from '@coreui/react-chartjs'
-import PurchaseOrderTimeChart from "../../charts/PurchaseOrderTimeChart";
+import LineChart from "../../charts/LineChart";
+import {getStyle, hexToRgba} from "@coreui/utils/src";
 
 const numberSuppliers = [
   {
@@ -46,7 +47,7 @@ const purchasesInTB = {
   totalPurchases: {
     inTime: 192235,
     total: 343277,
-    percentile: 0.385
+    percentile: 0.559
   },
   categories: [
     {
@@ -91,143 +92,188 @@ const suppliers = {
   ]
 };
 
-const purchaseOrder = {
-  cycleTimes: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91],
-  leadTimes: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86]
+const brandSuccess = getStyle("success") || "#4dbd74";
+const brandInfo = getStyle("info") || "#20a8d8";
+
+const purchaseOrder = [
+  {
+    label: "Product Order Cycle Time (days)",
+    backgroundColor: hexToRgba(brandInfo, 10),
+    borderColor: brandInfo,
+    pointHoverBackgroundColor: brandInfo,
+    borderWidth: 2,
+    data: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91]
+  },
+  {
+  label: "Product Order Lead Time (days)",
+    backgroundColor: "transparent",
+    borderColor: brandSuccess,
+    pointHoverBackgroundColor: brandSuccess,
+    borderWidth: 2,
+    data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86]
+  }
+];
+
+const formatNumber = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 const Procurement = () => {
   return (
-    <CRow>
-      <CCol sm="6" lg="6">
-        <CCard>
-          <CCardHeader>
-            <h3>Number of Suppliers</h3>
-          </CCardHeader>
-          <CCardBody>
-            <CChartBar
-              type="bar"
-              datasets={numberSuppliers}
-              labels="suppliers"
-              options={{
-                scales: {
-                  yAxes: [{
-                    ticks: {
-                      max: Math.max.apply(Math, numberSuppliers.map((element) => {
-                        return element.data[0];
-                      })) + 10,
-                      beginAtZero: true
+    <>
+      <CRow>
+        <CCol sm="6" lg="6">
+          <CCard>
+            <CCardHeader>
+              <h3>Number of Suppliers</h3>
+            </CCardHeader>
+            <CCardBody>
+              <CChartBar
+                type="bar"
+                datasets={numberSuppliers}
+                labels="suppliers"
+                options={{
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        max: Math.max.apply(Math, numberSuppliers.map((element) => {
+                          return element.data[0];
+                        })) + 10,
+                        beginAtZero: true
+                      }
+                    }]
+                  },
+                  tooltips: {
+                    enabled: true
+                  }
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol sm="6" lg="6">
+          <CCard>
+            <CCardHeader>
+              <h3>Suppliers</h3>
+            </CCardHeader>
+            <CCardBody>
+              <CChartDoughnut
+                type="doughnut"
+                datasets={suppliers.datasets}
+                labels={suppliers.labels}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+
+      <CRow className="h-100">
+        <CCol sm="6" lg="6" className="mb-4">
+          <CCard className="h-100">
+            <CCardHeader>
+              <h3>Supplier Quality Rating</h3>
+            </CCardHeader>
+            <CCardBody>
+              <CChartBar
+                type="bar"
+                datasets={supplierQuality.datasets}
+                labels={supplierQuality.labels}
+                options={{
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero: true,
+                        max: 100,
+                        // Include a dollar sign in the ticks
+                        callback: function (value, index, values) {
+                          return value + " %";
+                        },
+                      }
+                    }]
+                  },
+                  tooltips: {
+                    enabled: true,
+                    callbacks: {
+                      label: function(tooltipItem, data) {
+                        let label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                        if (label) {
+                          label += ': ';
+                        }
+                        label += Math.round(tooltipItem.yLabel * 100) / 100 + "%";
+                        return label;
+                      }
                     }
-                  }]
-                },
-                tooltips: {
-                  enabled: true
-                }
-              }}
-            />
-          </CCardBody>
-        </CCard>
+                  }
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
 
-        <CCard>
-          <CCardHeader>
-            <h3>Supplier Quality Rating</h3>
-          </CCardHeader>
-          <CCardBody>
-            <CChartBar
-              type="bar"
-              datasets={supplierQuality.datasets}
-              labels={supplierQuality.labels}
-              options={{
-                scales: {
-                  yAxes: [{
-                    ticks: {
-                      beginAtZero: true,
-                      max: 100
-                    }
-                  }]
-                },
-                tooltips: {
-                  enabled: true
-                }
-              }}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-
-      <CCol sm="6" lg="6">
-        <CCard>
-          <CCardHeader>
-            <h3>Suppliers</h3>
-          </CCardHeader>
-          <CCardBody>
-            <CChartDoughnut
-              type="doughnut"
-              datasets={suppliers.datasets}
-              labels={suppliers.labels}
-            />
-          </CCardBody>
-        </CCard>
-
-        <CCard>
-          <CCardHeader>
-            <h3>Purchases in Time and Budget</h3>
-          </CCardHeader>
-          <CCardBody>
-            <h4 className="mb-0">Total</h4>
-            <div className="progress-group mt-0">
-              <div className="progress-group-header">
-                <span className="ml-auto font-weight-bold">
-                    {purchasesInTB.totalPurchases.inTime} <span className="text-muted small">({Math.round(purchasesInTB.totalPurchases.percentile*100)}%)</span>
-                </span>
-              </div>
-              <div className="progress-group-bars">
-                <CProgress
-                  className="progress-xs"
-                  color="success"
-                  value={Math.round(purchasesInTB.totalPurchases.percentile*100)}
-                />
-              </div>
-            </div>
-
-            <h4>By category</h4>
-            {purchasesInTB.categories.map((category) => {
-              return (
-                <div className="progress-group">
-                  <div className="progress-group-header">
-                    <span className="title">{category.name}</span>
-                    <span className="ml-auto font-weight-bold">
-                        {category.inTime} <span className="text-muted small">({Math.round(category.percentile*100)}%)</span>
-                    </span>
-                  </div>
-                  <div className="progress-group-bars">
-                    <CProgress
-                      className="progress-xs"
-                      color="success"
-                      value={Math.round(category.percentile*100)}
-                    />
-                  </div>
+        <CCol sm="6" lg="6" className="mb-4">
+          <CCard className="h-100">
+            <CCardHeader>
+              <h3>Purchases in Time and Budget</h3>
+            </CCardHeader>
+            <CCardBody>
+              <h4 className="mb-0">Total</h4>
+              <div className="progress-group mt-0">
+                <div className="progress-group-header">
+                  <span className="ml-auto font-weight-bold">
+                      {formatNumber(purchasesInTB.totalPurchases.inTime)} <span className="text-muted small">({Math.round(purchasesInTB.totalPurchases.percentile*100)}%)</span>
+                  </span>
                 </div>
-              );
-            })}
-          </CCardBody>
-        </CCard>
-      </CCol>
+                <div className="progress-group-bars">
+                  <CProgress
+                    className="progress-xs"
+                    color="success"
+                    value={Math.round(purchasesInTB.totalPurchases.percentile*100)}
+                  />
+                </div>
+              </div>
 
-      <CCol>
-        <CCard>
-          <CCardHeader className="text-center">
-            <h3>Purchase Order Cycle Time and Lead Time</h3>
-          </CCardHeader>
-          <CCardBody>
-            <PurchaseOrderTimeChart
-              orderCycle={purchaseOrder.cycleTimes}
-              orderLead={purchaseOrder.leadTimes}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+              <h4>By category</h4>
+              {purchasesInTB.categories.map((category) => {
+                return (
+                  <div className="progress-group">
+                    <div className="progress-group-header">
+                      <span className="title">{category.name}</span>
+                      <span className="ml-auto font-weight-bold">
+                          {formatNumber(category.inTime)} <span className="text-muted small">({Math.round(category.percentile*100)}%)</span>
+                      </span>
+                    </div>
+                    <div className="progress-group-bars">
+                      <CProgress
+                        className="progress-xs"
+                        color="success"
+                        value={Math.round(category.percentile*100)}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+
+      <CRow>
+        <CCol>
+          <CCard className="w-100">
+            <CCardHeader className="text-center">
+              <h3>Purchase Order Cycle Time and Lead Time</h3>
+            </CCardHeader>
+            <CCardBody>
+              <LineChart
+                datasets={purchaseOrder}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </>
   );
 }
 
