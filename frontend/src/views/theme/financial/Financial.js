@@ -20,6 +20,29 @@ import ChartBarSimple from "../../charts/ChartBarSimple";
 import ProfitMarginChart from "../sales/ProfitMargin.js";
 import { flagSet } from "@coreui/icons";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
+import LineChart from "../../charts/LineChart.js";
+
+const brandSuccess = getStyle("success") || "#4dbd74";
+const brandInfo = getStyle("info") || "#20a8d8";
+
+const profitMargin = [
+  {
+    label: "Gross Profit Margin",
+    backgroundColor: hexToRgba(brandInfo, 10),
+    borderColor: brandInfo,
+    pointHoverBackgroundColor: brandInfo,
+    borderWidth: 2,
+    data: [98, 166, 159, 122, 109, 91, 139, 99, 140, 193, 79, 160],
+  },
+  {
+    label: "Net Profit Margin",
+    backgroundColor: hexToRgba(brandSuccess, 10),
+    borderColor: brandSuccess,
+    pointHoverBackgroundColor: brandSuccess,
+    borderWidth: 2,
+    data: [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65],
+  },
+];
 
 const vatPaidDeducted = [
   {
@@ -80,6 +103,10 @@ const profitAndLossCost = [
     data: [3123121],
   },
 ];
+
+const yLabel = (value, _index, _values) => {
+  return `$ ${value}K`;
+};
 
 const ebitda = 985445;
 const ebitdaMargin = 10.45;
@@ -144,7 +171,7 @@ const Financial = () => {
             </CCardBody>
           </CCard>
         </CCol>
-        <CCol md="12" lg="6" className="mt-xs-4 mt-sm-4 mt-lg-0">
+        <CCol md="12" lg="6" className="mt-4 mt-md-4 mt-lg-0">
           <CCard style={{ height: "100%" }}>
             <CCardHeader>
               <h4 id="traffic" className="card-title mb-0">
@@ -152,10 +179,8 @@ const Financial = () => {
               </h4>
               <div className="small text-muted">2019</div>
             </CCardHeader>
-            <CCardBody className="pt-0">
-              <ProfitMarginChart
-                style={{ height: "300px", marginTop: "40px" }}
-              />
+            <CCardBody>
+              <LineChart datasets={profitMargin} callback={yLabel} />
             </CCardBody>
           </CCard>
         </CCol>
