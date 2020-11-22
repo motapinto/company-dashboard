@@ -32,7 +32,7 @@ const ProfitMarginChart = (attributes) => {
 
   const options = (() => {
     return {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       legend: {
         display: true,
       },
@@ -51,6 +51,9 @@ const ProfitMarginChart = (attributes) => {
               maxTicksLimit: 5,
               stepSize: Math.ceil(250 / 5),
               max: 250,
+              callback: function (value, _index, _values) {
+                return `$ ${value}K`;
+              },
             },
             gridLines: {
               display: true,

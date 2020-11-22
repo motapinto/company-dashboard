@@ -14,7 +14,11 @@ import { CChartDoughnut } from "@coreui/react-chartjs";
 import CIcon from "@coreui/icons-react";
 import ChartLineSimple from "../../charts/ChartLineSimple";
 import ChartBarSimple from "../../charts/ChartBarSimple";
-import ProfitMarginChart from "./ProfitMargin.js";
+import LineChart from "../../charts/LineChart.js";
+import { getStyle, hexToRgba } from "@coreui/utils/src";
+
+const brandSuccess = getStyle("success") || "#4dbd74";
+const brandInfo = getStyle("info") || "#20a8d8";
 
 const getBadge = (status) => {
   switch (status) {
@@ -30,6 +34,25 @@ const getBadge = (status) => {
       return "primary";
   }
 };
+
+const profitMargin = [
+  {
+    label: "Gross Profit Margin",
+    backgroundColor: hexToRgba(brandInfo, 10),
+    borderColor: brandInfo,
+    pointHoverBackgroundColor: brandInfo,
+    borderWidth: 2,
+    data: [98, 166, 159, 122, 109, 91, 139, 99, 140, 193, 79, 160],
+  },
+  {
+    label: "Net Profit Margin",
+    backgroundColor: hexToRgba(brandSuccess, 10),
+    borderColor: brandSuccess,
+    pointHoverBackgroundColor: brandSuccess,
+    borderWidth: 2,
+    data: [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65],
+  },
+];
 
 const fields = ["name", "price", "totalSold", "status"];
 const productsData = [
@@ -77,45 +100,99 @@ const productsData = [
   },
 ];
 
+const yLabel = (value, _index, _values) => {
+  return `$ ${value}K`;
+};
+
+const cogsCallback = (value, _index, _values) => {
+  return `$ ${value}K`;
+};
+
 const Sales = () => {
   return (
     <>
-      <CRow>
-        <CCol sm="6" lg="6">
+      <CRow className="mb-4">
+        <CCol>
           <CWidgetDropdown
-            color="gradient-secondary"
-            header="20.51 B$"
+            color="dark"
+            className="h-100"
+            header="$ 20B"
             text="Cost of Goods Sold"
             footerSlot={
               <ChartBarSimple
-                className="mt-3 mx-3"
                 style={{ height: "70px" }}
-                backgroundColor="rgb(250, 152, 152)"
+                backgroundColor="primary"
                 dataPoints={[24, 37, 48, 52, 63, 51, 43, 31, 47, 78, 52, 61]}
+                pointHoverBackgroundColor="danger"
                 label="COGS"
                 labels="months"
               />
             }
           ></CWidgetDropdown>
         </CCol>
-        <CCol sm="6" lg="6">
+        <CCol>
           <CWidgetDropdown
-            color="gradient-danger"
-            header="$50.000"
+            color="dark"
+            className="h-100"
+            header="$ 50.000"
             text="Average Order Value (AOV)"
             footerSlot={
               <ChartLineSimple
-                className="mt-3"
                 style={{ height: "70px" }}
-                backgroundColor="rgba(255,255,255,.2)"
+                backgroundColor="primary"
                 dataPoints={[78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56]}
-                options={{ elements: { line: { borderWidth: 2.5 } } }}
                 pointHoverBackgroundColor="danger"
                 label="AOV"
                 labels="months"
               />
             }
           ></CWidgetDropdown>
+        </CCol>
+      </CRow>
+      <CRow>
+        <CCol>
+          <CCard>
+            <CCardBody>
+              <CRow>
+                <CCol sm="8">
+                  <h4 id="traffic" className="card-title mb-0">
+                    Profit Margin
+                  </h4>
+                  <div className="small text-muted">2019</div>
+                </CCol>
+              </CRow>
+              <LineChart datasets={profitMargin} callback={yLabel} />
+            </CCardBody>
+          </CCard>
+        </CCol>
+        <CCol>
+          <CCard>
+            <CCardBody>
+              <CRow>
+                <CCol sm="8">
+                  <h4 className="card-title mb-0">Sales Region</h4>
+                  <div className="small text-muted">2019</div>
+                </CCol>
+              </CRow>
+              <CChartDoughnut
+                type="doughnut"
+                datasets={[
+                  {
+                    backgroundColor: [
+                      "#fff2a5",
+                      "#a2d8a5",
+                      "#93d1fa",
+                      "#ffaca5",
+                      "#f6aa72",
+                    ],
+                    data: [40, 65, 42, 22, 15],
+                  },
+                ]}
+                labels={["America", "China", "Europe", "Australia", "Africa"]}
+                options={{ maintainAspectRatio: true }}
+              />
+            </CCardBody>
+          </CCard>
         </CCol>
       </CRow>
       <CCard>
@@ -125,11 +202,6 @@ const Sales = () => {
               <h4 className="card-title mb-0">Top Products</h4>
               <div className="small text-muted">2019</div>
             </CCol>
-            <CCol className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download" />
-              </CButton>
-            </CCol>
           </CRow>
           <CDataTable
             items={productsData}
@@ -138,6 +210,9 @@ const Sales = () => {
             hover
             bordered
             pagination
+            options={{
+              aspectRatio: false,
+            }}
             clickableRows
             scopedSlots={{
               status: (item) => (
@@ -145,60 +220,6 @@ const Sales = () => {
                   <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
                 </td>
               ),
-            }}
-          />
-        </CCardBody>
-      </CCard>
-      <CCard>
-        <CCardBody>
-          <CRow>
-            <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">
-                Profit Margin
-              </h4>
-              <div className="small text-muted">2019</div>
-            </CCol>
-            <CCol sm="7" className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download" />
-              </CButton>
-            </CCol>
-          </CRow>
-          <ProfitMarginChart style={{ height: "300px", marginTop: "40px" }} />
-        </CCardBody>
-      </CCard>
-      <CCard>
-        <CCardBody>
-          <CRow>
-            <CCol>
-              <h4 className="card-title mb-0">Sales Region</h4>
-              <div className="small text-muted">2019</div>
-            </CCol>
-            <CCol className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download" />
-              </CButton>
-            </CCol>
-          </CRow>
-          <CChartDoughnut
-            type="doughnut"
-            datasets={[
-              {
-                backgroundColor: [
-                  "#fff2a5",
-                  "#a2d8a5",
-                  "#93d1fa",
-                  "#ffaca5",
-                  "#f6aa72",
-                ],
-                data: [40, 65, 42, 22, 15],
-              },
-            ]}
-            labels={["America", "China", "Europe", "Australia", "Africa"]}
-            options={{
-              tooltips: {
-                enabled: true,
-              },
             }}
           />
         </CCardBody>
