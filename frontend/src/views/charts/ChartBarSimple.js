@@ -63,6 +63,7 @@ ChartBarSimple.propTypes = {
   backgroundColor: PropTypes.string,
   pointHoverBackgroundColor: PropTypes.string,
   dataPoints: PropTypes.array,
+  dataLabels: PropTypes.array,
   label: PropTypes.string,
   pointed: PropTypes.bool
 };

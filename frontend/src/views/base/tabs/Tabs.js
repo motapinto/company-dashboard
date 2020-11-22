@@ -119,7 +119,12 @@ const Tabs = () => {
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-chart-pie"/>
+                    <CIcon name="cil-grain" />
+                  </CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink>
+                    <CIcon name="cil-chart-pie" />
                   </CNavLink>
                 </CNavItem>
               </CNav>
@@ -150,19 +155,19 @@ const Tabs = () => {
                 <CNavItem>
                   <CNavLink>
                     <CIcon name="cil-calculator" />
-                    { active === 0 && ' Home'}
+                    {active === 0 && ' Home'}
                   </CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
                     <CIcon name="cil-basket" />
-                    { active === 1 && ' Profile'}
+                    {active === 1 && ' Profile'}
                   </CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>
-                    <CIcon name="cil-chart-pie"/>
-                    { active === 2 && ' Messages'}
+                    <CIcon name="cil-chart-pie" />
+                    {active === 2 && ' Messages'}
                   </CNavLink>
                 </CNavItem>
               </CNav>
