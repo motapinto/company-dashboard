@@ -5,31 +5,29 @@ import {
   CCol,
   CCard,
   CCardBody,
-  CCardHeader, CProgress
-} from '@coreui/react'
-import {
-  CChartBar,
-  CChartDoughnut
-} from '@coreui/react-chartjs'
+  CCardHeader,
+  CProgress,
+} from "@coreui/react";
+import { CChartBar, CChartDoughnut } from "@coreui/react-chartjs";
 import LineChart from "../../charts/LineChart";
-import {getStyle, hexToRgba} from "@coreui/utils/src";
+import { getStyle, hexToRgba } from "@coreui/utils/src";
 
 const numberSuppliers = [
   {
     label: "Short suppliers",
     data: [40],
-    backgroundColor: '#00D8FF'
+    backgroundColor: "#00D8FF",
   },
   {
     label: "Medium suppliers",
     data: [25],
-    backgroundColor: '#f87979'
+    backgroundColor: "#f87979",
   },
   {
     label: "Long suppliers",
     data: [70],
-    backgroundColor: '#41B883'
-  }
+    backgroundColor: "#41B883",
+  },
 ];
 
 const supplierQuality = {
@@ -37,59 +35,67 @@ const supplierQuality = {
     {
       label: "Supplier Quality Rating",
       data: [40, 20, 13, 40, 10, 40, 38, 80, 40, 20, 14, 11],
-      backgroundColor: '#f87979',
-    }
+      backgroundColor: "#f87979",
+    },
   ],
-  labels: ['AGC', 'Brembo', 'ZF', 'Fisher', 'Sika', 'akg', 'IRL', 'MOB', 'WES', 'AWS', 'TES', 'MJG'],
+  labels: [
+    "AGC",
+    "Brembo",
+    "ZF",
+    "Fisher",
+    "Sika",
+    "akg",
+    "IRL",
+    "MOB",
+    "WES",
+    "AWS",
+    "TES",
+    "MJG",
+  ],
 };
 
 const purchasesInTB = {
   totalPurchases: {
     inTime: 192235,
     total: 343277,
-    percentile: 0.559
+    percentile: 0.559,
   },
   categories: [
     {
-      name: 'Electrical Supply',
+      name: "Electrical Supply",
       inTime: 76129,
       total: 160372,
-      percentile: 0.4747
+      percentile: 0.4747,
     },
     {
-      name: 'Logistics',
+      name: "Logistics",
       inTime: 51223,
       total: 87941,
-      percentile: 0.58247
+      percentile: 0.58247,
     },
     {
-      name: 'Packaging',
+      name: "Packaging",
       inTime: 37564,
       total: 49906,
-      percentile: 0.75269
+      percentile: 0.75269,
     },
     {
-      name: 'Services',
+      name: "Services",
       inTime: 27319,
       total: 45058,
-      percentile: 0.6063
+      percentile: 0.6063,
     },
-  ]
+  ],
 };
 
 const suppliers = {
-  labels: ['AOC', 'Fisher', 'MOB', 'Others'],
+  labels: ["AOC", "Fisher", "MOB", "Others"],
   datasets: [
     {
-      backgroundColor: [
-        '#41B883',
-        '#E46651',
-        '#00D8FF',
-        '#DD1B16'
-      ],
-      data: [40, 20, 80, 10]
-    }
-  ]
+      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
+      data: [40, 20, 80, 10],
+    },
+  ],
 };
 
 const brandSuccess = getStyle("success") || "#4dbd74";
@@ -102,19 +108,19 @@ const purchaseOrder = [
     borderColor: brandInfo,
     pointHoverBackgroundColor: brandInfo,
     borderWidth: 2,
-    data: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91]
+    data: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91],
   },
   {
-  label: "Product Order Lead Time (days)",
-    backgroundColor: "transparent",
+    label: "Product Order Lead Time (days)",
+    backgroundColor: hexToRgba(brandSuccess, 10),
     borderColor: brandSuccess,
     pointHoverBackgroundColor: brandSuccess,
     borderWidth: 2,
-    data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86]
-  }
+    data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
+  },
 ];
 
-const formatNumber = (number) => {
+export const formatNumber = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
@@ -134,18 +140,24 @@ const Procurement = () => {
                 labels="suppliers"
                 options={{
                   scales: {
-                    yAxes: [{
-                      ticks: {
-                        max: Math.max.apply(Math, numberSuppliers.map((element) => {
-                          return element.data[0];
-                        })) + 10,
-                        beginAtZero: true
-                      }
-                    }]
+                    yAxes: [
+                      {
+                        ticks: {
+                          max:
+                            Math.max.apply(
+                              Math,
+                              numberSuppliers.map((element) => {
+                                return element.data[0];
+                              })
+                            ) + 10,
+                          beginAtZero: true,
+                        },
+                      },
+                    ],
                   },
                   tooltips: {
-                    enabled: true
-                  }
+                    enabled: true,
+                  },
                 }}
               />
             </CCardBody>
@@ -181,31 +193,35 @@ const Procurement = () => {
                 labels={supplierQuality.labels}
                 options={{
                   scales: {
-                    yAxes: [{
-                      ticks: {
-                        beginAtZero: true,
-                        max: 100,
-                        // Include a dollar sign in the ticks
-                        callback: function (value, index, values) {
-                          return value + " %";
+                    yAxes: [
+                      {
+                        ticks: {
+                          beginAtZero: true,
+                          max: 100,
+                          // Include a dollar sign in the ticks
+                          callback: function (value, index, values) {
+                            return value + " %";
+                          },
                         },
-                      }
-                    }]
+                      },
+                    ],
                   },
                   tooltips: {
                     enabled: true,
                     callbacks: {
-                      label: function(tooltipItem, data) {
-                        let label = data.datasets[tooltipItem.datasetIndex].label || '';
+                      label: function (tooltipItem, data) {
+                        let label =
+                          data.datasets[tooltipItem.datasetIndex].label || "";
 
                         if (label) {
-                          label += ': ';
+                          label += ": ";
                         }
-                        label += Math.round(tooltipItem.yLabel * 100) / 100 + "%";
+                        label +=
+                          Math.round(tooltipItem.yLabel * 100) / 100 + "%";
                         return label;
-                      }
-                    }
-                  }
+                      },
+                    },
+                  },
                 }}
               />
             </CCardBody>
@@ -222,14 +238,23 @@ const Procurement = () => {
               <div className="progress-group mt-0">
                 <div className="progress-group-header">
                   <span className="ml-auto font-weight-bold">
-                      {formatNumber(purchasesInTB.totalPurchases.inTime)} <span className="text-muted small">({Math.round(purchasesInTB.totalPurchases.percentile*100)}%)</span>
+                    {formatNumber(purchasesInTB.totalPurchases.inTime)}{" "}
+                    <span className="text-muted small">
+                      (
+                      {Math.round(
+                        purchasesInTB.totalPurchases.percentile * 100
+                      )}
+                      %)
+                    </span>
                   </span>
                 </div>
                 <div className="progress-group-bars">
                   <CProgress
                     className="progress-xs"
                     color="success"
-                    value={Math.round(purchasesInTB.totalPurchases.percentile*100)}
+                    value={Math.round(
+                      purchasesInTB.totalPurchases.percentile * 100
+                    )}
                   />
                 </div>
               </div>
@@ -241,14 +266,17 @@ const Procurement = () => {
                     <div className="progress-group-header">
                       <span className="title">{category.name}</span>
                       <span className="ml-auto font-weight-bold">
-                          {formatNumber(category.inTime)} <span className="text-muted small">({Math.round(category.percentile*100)}%)</span>
+                        {formatNumber(category.inTime)}{" "}
+                        <span className="text-muted small">
+                          ({Math.round(category.percentile * 100)}%)
+                        </span>
                       </span>
                     </div>
                     <div className="progress-group-bars">
                       <CProgress
                         className="progress-xs"
                         color="success"
-                        value={Math.round(category.percentile*100)}
+                        value={Math.round(category.percentile * 100)}
                       />
                     </div>
                   </div>
@@ -266,15 +294,13 @@ const Procurement = () => {
               <h3>Purchase Order Cycle Time and Lead Time</h3>
             </CCardHeader>
             <CCardBody>
-              <LineChart
-                datasets={purchaseOrder}
-              />
+              <LineChart datasets={purchaseOrder} />
             </CCardBody>
           </CCard>
         </CCol>
       </CRow>
     </>
   );
-}
+};
 
 export default Procurement;
