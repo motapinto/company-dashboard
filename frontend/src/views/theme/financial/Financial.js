@@ -11,6 +11,7 @@ import {
   CButton,
   CCardHeader,
   CHeader,
+  CCallout,
 } from "@coreui/react";
 import { CChartBar, CChartDoughnut } from "@coreui/react-chartjs";
 import CIcon from "@coreui/icons-react";
@@ -18,6 +19,7 @@ import ChartLineSimple from "../../charts/ChartLineSimple";
 import ChartBarSimple from "../../charts/ChartBarSimple";
 import ProfitMarginChart from "../sales/ProfitMargin.js";
 import { flagSet } from "@coreui/icons";
+import { getStyle, hexToRgba } from "@coreui/utils/src";
 
 const vatPaidDeducted = [
   {
@@ -27,7 +29,7 @@ const vatPaidDeducted = [
   },
   {
     label: "Deducted",
-    backgroundColor: "#597D35",
+    backgroundColor: "#4dbd74",
     data: [3, 4, 24, 24, 22, 33, 22, 1, 21, 65, 31, 44],
   },
 ];
@@ -35,7 +37,7 @@ const vatPaidDeducted = [
 const balanceSheetAssets = [
   {
     label: "NCA",
-    backgroundColor: "#C2DB58",
+    backgroundColor: "#4dbd74",
     data: [8223232],
   },
   {
@@ -66,7 +68,7 @@ const balanceSheetEquity = [
 const profitAndLossRevenue = [
   {
     label: "R",
-    backgroundColor: "#C2DB58",
+    backgroundColor: "#4dbd74",
     data: [2312323],
   },
 ];
@@ -94,7 +96,23 @@ const Financial = () => {
               </h4>
               <div className="small text-muted">2019</div>
             </CCardHeader>
-            <CCardBody className="align-middle">
+            <CCardBody className="align-middle pt-0">
+              <CRow>
+                <CCol sm="6">
+                  <CCallout color="lightRed">
+                    <small className="text-muted">Paid</small>
+                    <br />
+                    <strong className="h4">9,123</strong>
+                  </CCallout>
+                </CCol>
+                <CCol sm="6">
+                  <CCallout color="lightGreen">
+                    <small className="text-muted">Deducted</small>
+                    <br />
+                    <strong className="h4">22,643</strong>
+                  </CCallout>
+                </CCol>
+              </CRow>
               <CChartBar
                 type="bar"
                 datasets={vatPaidDeducted}
@@ -103,7 +121,7 @@ const Financial = () => {
                   maintainAspectRatio: true,
                   responsive: true,
                   legend: {
-                    display: true,
+                    display: false,
                   },
                   scales: {
                     yAxes: [
@@ -134,7 +152,7 @@ const Financial = () => {
               </h4>
               <div className="small text-muted">2019</div>
             </CCardHeader>
-            <CCardBody>
+            <CCardBody className="pt-0">
               <ProfitMarginChart
                 style={{ height: "300px", marginTop: "40px" }}
               />
