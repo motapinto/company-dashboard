@@ -1,9 +1,5 @@
 import React from "react";
 import { CChartLine } from "@coreui/react-chartjs";
-import { getStyle, hexToRgba } from "@coreui/utils/src";
-
-const brandSuccess = getStyle("success") || "#4dbd74";
-const brandInfo = getStyle("info") || "#20a8d8";
 
 const LineChart = (attributes) => {
   const defaultOptions = (() => {
