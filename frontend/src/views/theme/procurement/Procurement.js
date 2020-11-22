@@ -46,7 +46,7 @@ const purchasesInTB = {
   totalPurchases: {
     inTime: 192235,
     total: 343277,
-    percentile: 0.385
+    percentile: 0.559
   },
   categories: [
     {
