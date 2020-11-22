@@ -58,6 +58,7 @@ const Typography = React.lazy(() =>
 );
 const Sales = React.lazy(() => import("./views/theme/sales/Sales"));
 const Procurement = React.lazy(() => import("./views/theme/procurement/Procurement"));
+const Financial = React.lazy(() => import("./views/theme/financial/Financial"));
 const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
 const Users = React.lazy(() => import("./views/users/Users"));
 const User = React.lazy(() => import("./views/users/User"));
@@ -70,6 +71,7 @@ const routes = [
   { path: "/theme/typography", name: "Typography", component: Typography },
   { path: "/theme/sales", name: "Sales", component: Sales },
   { path: "/theme/procurement", name: "Procurement", component: Procurement },
+  { path: "/theme/financial", name: "Financial", component: Financial },
   { path: "/base", name: "Base", component: Cards, exact: true },
   { path: "/base/breadcrumbs", name: "Breadcrumbs", component: Breadcrumbs },
   { path: "/base/cards", name: "Cards", component: Cards },

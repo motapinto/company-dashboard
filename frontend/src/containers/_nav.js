@@ -38,6 +38,12 @@ export default [
     icon: "cil-graph",
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Financial",
+    to: "/theme/financial",
+    icon: "cil-briefcase",
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["Components"],
   },
