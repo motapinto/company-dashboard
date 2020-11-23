@@ -1,11 +1,7 @@
 import React from "react";
 import { CChartLine } from "@coreui/react-chartjs";
-import { getStyle, hexToRgba } from "@coreui/utils/src";
 
-const brandSuccess = getStyle("success") || "#4dbd74";
-const brandInfo = getStyle("info") || "#20a8d8";
-
-const LineChart = (params, attributes) => {
+const LineChart = (attributes) => {
   const defaultOptions = (() => {
     return {
       maintainAspectRatio: true,
@@ -45,11 +41,9 @@ const LineChart = (params, attributes) => {
     };
   })();
 
-  // render
   return (
     <CChartLine
       {...attributes}
-      datasets={params.datasets}
       options={defaultOptions}
       labels={[
         "Jan",
@@ -63,7 +57,7 @@ const LineChart = (params, attributes) => {
         "Sept",
         "Oct",
         "Nov",
-        "Dec"
+        "Dec",
       ]}
     />
   );

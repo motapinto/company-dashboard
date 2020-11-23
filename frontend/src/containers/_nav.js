@@ -33,9 +33,21 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Financial Report",
+    to: "/theme/financial",
+    icon: "cilDollar",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Procurement Report",
     to: "/theme/procurement",
-    icon: "cil-graph",
+    icon: "cil-briefcase",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Inventory Report",
+    to: "/theme/inventory",
+    icon: "cil-clipboard",
   },
   {
     _tag: "CSidebarNavTitle",

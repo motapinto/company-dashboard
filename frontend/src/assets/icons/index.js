@@ -1,6 +1,6 @@
-import { sygnet } from './sygnet'
-import { logo } from './logo'
-import { logoNegative } from './logo-negative'
+import { sygnet } from "./sygnet";
+import { logo } from "./logo";
+import { logoNegative } from "./logo-negative";
 
 import {
   cibSkype,
@@ -26,16 +26,9 @@ import {
   cibStripe,
   cibPaypal,
   cibGooglePay,
-  cibCcAmex
-} from '@coreui/icons'
-import {
-  cifUs,
-  cifBr,
-  cifIn,
-  cifFr,
-  cifEs,
-  cifPl
-} from '@coreui/icons'
+  cibCcAmex,
+} from "@coreui/icons";
+import { cifUs, cifBr, cifIn, cifFr, cifEs, cifPl } from "@coreui/icons";
 import {
   cilAlignCenter,
   cilAlignLeft,
@@ -45,12 +38,14 @@ import {
   cilArrowTop,
   cilAsterisk,
   cilBan,
+  cilBriefcase,
   cilBasket,
   cilBell,
   cilBold,
   cilBookmark,
   cilCalculator,
   cilCalendar,
+  cilClipboard,
   cilCloudDownload,
   cilChartPie,
   cilCheck,
@@ -127,8 +122,8 @@ import {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
-} from '@coreui/icons'
+  cilWarning,
+} from "@coreui/icons";
 
 export const icons = Object.assign({}, {
   sygnet,
@@ -143,12 +138,14 @@ export const icons = Object.assign({}, {
   cilArrowTop,
   cilAsterisk,
   cilBan,
+  cilBriefcase,
   cilBasket,
   cilBell,
   cilBold,
   cilBookmark,
   cilCalculator,
   cilCalendar,
+  cilClipboard,
   cilCloudDownload,
   cilChartPie,
   cilCheck,
