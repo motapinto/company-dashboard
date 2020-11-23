@@ -31,6 +31,11 @@ const getBadge = (status) => {
   }
 };
 
+function Product(item) {
+  console.log(item);
+  window.location.href="/#/theme/products"
+}
+
 const fields = ["name", "price", "totalSold", "status"];
 const productsData = [
   {
@@ -139,6 +144,7 @@ const Sales = () => {
             bordered
             pagination
             clickableRows
+            onRowClick={(item)=>{Product(item)}}
             scopedSlots={{
               status: (item) => (
                 <td>
@@ -147,6 +153,7 @@ const Sales = () => {
               ),
             }}
           />
+
         </CCardBody>
       </CCard>
       <CCard>
