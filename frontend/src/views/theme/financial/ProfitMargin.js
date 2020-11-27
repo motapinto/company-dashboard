@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  CRow,
-  CCol,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCallout,
-} from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import LineChart from "../../charts/LineChart.js";
 
 const yLabel = (value, _index, _values) => {
