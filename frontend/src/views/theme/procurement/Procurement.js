@@ -6,11 +6,13 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CProgress,
 } from "@coreui/react";
 import { CChartBar, CChartDoughnut } from "@coreui/react-chartjs";
 import LineChart from "../../charts/LineChart";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
+import ChartBarPercentage from "../../charts/ChartBarPercentage";
+import ProgressBar from "./ProgressBar";
+import ChartBarMax from "../../charts/ChartBarMax";
 
 const numberSuppliers = [
   {
@@ -56,6 +58,7 @@ const supplierQuality = {
 
 const purchasesInTB = {
   totalPurchases: {
+    name: "",
     inTime: 192235,
     total: 343277,
     percentile: 0.559,
@@ -125,6 +128,12 @@ export const formatNumber = (number) => {
 };
 
 const Procurement = () => {
+  const progressBars = [];
+
+  for (let i = 0; i < purchasesInTB.categories.length; i++) {
+    progressBars.push(<ProgressBar key={`categories${i}`} data={purchasesInTB.categories[i]}/>);
+  }
+
   return (
     <>
       <CRow>
@@ -134,32 +143,7 @@ const Procurement = () => {
               <h3>Number of Suppliers</h3>
             </CCardHeader>
             <CCardBody>
-              <CChartBar
-                type="bar"
-                datasets={numberSuppliers}
-                labels="suppliers"
-                options={{
-                  scales: {
-                    yAxes: [
-                      {
-                        ticks: {
-                          max:
-                            Math.max.apply(
-                              Math,
-                              numberSuppliers.map((element) => {
-                                return element.data[0];
-                              })
-                            ) + 10,
-                          beginAtZero: true,
-                        },
-                      },
-                    ],
-                  },
-                  tooltips: {
-                    enabled: true,
-                  },
-                }}
-              />
+              <ChartBarMax datasets={numberSuppliers} />
             </CCardBody>
           </CCard>
         </CCol>
@@ -187,42 +171,9 @@ const Procurement = () => {
               <h3>Supplier Quality Rating</h3>
             </CCardHeader>
             <CCardBody>
-              <CChartBar
-                type="bar"
+              <ChartBarPercentage
                 datasets={supplierQuality.datasets}
                 labels={supplierQuality.labels}
-                options={{
-                  scales: {
-                    yAxes: [
-                      {
-                        ticks: {
-                          beginAtZero: true,
-                          max: 100,
-                          // Include a dollar sign in the ticks
-                          callback: function (value, index, values) {
-                            return value + " %";
-                          },
-                        },
-                      },
-                    ],
-                  },
-                  tooltips: {
-                    enabled: true,
-                    callbacks: {
-                      label: function (tooltipItem, data) {
-                        let label =
-                          data.datasets[tooltipItem.datasetIndex].label || "";
-
-                        if (label) {
-                          label += ": ";
-                        }
-                        label +=
-                          Math.round(tooltipItem.yLabel * 100) / 100 + "%";
-                        return label;
-                      },
-                    },
-                  },
-                }}
               />
             </CCardBody>
           </CCard>
@@ -235,53 +186,11 @@ const Procurement = () => {
             </CCardHeader>
             <CCardBody>
               <h4 className="mb-0">Total</h4>
-              <div className="progress-group mt-0">
-                <div className="progress-group-header">
-                  <span className="ml-auto font-weight-bold">
-                    {formatNumber(purchasesInTB.totalPurchases.inTime)}{" "}
-                    <span className="text-muted small">
-                      (
-                      {Math.round(
-                        purchasesInTB.totalPurchases.percentile * 100
-                      )}
-                      %)
-                    </span>
-                  </span>
-                </div>
-                <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="success"
-                    value={Math.round(
-                      purchasesInTB.totalPurchases.percentile * 100
-                    )}
-                  />
-                </div>
-              </div>
+              <ProgressBar data={purchasesInTB.totalPurchases}/>
 
               <h4>By category</h4>
-              {purchasesInTB.categories.map((category) => {
-                return (
-                  <div className="progress-group">
-                    <div className="progress-group-header">
-                      <span className="title">{category.name}</span>
-                      <span className="ml-auto font-weight-bold">
-                        {formatNumber(category.inTime)}{" "}
-                        <span className="text-muted small">
-                          ({Math.round(category.percentile * 100)}%)
-                        </span>
-                      </span>
-                    </div>
-                    <div className="progress-group-bars">
-                      <CProgress
-                        className="progress-xs"
-                        color="success"
-                        value={Math.round(category.percentile * 100)}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+              {progressBars}
+
             </CCardBody>
           </CCard>
         </CCol>
