@@ -11,42 +11,30 @@ export default [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Theme"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Colors",
-    to: "/theme/colors",
-    icon: "cil-drop",
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Typography",
-    to: "/theme/typography",
-    icon: "cil-pencil",
+    _children: ["Report"],
   },
   {
     _tag: "CSidebarNavItem",
     name: "Sales Report",
-    to: "/theme/sales",
+    to: "/report/sales",
     icon: "cil-graph",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Financial Report",
-    to: "/theme/financial",
+    to: "/report/financial",
     icon: "cilDollar",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Procurement Report",
-    to: "/theme/procurement",
+    to: "/report/procurement",
     icon: "cil-briefcase",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Inventory Report",
-    to: "/theme/inventory",
+    to: "/report/inventory",
     icon: "cil-clipboard",
   },
   {
@@ -142,95 +130,6 @@ export default [
     ],
   },
   {
-    _tag: "CSidebarNavDropdown",
-    name: "Buttons",
-    route: "/buttons",
-    icon: "cil-cursor",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Buttons",
-        to: "/buttons/buttons",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Brand buttons",
-        to: "/buttons/brand-buttons",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Buttons groups",
-        to: "/buttons/button-groups",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Dropdowns",
-        to: "/buttons/button-dropdowns",
-      },
-    ],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Charts",
-    to: "/charts",
-    icon: "cil-chart-pie",
-  },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Icons",
-    route: "/icons",
-    icon: "cil-star",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "CoreUI Free",
-        to: "/icons/coreui-icons",
-        badge: {
-          color: "success",
-          text: "NEW",
-        },
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "CoreUI Flags",
-        to: "/icons/flags",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "CoreUI Brands",
-        to: "/icons/brands",
-      },
-    ],
-  },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Notifications",
-    route: "/notifications",
-    icon: "cil-bell",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Alerts",
-        to: "/notifications/alerts",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Badges",
-        to: "/notifications/badges",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Modal",
-        to: "/notifications/modals",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Toaster",
-        to: "/notifications/toaster",
-      },
-    ],
-  },
-  {
     _tag: "CSidebarNavItem",
     name: "Widgets",
     to: "/widgets",
@@ -246,34 +145,6 @@ export default [
   {
     _tag: "CSidebarNavTitle",
     _children: ["Extras"],
-  },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Pages",
-    route: "/pages",
-    icon: "cil-star",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Login",
-        to: "/login",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Register",
-        to: "/register",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 404",
-        to: "/404",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 500",
-        to: "/500",
-      },
-    ],
   },
   {
     _tag: "CSidebarNavItem",
