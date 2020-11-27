@@ -8,6 +8,8 @@ import {
   CDataTable,
 } from "@coreui/react";
 
+import { useHistory } from "react-router-dom";
+
 const getBadge = (status) => {
   switch (status) {
     case "Active":
@@ -24,6 +26,7 @@ const getBadge = (status) => {
 };
 
 export default (attributes) => {
+  let history = useHistory();
   const fields = ["name", "price", "totalSold", "status"];
   const productsData = [
     {
@@ -90,6 +93,7 @@ export default (attributes) => {
             aspectRatio: false,
           }}
           clickableRows
+          onRowClick={(row) => history.push(`/theme/products/${row.id}`)}
           scopedSlots={{
             status: (item) => (
               <td>
