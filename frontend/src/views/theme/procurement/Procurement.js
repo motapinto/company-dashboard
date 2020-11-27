@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-  CRow,
-  CCol,
-  CCard,
-  CCardBody,
-  CCardHeader,
-} from "@coreui/react";
+import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar, CChartDoughnut } from "@coreui/react-chartjs";
 import LineChart from "../../charts/LineChart";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
@@ -131,7 +125,9 @@ const Procurement = () => {
   const progressBars = [];
 
   for (let i = 0; i < purchasesInTB.categories.length; i++) {
-    progressBars.push(<ProgressBar key={`categories${i}`} data={purchasesInTB.categories[i]}/>);
+    progressBars.push(
+      <ProgressBar key={`categories${i}`} data={purchasesInTB.categories[i]} />
+    );
   }
 
   return (
@@ -186,11 +182,10 @@ const Procurement = () => {
             </CCardHeader>
             <CCardBody>
               <h4 className="mb-0">Total</h4>
-              <ProgressBar data={purchasesInTB.totalPurchases}/>
+              <ProgressBar data={purchasesInTB.totalPurchases} />
 
               <h4>By category</h4>
               {progressBars}
-
             </CCardBody>
           </CCard>
         </CCol>
@@ -203,7 +198,7 @@ const Procurement = () => {
               <h3>Purchase Order Cycle Time and Lead Time</h3>
             </CCardHeader>
             <CCardBody>
-              <LineChart datasets={purchaseOrder} />
+              <LineChart datasets={purchaseOrder} callback={() => {}} />
             </CCardBody>
           </CCard>
         </CCol>

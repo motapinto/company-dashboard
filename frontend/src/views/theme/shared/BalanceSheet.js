@@ -14,7 +14,7 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
         <CRow>
           <CCol className="justify-content-center text-center">
             <h4>
-              $
+              {"$ "}
               {MoneyFormat(
                 balanceSheetAssets[0].data[0] + balanceSheetAssets[1].data[0]
               )}
@@ -23,7 +23,7 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
 
           <CCol className="justify-content-center text-center">
             <h4>
-              $
+              {"$ "}
               {MoneyFormat(
                 balanceSheetEquity[0].data[0] + balanceSheetEquity[1].data[0]
               )}

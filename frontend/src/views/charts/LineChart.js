@@ -1,7 +1,7 @@
 import React from "react";
 import { CChartLine } from "@coreui/react-chartjs";
 
-const LineChart = (attributes) => {
+const LineChart = ({ datasets, callback }) => {
   const defaultOptions = (() => {
     return {
       maintainAspectRatio: true,
@@ -23,6 +23,7 @@ const LineChart = (attributes) => {
               maxTicksLimit: 5,
               stepSize: Math.ceil(250 / 5),
               max: 250,
+              callback: callback,
             },
             gridLines: {
               display: true,
@@ -43,7 +44,7 @@ const LineChart = (attributes) => {
 
   return (
     <CChartLine
-      {...attributes}
+      datasets={datasets}
       options={defaultOptions}
       labels={[
         "Jan",

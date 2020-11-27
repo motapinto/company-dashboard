@@ -21,21 +21,23 @@ export default ({ vatPaidDeducted, year }) => {
       </CCardHeader>
       <CCardBody className="align-middle pt-0">
         <CRow>
-          <CCol sm="6">
+          <CCol xs="6" sm="6">
             <CCallout color="lightRed">
               <small className="text-muted">Paid</small>
               <br />
               <strong className="h4">
-                ${MoneyFormat(totalPaid(vatPaidDeducted))}
+                {"$ "}
+                {MoneyFormat(totalPaid(vatPaidDeducted))}
               </strong>
             </CCallout>
           </CCol>
-          <CCol sm="6">
+          <CCol xs="6" sm="6">
             <CCallout color="lightGreen">
               <small className="text-muted">Deducted</small>
               <br />
               <strong className="h4">
-                ${MoneyFormat(totalDeducted(vatPaidDeducted))}
+                {"$ "}
+                {MoneyFormat(totalDeducted(vatPaidDeducted))}
               </strong>
             </CCallout>
           </CCol>
@@ -57,7 +59,7 @@ export default ({ vatPaidDeducted, year }) => {
                   ticks: {
                     // Include a dollar sign in the ticks
                     callback: function (value, index, values) {
-                      return "$" + value;
+                      return "$ " + value;
                     },
                   },
                 },

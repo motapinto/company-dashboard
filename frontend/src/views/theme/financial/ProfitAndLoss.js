@@ -21,10 +21,10 @@ export default ({
           <CCol md="12" lg="9">
             <CRow>
               <CCol className="justify-content-center text-center">
-                <h4>${MoneyFormat(profitAndLossRevenue[0].data[0])}</h4>
+                <h4>$ {MoneyFormat(profitAndLossRevenue[0].data[0])}</h4>
               </CCol>
               <CCol className="justify-content-center text-center">
-                <h4>${MoneyFormat(profitAndLossCost[0].data[0])}</h4>
+                <h4>$ {MoneyFormat(profitAndLossCost[0].data[0])}</h4>
               </CCol>
             </CRow>
             <CRow>
@@ -116,7 +116,7 @@ export default ({
           </CCol>
           <CCol md="12" lg="3" className="d-none d-lg-block">
             <h4>EBITDA</h4>
-            <h4>${MoneyFormat(ebitda)}</h4>
+            <h4>$ {MoneyFormat(ebitda)}</h4>
             <h4>EBITDA Margin</h4>
             <h4>{ebitdaMargin}%</h4>
           </CCol>
