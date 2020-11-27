@@ -117,6 +117,10 @@ const purchaseOrder = [
   },
 ];
 
+const yLabel = (value, _index, _values) => {
+  return `${value}`;
+};
+
 export const formatNumber = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -198,7 +202,7 @@ const Procurement = () => {
               <h3>Purchase Order Cycle Time and Lead Time</h3>
             </CCardHeader>
             <CCardBody>
-              <LineChart datasets={purchaseOrder} callback={() => {}} />
+              <LineChart datasets={purchaseOrder} callback={yLabel} />
             </CCardBody>
           </CCard>
         </CCol>
