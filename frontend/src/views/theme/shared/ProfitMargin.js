@@ -6,9 +6,9 @@ const yLabel = (value, _index, _values) => {
   return `$ ${value}K`;
 };
 
-export default ({ profitMargin, year }) => {
+export default ({ profitMargin, year, heightValue }) => {
   return (
-    <CCard style={{ height: "100%" }}>
+    <CCard style={{ height: heightValue }}>
       <CCardHeader>
         <h4 id="traffic" className="card-title mb-0">
           Profit Margin

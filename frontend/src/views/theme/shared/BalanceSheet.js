@@ -1,7 +1,7 @@
 import React from "react";
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
-import MoneyFormat from "../shared/MoneyFormat";
+import MoneyFormat from "./MoneyFormat";
 
 export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
   return (

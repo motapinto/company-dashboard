@@ -1,29 +1,9 @@
 import React from "react";
-
-import {
-  CWidgetDropdown,
-  CRow,
-  CCol,
-  CBadge,
-  CCard,
-  CCardBody,
-  CDataTable,
-  CButton,
-  CCardHeader,
-  CHeader,
-  CCallout,
-} from "@coreui/react";
-import { CChartBar, CChartDoughnut } from "@coreui/react-chartjs";
-import CIcon from "@coreui/icons-react";
-import ChartLineSimple from "../../charts/ChartLineSimple";
-import ChartBarSimple from "../../charts/ChartBarSimple";
-import ProfitMarginChart from "../sales/ProfitMargin.js";
-import { flagSet } from "@coreui/icons";
+import { CWidgetDropdown, CRow, CCol } from "@coreui/react";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
-import LineChart from "../../charts/LineChart.js";
 import VatPaidDeducted from "./VatPaidDeducted";
-import ProfitMargin from "./ProfitMargin";
-import BalanceSheet from "./BalanceSheet";
+import ProfitMargin from "../shared/ProfitMargin";
+import BalanceSheet from "../shared/BalanceSheet";
 import ProfitAndLoss from "./ProfitAndLoss";
 
 const brandSuccess = getStyle("success") || "#4dbd74";
@@ -119,7 +99,11 @@ const Financial = () => {
           <VatPaidDeducted vatPaidDeducted={vatPaidDeducted} year={2019} />
         </CCol>
         <CCol md="12" lg="6" className="mt-4 mt-md-4 mt-lg-0">
-          <ProfitMargin profitMargin={profitMargin} year={2019} />
+          <ProfitMargin
+            profitMargin={profitMargin}
+            year={2019}
+            heightValue="100%"
+          />
         </CCol>
       </CRow>
       <CRow>

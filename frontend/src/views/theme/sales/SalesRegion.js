@@ -1,5 +1,5 @@
 import React from "react";
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
+import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartDoughnut } from "@coreui/react-chartjs";
 
 export default (attributes) => {
@@ -8,13 +8,15 @@ export default (attributes) => {
 
   return (
     <CCard>
-      <CCardBody>
+      <CCardHeader>
         <CRow>
           <CCol sm="8">
             <h4 className="card-title mb-0">Sales Region</h4>
             <div className="small text-muted">2019</div>
           </CCol>
         </CRow>
+      </CCardHeader>
+      <CCardBody>
         <CChartDoughnut
           type="doughnut"
           datasets={[
