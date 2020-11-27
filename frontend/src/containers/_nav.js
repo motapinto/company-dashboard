@@ -15,6 +15,12 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Overview",
+    to: "/report/overview",
+    icon: "cil-chart-pie",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Sales Report",
     to: "/report/sales",
     icon: "cil-graph",

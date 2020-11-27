@@ -87,33 +87,48 @@ const Product = ({ match }) => {
 
   return (
     <>
-      <CRow>
+      <CRow className="h-100">
         <CCol sm="6" lg="6">
-          <h4 class="card-title">Product Information</h4>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID: {ProductInfo[0].id}</li>
-            <li class="list-group-item">Name: {ProductInfo[0].name}</li>
-            <li class="list-group-item">Supplier: {ProductInfo[0].supplier}</li>
-            <li class="list-group-item">Cost: {ProductInfo[0].cost}</li>
-            <li class="list-group-item">Profit: {ProductInfo[0].profit}</li>
-            <li class="list-group-item">Details: {ProductInfo[0].details}</li>
-          </ul>
+          <CCard className="w-100 h-100">
+            <CCardHeader className="text-center">
+              <h3 class="card-title">Product Information</h3>
+            </CCardHeader>
+            <CCardBody>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: {ProductInfo[0].id}</li>
+                <li class="list-group-item">Name: {ProductInfo[0].name}</li>
+                <li class="list-group-item">
+                  Supplier: {ProductInfo[0].supplier}
+                </li>
+                <li class="list-group-item">Cost: {ProductInfo[0].cost}</li>
+                <li class="list-group-item">Profit: {ProductInfo[0].profit}</li>
+                <li class="list-group-item">
+                  Details: {ProductInfo[0].details}
+                </li>
+              </ul>
+            </CCardBody>
+          </CCard>
         </CCol>
+
         <CCol sm="6" lg="6">
-          <h4 class="card-title">Top Clients</h4>
-          <CDataTable
-            items={clientsData}
-            fields={fields}
-            itemsPerPage={5}
-            hover
-            bordered
-            pagination
-          />
+          <CCard className="w-100 h-100">
+            <CCardBody>
+              <h3 class="card-title mb-1">Top Clients</h3>
+              <CDataTable
+                items={clientsData}
+                fields={fields}
+                itemsPerPage={5}
+                hover
+                bordered
+                pagination
+              />
+            </CCardBody>
+          </CCard>
         </CCol>
       </CRow>
 
-      <CRow>
-        <CCol>
+      <CRow className="mt-5">
+        <CCol sm="6" lg="6">
           <CCard className="w-100">
             <CCardHeader className="text-center">
               <h3>Gross Profit vs Net Profit</h3>
@@ -123,32 +138,34 @@ const Product = ({ match }) => {
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
 
-      <CRow>
-        <CCol sm="4" lg="4">
-          <div class="card border-light mb-3">
-            <h3 class="card-header text-center">Units in Stock</h3>
-            <div class="card-body">
-              <h4 class="card-title text-center">12344</h4>
-            </div>
-          </div>
-        </CCol>
-        <CCol sm="4" lg="4">
-          <div class="card border-light mb-3">
-            <h3 class="card-header text-center">Units Sold</h3>
-            <div class="card-body">
-              <h4 class="card-title text-center">943212</h4>
-            </div>
-          </div>
-        </CCol>
-        <CCol sm="4" lg="4">
-          <div class="card border-light mb-3">
-            <h3 class="card-header text-center">Annual Product Net Profit</h3>
-            <div class="card-body">
-              <h4 class="card-title text-center">40%</h4>
-            </div>
-          </div>
+        <CCol sm="6" lg="6">
+          <CCard className="w-100">
+            <CCardHeader>
+              <h2 class="text-center">Units in Stock</h2>
+            </CCardHeader>
+            <CCardBody>
+              <h3 class="card-title text-center">12344</h3>
+            </CCardBody>
+          </CCard>
+
+          <CCard className="w-100">
+            <CCardHeader>
+              <h2 class="text-center">Units Sold</h2>
+            </CCardHeader>
+            <CCardBody>
+              <h3 class="card-title text-center">943212</h3>
+            </CCardBody>
+          </CCard>
+
+          <CCard className="w-100">
+            <CCardHeader>
+              <h2 class="text-center">Annual Product Net Profit</h2>
+            </CCardHeader>
+            <CCardBody>
+              <h3 class="card-title text-center">40%</h3>
+            </CCardBody>
+          </CCard>
         </CCol>
       </CRow>
     </>

@@ -1,9 +1,10 @@
 import React from "react";
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import LineChart from "../../charts/LineChart.js";
+import MoneyFormat from "./MoneyFormat";
 
 const yLabel = (value, _index, _values) => {
-  return `$ ${value}K`;
+  return `$ ` + MoneyFormat(value);
 };
 
 export default ({ profitMargin, year, heightValue }) => {

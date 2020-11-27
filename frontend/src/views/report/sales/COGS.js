@@ -1,21 +1,20 @@
 import React from "react";
 import ChartBarSimple from "../../charts/ChartBarSimple";
 import { CWidgetDropdown } from "@coreui/react";
+import MoneyFormat from "../shared/MoneyFormat";
 
-export default (attributes) => {
-  const data = [24, 37, 48, 52, 63, 51, 43, 31, 47, 78, 52, 61];
-
+export default ({ dataset }) => {
   return (
     <CWidgetDropdown
       color="dark"
-      className="h-100"
-      header="$ 20B"
+      className="w-100"
+      header={"$ " + MoneyFormat(dataset.reduce((a, b) => a + b, 0))}
       text="Cost of Goods Sold"
       footerSlot={
         <ChartBarSimple
           style={{ height: "70px" }}
           backgroundColor="primary"
-          dataPoints={data}
+          dataPoints={dataset}
           pointHoverBackgroundColor="danger"
           label="COGS"
           labels="months"

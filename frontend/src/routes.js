@@ -38,6 +38,7 @@ const Procurement = React.lazy(() =>
 const Financial = React.lazy(() =>
   import("./views/report/financial/Financial")
 );
+const Overview = React.lazy(() => import("./views/report/overview/Overview"));
 const Inventory = React.lazy(() =>
   import("./views/report/inventory/Inventory")
 );
@@ -58,6 +59,7 @@ const routes = [
   },
   { path: "/report/procurement", name: "Procurement", component: Procurement },
   { path: "/report/financial", name: "Financial", component: Financial },
+  { path: "/report/overview", name: "Overview", component: Overview },
   { path: "/report/inventory", name: "Sales", component: Inventory },
   { path: "/base", name: "Base", component: Cards, exact: true },
   { path: "/base/breadcrumbs", name: "Breadcrumbs", component: Breadcrumbs },

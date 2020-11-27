@@ -16,15 +16,10 @@ import {
   CButtonGroup,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import {
-  CChartBar
-}
-  from "@coreui/react-chartjs";
+import { CChartBar } from "@coreui/react-chartjs";
 import ChartBarSimple from "../../charts/ChartBarSimple";
 import ChartLineSimple from "../../charts/ChartLineSimple";
 import MainChartExample from "../../charts/MainChartExample.js";
-
-
 
 const getBadge = (status) => {
   switch (status) {
@@ -122,7 +117,9 @@ const Inventory = () => {
                 <CCardHeader>
                   <CRow>
                     <CCol>
-                      <h4 className="card-title mb-0">Monthly Average Inventory</h4>
+                      <h4 className="card-title mb-0">
+                        Monthly Average Inventory
+                      </h4>
                       <div className="small text-muted">2019</div>
                     </CCol>
                   </CRow>
@@ -134,23 +131,35 @@ const Inventory = () => {
                         type="bar"
                         datasets={[
                           {
-                            label: 'GitHub Commits',
-                            backgroundColor: '#41B883',
-                            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
+                            label: "GitHub Commits",
+                            backgroundColor: "#41B883",
+                            data: [
+                              40,
+                              20,
+                              12,
+                              39,
+                              10,
+                              40,
+                              39,
+                              80,
+                              40,
+                              20,
+                              12,
+                              11,
+                            ],
                             barPercentage: 0.6,
                             categoryPercentage: 1,
-                          }
+                          },
                         ]}
                         labels="months"
                         options={{
                           tooltips: {
-                            enabled: true
-                          }
+                            enabled: true,
+                          },
                         }}
                       />
                     }
-                  >
-                  </CWidgetDropdown>
+                  ></CWidgetDropdown>
                 </CCardBody>
               </CCard>
             </CCol>
@@ -161,7 +170,9 @@ const Inventory = () => {
             <CCardHeader>
               <CRow>
                 <CCol>
-                  <h4 className="card-title mb-0">Monthly Inventory Turnover</h4>
+                  <h4 className="card-title mb-0">
+                    Monthly Inventory Turnover
+                  </h4>
                   <div className="small text-muted">2019</div>
                 </CCol>
               </CRow>
@@ -188,11 +199,7 @@ const Inventory = () => {
                   <span className="progress-group-text">January</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="34"
-                  />
+                  <CProgress className="progress-xs" color="info" value="34" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -205,11 +212,7 @@ const Inventory = () => {
                   <span className="progress-group-text">February</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="56"
-                  />
+                  <CProgress className="progress-xs" color="info" value="56" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -222,11 +225,7 @@ const Inventory = () => {
                   <span className="progress-group-text">March</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="12"
-                  />
+                  <CProgress className="progress-xs" color="info" value="12" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -239,11 +238,7 @@ const Inventory = () => {
                   <span className="progress-group-text">April</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="43"
-                  />
+                  <CProgress className="progress-xs" color="info" value="43" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -256,11 +251,7 @@ const Inventory = () => {
                   <span className="progress-group-text">May</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="22"
-                  />
+                  <CProgress className="progress-xs" color="info" value="22" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -273,11 +264,7 @@ const Inventory = () => {
                   <span className="progress-group-text">June</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="53"
-                  />
+                  <CProgress className="progress-xs" color="info" value="53" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -290,11 +277,7 @@ const Inventory = () => {
                   <span className="progress-group-text">July</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="9"
-                  />
+                  <CProgress className="progress-xs" color="info" value="9" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -307,11 +290,7 @@ const Inventory = () => {
                   <span className="progress-group-text">August</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="49"
-                  />
+                  <CProgress className="progress-xs" color="info" value="49" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -324,11 +303,7 @@ const Inventory = () => {
                   <span className="progress-group-text">September</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="55"
-                  />
+                  <CProgress className="progress-xs" color="info" value="55" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -341,11 +316,7 @@ const Inventory = () => {
                   <span className="progress-group-text">October</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="33"
-                  />
+                  <CProgress className="progress-xs" color="info" value="33" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -358,11 +329,7 @@ const Inventory = () => {
                   <span className="progress-group-text">November</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="65"
-                  />
+                  <CProgress className="progress-xs" color="info" value="65" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -375,11 +342,7 @@ const Inventory = () => {
                   <span className="progress-group-text">December</span>
                 </div>
                 <div className="progress-group-bars">
-                  <CProgress
-                    className="progress-xs"
-                    color="info"
-                    value="71"
-                  />
+                  <CProgress className="progress-xs" color="info" value="71" />
                   <CProgress
                     className="progress-xs"
                     color="danger"
@@ -394,21 +357,19 @@ const Inventory = () => {
                       &nbsp;
                     </CBadge>
                   </sup>
-                Replaced &nbsp;
-                <sup className="px-1">
+                  Replaced &nbsp;
+                  <sup className="px-1">
                     <CBadge shape="pill" color="danger">
                       &nbsp;
-                  </CBadge>
+                    </CBadge>
                   </sup>
-                Sold
-              </small>
+                  Sold
+                </small>
               </div>
             </CCardBody>
           </CCard>
         </CCol>
       </CRow>
-
-
 
       <CRow className="h-100 mt-5">
         <CCol>
@@ -433,7 +394,9 @@ const Inventory = () => {
                 scopedSlots={{
                   status: (item) => (
                     <td>
-                      <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+                      <CBadge color={getBadge(item.status)}>
+                        {item.status}
+                      </CBadge>
                     </td>
                   ),
                 }}

@@ -1,21 +1,20 @@
 import React from "react";
 import ChartLineSimple from "../../charts/ChartLineSimple";
 import { CWidgetDropdown } from "@coreui/react";
+import MoneyFormat from "../shared/MoneyFormat";
 
-export default (attributes) => {
-  const data = [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
-
+export default ({ dataset }) => {
   return (
     <CWidgetDropdown
       color="dark"
-      className="h-100"
-      header="$ 50.000"
+      className="w-100"
+      header={"$ " + MoneyFormat(dataset.reduce((a, b) => a + b, 0))}
       text="Average Order Value (AOV)"
       footerSlot={
         <ChartLineSimple
           style={{ height: "70px" }}
           backgroundColor="primary"
-          dataPoints={data}
+          dataPoints={dataset}
           pointHoverBackgroundColor="danger"
           label="AOV"
           labels="months"
