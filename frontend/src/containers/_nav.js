@@ -11,36 +11,30 @@ export default [
   },
   {
     _tag: "CSidebarNavTitle",
-    _children: ["Theme"],
-  },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Colors",
-    to: "/theme/colors",
-    icon: "cil-drop",
+    _children: ["Report"],
   },
   {
     _tag: "CSidebarNavItem",
     name: "Sales Report",
-    to: "/theme/sales",
+    to: "/report/sales",
     icon: "cil-graph",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Financial Report",
-    to: "/theme/financial",
+    to: "/report/financial",
     icon: "cilDollar",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Procurement Report",
-    to: "/theme/procurement",
+    to: "/report/procurement",
     icon: "cil-briefcase",
   },
   {
     _tag: "CSidebarNavItem",
     name: "Inventory Report",
-    to: "/theme/inventory",
+    to: "/report/inventory",
     icon: "cil-clipboard",
   },
   {
@@ -151,34 +145,6 @@ export default [
   {
     _tag: "CSidebarNavTitle",
     _children: ["Extras"],
-  },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Pages",
-    route: "/pages",
-    icon: "cil-star",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Login",
-        to: "/login",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Register",
-        to: "/register",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 404",
-        to: "/404",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 500",
-        to: "/500",
-      },
-    ],
   },
   {
     _tag: "CSidebarNavItem",

@@ -30,14 +30,17 @@ const Switches = React.lazy(() => import("./views/base/switches/Switches"));
 const Tabs = React.lazy(() => import("./views/base/tabs/Tabs"));
 const Tooltips = React.lazy(() => import("./views/base/tooltips/Tooltips"));
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
-const Colors = React.lazy(() => import("./views/theme/colors/Colors"));
-const Sales = React.lazy(() => import("./views/theme/sales/Sales"));
-const Product = React.lazy(() => import("./views/theme/products/Product"));
+const Sales = React.lazy(() => import("./views/report/sales/Sales"));
+const Product = React.lazy(() => import("./views/report/products/Product"));
 const Procurement = React.lazy(() =>
-  import("./views/theme/procurement/Procurement")
+  import("./views/report/procurement/Procurement")
 );
-const Financial = React.lazy(() => import("./views/theme/financial/Financial"));
-const Inventory = React.lazy(() => import("./views/theme/inventory/Inventory"));
+const Financial = React.lazy(() =>
+  import("./views/report/financial/Financial")
+);
+const Inventory = React.lazy(() =>
+  import("./views/report/inventory/Inventory")
+);
 const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
 const Users = React.lazy(() => import("./views/users/Users"));
 const User = React.lazy(() => import("./views/users/User"));
@@ -45,13 +48,12 @@ const User = React.lazy(() => import("./views/users/User"));
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
-  { path: "/theme", name: "Theme", component: Colors, exact: true },
-  { path: "/theme/colors", name: "Colors", component: Colors },
-  { path: "/theme/sales", name: "Sales", component: Sales },
-  { path: "/theme/products", name: "Product", component: Product },
-  { path: "/theme/procurement", name: "Procurement", component: Procurement },
-  { path: "/theme/financial", name: "Financial", component: Financial },
-  { path: "/theme/inventory", name: "Sales", component: Inventory },
+  { path: "/report", name: "Report", component: Sales, exact: true },
+  { path: "/report/sales", name: "Sales", component: Sales },
+  { path: "/report/products", name: "Product", component: Product },
+  { path: "/report/procurement", name: "Procurement", component: Procurement },
+  { path: "/report/financial", name: "Financial", component: Financial },
+  { path: "/report/inventory", name: "Sales", component: Inventory },
   { path: "/base", name: "Base", component: Cards, exact: true },
   { path: "/base/breadcrumbs", name: "Breadcrumbs", component: Breadcrumbs },
   { path: "/base/cards", name: "Cards", component: Cards },
