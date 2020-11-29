@@ -7,6 +7,7 @@ import { getStyle, hexToRgba } from "@coreui/utils/src";
 import ChartBarPercentage from "../charts/ChartBarPercentage";
 import ProgressBar from "../components/ProgressBar";
 import ChartBarMax from "../charts/ChartBarMax";
+import yLabel from '../utils/yLabel';
 
 const numberSuppliers = [
   {
@@ -116,10 +117,6 @@ const purchaseOrder = [
     data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
   },
 ];
-
-const yLabel = (value, _index, _values) => {
-  return `${value}`;
-};
 
 export const formatNumber = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

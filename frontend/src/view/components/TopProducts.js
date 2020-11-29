@@ -10,6 +10,7 @@ import {
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
+import TopProduct from "../../model/topProducts";
 
 const getBadge = (status) => {
   switch (status) {
@@ -26,7 +27,7 @@ const getBadge = (status) => {
   }
 };
 
-export default ({ fields, productsData, year }) => {
+export default ({ fields, productsData, year}) => {
   let history = useHistory();
   return (
     <CCard className="w-100">

@@ -1,13 +1,9 @@
 import React from "react";
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
-import MoneyFormat from "../utils/MoneyFormat";
+import yLabel from '../utils/yLabel'
 
-const yLabel = (value, _index, _values) => {
-  return `$ ` + MoneyFormat(value);
-};
-
-const SalesSummary = ({ datasets, year }) => {
+export default ({ datasets, year }) => {
   return (
     <CCard className="w-100">
       <CCardHeader>
@@ -33,10 +29,7 @@ const SalesSummary = ({ datasets, year }) => {
               yAxes: [
                 {
                   display: true,
-                  ticks: {
-                    // Include a dollar sign in the ticks
-                    callback: yLabel,
-                  },
+                  ticks: { callback: yLabel },
                 },
               ],
             },
@@ -49,5 +42,3 @@ const SalesSummary = ({ datasets, year }) => {
     </CCard>
   );
 };
-
-export default SalesSummary;

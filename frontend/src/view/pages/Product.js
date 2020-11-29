@@ -7,9 +7,9 @@ import {
   CCardHeader,
   CDataTable,
 } from "@coreui/react";
-
-import LineChart from "../components/LineChart";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
+import LineChart from "../components/LineChart";
+import yLabel from '../utils/yLabel'
 
 const Product = ({ match }) => {
   const ProductInfo = [
@@ -79,10 +79,6 @@ const Product = ({ match }) => {
       data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
     },
   ];
-
-  const yLabel = (value, _index, _values) => {
-    return `${value}`;
-  };
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React from "react";
 import { CChartLine } from "@coreui/react-chartjs";
 
-const LineChart = ({ datasets, callback }) => {
+export default ({ datasets, callback }) => {
   const defaultOptions = (() => {
     return {
       maintainAspectRatio: true,
@@ -63,5 +63,3 @@ const LineChart = ({ datasets, callback }) => {
     />
   );
 };
-
-export default LineChart;

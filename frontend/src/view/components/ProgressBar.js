@@ -2,7 +2,7 @@ import React from "react";
 import { CProgress } from "@coreui/react";
 import { formatNumber } from "../pages/Procurement";
 
-const ProgressBar = (attributes) => {
+export default (attributes) => {
   return (
     <div className="progress-group mt-0">
       <div className="progress-group-header">
@@ -25,5 +25,3 @@ const ProgressBar = (attributes) => {
     </div>
   );
 };
-
-export default ProgressBar;

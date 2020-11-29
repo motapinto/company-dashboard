@@ -1,6 +1,6 @@
 import React from "react";
-import ChartLineSimple from "../charts/ChartLineSimple";
 import { CWidgetDropdown } from "@coreui/react";
+import ChartLineSimple from "../charts/ChartLineSimple";
 import MoneyFormat from "../utils/MoneyFormat";
 
 export default ({ dataset }) => {

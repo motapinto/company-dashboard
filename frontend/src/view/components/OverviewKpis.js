@@ -2,7 +2,7 @@ import React from "react";
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import MoneyFormat from "../utils/MoneyFormat";
 
-const OverviewKpis = ({ kpis, year }) => {
+export default ({ kpis, year }) => {
   return (
     <CCard className="w-100">
       <CCardHeader>
@@ -46,5 +46,3 @@ const OverviewKpis = ({ kpis, year }) => {
     </CCard>
   );
 };
-
-export default OverviewKpis;
