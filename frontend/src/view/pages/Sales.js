@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CRow, CCol } from "@coreui/react";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
 import COGS from "../components/COGS";
@@ -52,7 +52,7 @@ const RenderSales = (data) => {
         <CCol>
           <SalesRegion
             labels={["America", "China", "Europe", "Australia", "Africa"]}
-            datasets={data.salesR}            
+            datasets={data.salesR}
             year={2019}
           />
         </CCol>
@@ -66,10 +66,5 @@ const RenderSales = (data) => {
   );
 };
 
-const Sales = () => (
-  <ResourceGetter
-    func={() => GetSalesData(2019)}
-    componentToRender={RenderSales}
-  />
-);
+const Sales =  (year) => <ResourceGetter func={() => GetSalesData(year)} componentToRender={RenderSales}/>;
 export default Sales;

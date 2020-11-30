@@ -10,7 +10,6 @@ import {
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
-import TopProduct from "../../model/topProducts";
 
 const getBadge = (status) => {
   switch (status) {
