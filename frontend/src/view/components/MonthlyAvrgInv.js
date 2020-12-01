@@ -37,13 +37,22 @@ export default ({ dataset, year }) => {
               ]}
               labels="months"
               options={{
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true,
+                      },
+                    },
+                  ],
+                },
                 tooltips: {
                   enabled: true,
                 },
               }}
             />
           }
-        ></CWidgetDropdown>
+        />
       </CCardBody>
     </CCard>
   );

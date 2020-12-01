@@ -11,7 +11,22 @@ import {
   CCardHeader,
 } from "@coreui/react";
 
-export default ({ replaced, sold, year }) => {
+export default ({ labels, data1, data2, year }) => {
+  let bars = [];
+  for (let i = 0; i < data1.data.length && i < data2.data.length && i < labels.length; i++) {
+    bars.push(
+      <div key={"data-progress-"+i} className="progress-group mb-4">
+        <div className="progress-group-prepend">
+          <span className="progress-group-text">{labels[i]}</span>
+        </div>
+        <div className="progress-group-bars">
+          <CProgress className="progress-xs" color="info" value={data1.data[i]} />
+          <CProgress className="progress-xs" color="danger" value={data2.data[i]} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <CCard className="h-100">
       <CCardHeader>
@@ -24,129 +39,22 @@ export default ({ replaced, sold, year }) => {
         <CRow>
           <CCol sm="6">
             <CCallout color="info">
-              <small className="text-muted">Replaced</small>
+              <small className="text-muted">{data1.label}</small>
               <br />
-              <strong className="h4">{replaced}</strong>
+              <strong className="h4">{data1.total}</strong>
             </CCallout>
           </CCol>
           <CCol sm="6">
             <CCallout color="danger">
-              <small className="text-muted">Sold</small>
+              <small className="text-muted">{data2.label}</small>
               <br />
-              <strong className="h4">{sold}</strong>
+              <strong className="h4">{data2.total}</strong>
             </CCallout>
           </CCol>
         </CRow>
       </CCardHeader>
       <CCardBody>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">January</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="34" />
-            <CProgress className="progress-xs" color="danger" value="78" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">February</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="56" />
-            <CProgress className="progress-xs" color="danger" value="94" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">March</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="12" />
-            <CProgress className="progress-xs" color="danger" value="67" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">April</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="43" />
-            <CProgress className="progress-xs" color="danger" value="91" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">May</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="22" />
-            <CProgress className="progress-xs" color="danger" value="73" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">June</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="53" />
-            <CProgress className="progress-xs" color="danger" value="82" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">July</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="9" />
-            <CProgress className="progress-xs" color="danger" value="69" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">August</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="49" />
-            <CProgress className="progress-xs" color="danger" value="74" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">September</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="55" />
-            <CProgress className="progress-xs" color="danger" value="72" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">October</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="33" />
-            <CProgress className="progress-xs" color="danger" value="55" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">November</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="65" />
-            <CProgress className="progress-xs" color="danger" value="83" />
-          </div>
-        </div>
-        <div className="progress-group mb-4">
-          <div className="progress-group-prepend">
-            <span className="progress-group-text">December</span>
-          </div>
-          <div className="progress-group-bars">
-            <CProgress className="progress-xs" color="info" value="71" />
-            <CProgress className="progress-xs" color="danger" value="95" />
-          </div>
-        </div>
+        {bars}
         <div className="legend text-center">
           <small>
             <sup className="px-1">
@@ -154,13 +62,13 @@ export default ({ replaced, sold, year }) => {
                 &nbsp;
               </CBadge>
             </sup>
-            Replaced &nbsp;
+            {data1.label} &nbsp;
             <sup className="px-1">
               <CBadge shape="pill" color="danger">
                 &nbsp;
               </CBadge>
             </sup>
-            Sold
+            {data2.label}
           </small>
         </div>
       </CCardBody>

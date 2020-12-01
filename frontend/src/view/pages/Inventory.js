@@ -54,6 +54,33 @@ const productsData = [
 
 const monthlyAvrgInv = [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11];
 
+const monthlyAvrgTurn = {
+  labels: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ],
+  sold: {
+    total: 20000,
+    data: [34, 56, 12, 43, 22, 53, 9, 49, 55, 33, 65, 71],
+    label: "Sold"
+  },
+  replaced: {
+    total: 23122,
+    data: [78, 94, 67, 91, 73, 82, 69, 74, 72, 55, 83, 95],
+    label: "Replaced"
+  }
+}
+
 const Inventory = () => {
   return (
     <>
@@ -94,7 +121,7 @@ const Inventory = () => {
           </CRow>
         </CCol>
         <CCol md="6">
-          <MontlyAvrgTurn sold={20000} replaced={23122} year={2019} />
+          <MontlyAvrgTurn labels={monthlyAvrgTurn.labels} data1={monthlyAvrgTurn.sold} data2={monthlyAvrgTurn.replaced} year={2019} />
         </CCol>
       </CRow>
       <CRow className="h-100 mt-5">
