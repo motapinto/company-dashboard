@@ -19,6 +19,7 @@ const brandInfo = getStyle("info") || "#20a8d8";
 const fields = ["name", "quantity", "amount"];
 
 const RenderProduct = (data) => {
+  console.log(data);
   const netGrossProfit = [
     {
       label: "Gross Profit",
@@ -42,7 +43,7 @@ const RenderProduct = (data) => {
     <>
       <CRow className="h-100">
         <CCol sm="6" lg="6">
-          <ProductInfo ProductInfo={data.ProductInfo} />
+          <ProductInfo ProductInfo={data.productInfo} />
         </CCol>
         <CCol sm="6" lg="6">
           <TopClients clientsData={data.clientsData} fields={fields} />

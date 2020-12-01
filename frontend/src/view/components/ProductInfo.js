@@ -9,12 +9,12 @@ export default ({ ProductInfo }) => {
       </CCardHeader>
       <CCardBody>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">ID: {ProductInfo[0].id}</li>
-          <li class="list-group-item">Name: {ProductInfo[0].name}</li>
-          <li class="list-group-item">Supplier: {ProductInfo[0].supplier}</li>
-          <li class="list-group-item">Cost: {ProductInfo[0].cost}</li>
-          <li class="list-group-item">Profit: {ProductInfo[0].profit}</li>
-          <li class="list-group-item">Details: {ProductInfo[0].details}</li>
+          <li class="list-group-item">ID: {ProductInfo.id}</li>
+          <li class="list-group-item">Name: {ProductInfo.name}</li>
+          <li class="list-group-item">Supplier: {ProductInfo.supplier}</li>
+          <li class="list-group-item">Cost: {ProductInfo.cost}</li>
+          <li class="list-group-item">Profit: {ProductInfo.profit}</li>
+          <li class="list-group-item">Details: {ProductInfo.details}</li>
         </ul>
       </CCardBody>
     </CCard>

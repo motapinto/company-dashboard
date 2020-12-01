@@ -10,7 +10,7 @@ const getProductInfo = async (
   year: number
 ): Promise<ProductInfo> => {
   return {
-    id: productId,
+    id: "1111",
     name: "Tesla Model S",
     supplier: "Tesla",
     cost: 70.0,
@@ -94,7 +94,7 @@ export default async (
   year: number
 ): Promise<ProductData> => {
   return {
-    productInfo: await getProductInfo("modelS", 2019),
+    productInfo: await getProductInfo(productId, year),
     purchaseOrder: await getNetGrossProfit(productId, year),
     clientsData: await getClientsData(productId, year),
     unitsSold: await getUnitsSold(productId, year),
