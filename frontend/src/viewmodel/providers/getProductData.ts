@@ -2,8 +2,8 @@ import SalesData from "../../model/salesData";
 import ProductInfo from "../../model/productInfo";
 import { cilEthernet } from "@coreui/icons";
 import ClientsData from "../../model/clientsData";
-import NetGrossProfitData from "../../model/NetGrossProfitData";
 import ProductData from "../../model/productData";
+import NetGrossProfitData from "../../model/NetGrossProfitData";
 
 const getProductInfo = async (
   productId: string,

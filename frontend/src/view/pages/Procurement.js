@@ -8,126 +8,61 @@ import ChartBarPercentage from "../charts/ChartBarPercentage";
 import ProgressBar from "../components/ProgressBar";
 import ChartBarMax from "../charts/ChartBarMax";
 import yLabel from "../utils/yLabel";
-
-const numberSuppliers = [
-  {
-    label: "Short suppliers",
-    data: [40],
-    backgroundColor: "#00D8FF",
-  },
-  {
-    label: "Medium suppliers",
-    data: [25],
-    backgroundColor: "#f87979",
-  },
-  {
-    label: "Long suppliers",
-    data: [70],
-    backgroundColor: "#41B883",
-  },
-];
-
-const supplierQuality = {
-  datasets: [
-    {
-      label: "Supplier Quality Rating",
-      data: [40, 20, 13, 40, 10, 40, 38, 80, 40, 20, 14, 11],
-      backgroundColor: "#f87979",
-    },
-  ],
-  labels: [
-    "AGC",
-    "Brembo",
-    "ZF",
-    "Fisher",
-    "Sika",
-    "akg",
-    "IRL",
-    "MOB",
-    "WES",
-    "AWS",
-    "TES",
-    "MJG",
-  ],
-};
-
-const purchasesInTB = {
-  totalPurchases: {
-    name: "",
-    inTime: 192235,
-    total: 343277,
-    percentile: 0.559,
-  },
-  categories: [
-    {
-      name: "Electrical Supply",
-      inTime: 76129,
-      total: 160372,
-      percentile: 0.4747,
-    },
-    {
-      name: "Logistics",
-      inTime: 51223,
-      total: 87941,
-      percentile: 0.58247,
-    },
-    {
-      name: "Packaging",
-      inTime: 37564,
-      total: 49906,
-      percentile: 0.75269,
-    },
-    {
-      name: "Services",
-      inTime: 27319,
-      total: 45058,
-      percentile: 0.6063,
-    },
-  ],
-};
-
-const suppliers = {
-  labels: ["AOC", "Fisher", "MOB", "Others"],
-  datasets: [
-    {
-      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-      data: [40, 20, 80, 10],
-    },
-  ],
-};
-
-const brandSuccess = getStyle("success") || "#4dbd74";
-const brandInfo = getStyle("info") || "#20a8d8";
-
-const purchaseOrder = [
-  {
-    label: "Product Order Cycle Time (days)",
-    backgroundColor: hexToRgba(brandInfo, 10),
-    borderColor: brandInfo,
-    pointHoverBackgroundColor: brandInfo,
-    borderWidth: 2,
-    data: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91],
-  },
-  {
-    label: "Product Order Lead Time (days)",
-    backgroundColor: hexToRgba(brandSuccess, 10),
-    borderColor: brandSuccess,
-    pointHoverBackgroundColor: brandSuccess,
-    borderWidth: 2,
-    data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
-  },
-];
+import ResourceGetter from "../components/ResourceGetter";
+import getProcurementData from "../../viewmodel/providers/getProcurementData";
 
 export const formatNumber = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-const Procurement = () => {
+const RenderProcurement = (data) => {
+  const brandSuccess = getStyle("success") || "#4dbd74";
+  const brandInfo = getStyle("info") || "#20a8d8";
+
+  const colorOrder = ["#41B883", "#E46651", "#00D8FF", "#DD1B16"];
+
+  const numberSuppliers = [];
+  for (let i = 0; i < data.numberSuppliers.length; i++) {
+    numberSuppliers.push({
+      label: data.numberSuppliers[i].label,
+      data: data.numberSuppliers[i].data,
+      backgroundColor: colorOrder[i],
+    })
+  }
+
+  const suppliers = data.suppliers;
+  suppliers.datasets[0] = {
+    label: suppliers.datasets[0].label,
+    data: suppliers.datasets[0].data,
+    backgroundColor: colorOrder
+  }
+
+  const supplierQuality = data.supplierQuality;
+  supplierQuality.datasets[0].backgroundColor = "#f87979";
+
+  const purchaseOrder = data.purchaseOrder;
+  purchaseOrder[0] = {
+    label: purchaseOrder[0].label,
+    data: purchaseOrder[0].data,
+    backgroundColor: hexToRgba(brandSuccess, 10),
+    borderColor: brandSuccess,
+    pointHoverBackgroundColor: brandSuccess,
+    borderWidth: 2,
+  }
+  purchaseOrder[1] = {
+    label: purchaseOrder[1].label,
+    data: purchaseOrder[1].data,
+    backgroundColor: hexToRgba(brandInfo, 10),
+    borderColor: brandInfo,
+    pointHoverBackgroundColor: brandInfo,
+    borderWidth: 2,
+  }
+
   const progressBars = [];
 
-  for (let i = 0; i < purchasesInTB.categories.length; i++) {
+  for (let i = 0; i < data.purchasesInTB.categories.length; i++) {
     progressBars.push(
-      <ProgressBar key={`categories${i}`} data={purchasesInTB.categories[i]} />
+      <ProgressBar key={`categories${i}`} data={data.purchasesInTB.categories[i]} />
     );
   }
 
@@ -183,7 +118,7 @@ const Procurement = () => {
             </CCardHeader>
             <CCardBody>
               <h4 className="mb-0">Total</h4>
-              <ProgressBar data={purchasesInTB.totalPurchases} />
+              <ProgressBar data={data.purchasesInTB.totalPurchases} />
 
               <h4>By category</h4>
               {progressBars}
@@ -208,4 +143,5 @@ const Procurement = () => {
   );
 };
 
+const Procurement = (year) => <ResourceGetter func={() => getProcurementData(year)} componentToRender={RenderProcurement}/>;
 export default Procurement;

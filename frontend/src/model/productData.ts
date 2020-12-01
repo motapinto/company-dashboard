@@ -1,5 +1,4 @@
 import ProductInfo from "./productInfo";
-import { cilEthernet } from "@coreui/icons";
 import ClientsData from "./clientsData";
 import NetGrossProfitData from "./NetGrossProfitData";
 

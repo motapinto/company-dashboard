@@ -8,7 +8,7 @@ export default (attributes) => {
       <div className="progress-group-header">
         <span className="title">{attributes.data.name}</span>
         <span className="ml-auto font-weight-bold">
-          {formatNumber(attributes.data.inTime)}{" "}
+          {formatNumber(attributes.data.value)}{" "}
           <span className="text-muted small">
             ({Math.round(attributes.data.percentile * 100)}
             %)
