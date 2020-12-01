@@ -2,6 +2,7 @@ import React from "react";
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
 import yLabel from '../utils/yLabel'
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ datasets, year }) => {
   return (
@@ -29,12 +30,27 @@ export default ({ datasets, year }) => {
               yAxes: [
                 {
                   display: true,
-                  ticks: { callback: yLabel },
+                  ticks: {
+                    callback: yLabel
+                  },
                 },
               ],
             },
             tooltips: {
               enabled: true,
+              callbacks: {
+                label: function (tooltipItem, data) {
+                  let label =
+                    data.datasets[tooltipItem.datasetIndex].label || "";
+
+                  if (label) {
+                    label += ": ";
+                  }
+                  label +=
+                    "$ " + formatNumber(tooltipItem.yLabel);
+                  return label;
+                },
+              },
             },
           }}
         />
