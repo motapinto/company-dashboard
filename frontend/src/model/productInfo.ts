@@ -1,4 +1,4 @@
-export default interface ProfitMargin {
+export default interface ProductInfo {
   id: string;
   name: string;
   supplier: string;

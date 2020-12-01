@@ -1,11 +1,8 @@
-import SalesData from "../../model/salesData";
 import ProductInfo from "../../model/productInfo";
-import { cilEthernet } from "@coreui/icons";
 import ClientsData from "../../model/clientsData";
 import ProductData from "../../model/productData";
-import NetGrossProfitData from "../../model/NetGrossProfitData";
 
-const getProductInfo = async (
+const getInfo = async (
   productId: string,
   year: number
 ): Promise<ProductInfo> => {
@@ -20,7 +17,15 @@ const getProductInfo = async (
   };
 };
 
-const getClientsData = async (
+const getGrossProfitMargin = async(year: number): Promise<Array<number>> => {
+  return [98, 166, 159, 122, 109, 91, 139, 99, 140, 193, 79, 160];
+}
+
+const getNetProfitMargin = async(year: number): Promise<Array<number>> => {
+  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
+}
+
+const getClients = async (
   productId: string,
   year: number
 ): Promise<Array<ClientsData>> => {
@@ -58,31 +63,21 @@ const getClientsData = async (
   ];
 };
 
-const getNetGrossProfit = async (
-  productId: string,
-  year: number
-): Promise<NetGrossProfitData> => {
-  return {
-    netProfit: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91],
-    grossProfit: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
-  };
-};
-
-const getUnitsSold = async (
+const getSold = async (
   productId: string,
   year: number
 ): Promise<number> => {
   return 2000;
 };
 
-const getProductNetProfit = async (
+const getStock = async (
   productId: string,
   year: number
 ): Promise<number> => {
   return 2000;
 };
 
-const getUnitStock = async (
+const getAnnualNetProfit = async (
   productId: string,
   year: number
 ): Promise<number> => {
@@ -94,11 +89,12 @@ export default async (
   year: number
 ): Promise<ProductData> => {
   return {
-    productInfo: await getProductInfo(productId, year),
-    purchaseOrder: await getNetGrossProfit(productId, year),
-    clientsData: await getClientsData(productId, year),
-    unitsSold: await getUnitsSold(productId, year),
-    productNetProfit: await getProductNetProfit(productId, year),
-    unitStock: await getUnitStock(productId, year),
+    info: await getInfo(productId, year),
+    gpm: await getGrossProfitMargin(year),
+    npm: await getNetProfitMargin(year),
+    clients: await getClients(productId, year),
+    sold: await getSold(productId, year),
+    stock: await getStock(productId, year),
+    annualNetProfit: await getAnnualNetProfit(productId, year),
   };
 };

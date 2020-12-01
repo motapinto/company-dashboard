@@ -5,7 +5,6 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CDataTable,
 } from "@coreui/react";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
 import ProductInfo from "../components/ProductInfo";
@@ -16,18 +15,16 @@ import ResourceGetter from "../components/ResourceGetter";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 
-const fields = ["name", "quantity", "amount"];
-
 const RenderProduct = (data) => {
   console.log(data);
-  const netGrossProfit = [
+  const profitMargin = [
     {
       label: "Gross Profit",
       backgroundColor: hexToRgba(brandInfo, 10),
       borderColor: brandInfo,
       pointHoverBackgroundColor: brandInfo,
       borderWidth: 2,
-      data: data.purchaseOrder.grossProfit,
+      data: data.gpm,
     },
     {
       label: "Net Profit",
@@ -35,7 +32,7 @@ const RenderProduct = (data) => {
       borderColor: brandSuccess,
       pointHoverBackgroundColor: brandSuccess,
       borderWidth: 2,
-      data: data.purchaseOrder.netProfit,
+      data: data.npm,
     },
   ];
 
@@ -43,15 +40,15 @@ const RenderProduct = (data) => {
     <>
       <CRow className="h-100">
         <CCol sm="6" lg="6">
-          <ProductInfo ProductInfo={data.productInfo} />
+          <ProductInfo ProductInfo={data.info} />
         </CCol>
         <CCol sm="6" lg="6">
-          <TopClients clientsData={data.clientsData} fields={fields} />
+          <TopClients clientsData={data.clients} fields={["name", "quantity", "amount"]} />
         </CCol>
       </CRow>
       <CRow className="mt-5">
         <CCol sm="6" lg="6">
-          <GrossNetProfit purchaseOrder={netGrossProfit} />
+          <GrossNetProfit purchaseOrder={profitMargin} />
         </CCol>
         <CCol sm="6" lg="6">
           <CCard className="w-100">
@@ -59,7 +56,7 @@ const RenderProduct = (data) => {
               <h2 class="text-center">Units in Stock</h2>
             </CCardHeader>
             <CCardBody>
-              <h3 class="card-title text-center">{data.unitStock}</h3>
+              <h3 class="card-title text-center">{data.stock}</h3>
             </CCardBody>
           </CCard>
 
@@ -68,7 +65,7 @@ const RenderProduct = (data) => {
               <h2 class="text-center">Units Sold</h2>
             </CCardHeader>
             <CCardBody>
-              <h3 class="card-title text-center">{data.unitsSold}</h3>
+              <h3 class="card-title text-center">{data.sold}</h3>
             </CCardBody>
           </CCard>
 
@@ -77,7 +74,7 @@ const RenderProduct = (data) => {
               <h2 class="text-center">Annual Product Net Profit</h2>
             </CCardHeader>
             <CCardBody>
-              <h3 class="card-title text-center">{data.productNetProfit}%</h3>
+              <h3 class="card-title text-center">{data.annualNetProfit}%</h3>
             </CCardBody>
           </CCard>
         </CCol>
