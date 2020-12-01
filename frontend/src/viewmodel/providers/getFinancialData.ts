@@ -70,7 +70,7 @@ export default async (year: number): Promise<FinancialData> => {
     e: await getEquity(year),
     revenue: await getRevenue(year),
     cost: await getCost(year),
-    ebidta: await getEbidta(year),
+    ebitda: await getEbidta(year),
     ebitdaMargin: await getEbidtaMargin(year),
   };
 };

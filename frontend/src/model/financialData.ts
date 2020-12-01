@@ -10,6 +10,6 @@ export default interface FinancialData {
   e: Array<number>,
   revenue: Array<number>,
   cost: Array<number>,
-  ebidta: number,
+  ebitda: number,
   ebitdaMargin: number,
 }
