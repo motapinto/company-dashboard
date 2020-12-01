@@ -34,19 +34,21 @@ const RenderFinancial = (data) => {
     <>
       <CRow className="mb-4">
         <CCol sm="12" md="12" lg="6">
-          <VatPaidDeducted vatPaidDeducted={[
-            {
-              label: "Paid",
-              backgroundColor: "#f87979",
-              data: data.vatPaid,
-            },
-            {
-              label: "Deducted",
-              backgroundColor: "#4dbd74",
-              data: data.vatDeducted,
-            },
-          ]} 
-          year={2019} />
+          <VatPaidDeducted
+            vatPaidDeducted={[
+              {
+                label: "Paid",
+                backgroundColor: "#f87979",
+                data: data.vatPaid,
+              },
+              {
+                label: "Deducted",
+                backgroundColor: "#4dbd74",
+                data: data.vatDeducted,
+              },
+            ]}
+            year={2019}
+          />
         </CCol>
         <CCol md="12" lg="6" className="mt-4 mt-md-4 mt-lg-0">
           <ProfitMargin
@@ -69,8 +71,8 @@ const RenderFinancial = (data) => {
                 label: "CA",
                 backgroundColor: "#597D35",
                 data: data.ca,
-              }]
-            }
+              },
+            ]}
             balanceSheetEquity={[
               {
                 label: "CL",
@@ -86,23 +88,27 @@ const RenderFinancial = (data) => {
                 label: "E",
                 backgroundColor: "#f87979",
                 data: data.e,
-              }]
-            }
+              },
+            ]}
             year={2019}
           />
         </CCol>
         <CCol md="7" className="d-flex align-items-stretch">
           <ProfitAndLoss
-            profitAndLossCost={[{
-              label: "O",
-              backgroundColor: "#f87979",
-              data: data.cost,
-            }]}
-            profitAndLossRevenue={[{
-              label: "R",
-              backgroundColor: "#4dbd74",
-              data: data.revenue,
-            }]}
+            profitAndLossCost={[
+              {
+                label: "O",
+                backgroundColor: "#f87979",
+                data: data.cost,
+              },
+            ]}
+            profitAndLossRevenue={[
+              {
+                label: "R",
+                backgroundColor: "#4dbd74",
+                data: data.revenue,
+              },
+            ]}
             className="d-flex align-items-stretch"
             year={2019}
             ebitda={data.ebidta}
@@ -114,5 +120,10 @@ const RenderFinancial = (data) => {
   );
 };
 
-const Financial =  (year) => <ResourceGetter func={() => GetFinancialData(year)} componentToRender={RenderFinancial}/>;
+const Financial = (year) => (
+  <ResourceGetter
+    func={() => GetFinancialData(year)}
+    componentToRender={RenderFinancial}
+  />
+);
 export default Financial;
