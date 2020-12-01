@@ -9,10 +9,13 @@ import {
 } from "@coreui/react";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
 import LineChart from "../components/LineChart";
-import yLabel from '../utils/yLabel'
+import yLabel from "../utils/yLabel";
+import ProductInfo from "../components/ProductInfo";
+import TopClients from "../components/TopClients";
+import GrossNetProfit from "../components/GrossNetProfit";
 
 const Product = ({ match }) => {
-  const ProductInfo = [
+  const productInfo = [
     {
       id: match.params.id,
       name: "Tesla Model S",
@@ -84,56 +87,16 @@ const Product = ({ match }) => {
     <>
       <CRow className="h-100">
         <CCol sm="6" lg="6">
-          <CCard className="w-100 h-100">
-            <CCardHeader className="text-center">
-              <h3 class="card-title">Product Information</h3>
-            </CCardHeader>
-            <CCardBody>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: {ProductInfo[0].id}</li>
-                <li class="list-group-item">Name: {ProductInfo[0].name}</li>
-                <li class="list-group-item">
-                  Supplier: {ProductInfo[0].supplier}
-                </li>
-                <li class="list-group-item">Cost: {ProductInfo[0].cost}</li>
-                <li class="list-group-item">Profit: {ProductInfo[0].profit}</li>
-                <li class="list-group-item">
-                  Details: {ProductInfo[0].details}
-                </li>
-              </ul>
-            </CCardBody>
-          </CCard>
+          <ProductInfo ProductInfo={productInfo} />
         </CCol>
-
         <CCol sm="6" lg="6">
-          <CCard className="w-100 h-100">
-            <CCardBody>
-              <h3 class="card-title mb-1">Top Clients</h3>
-              <CDataTable
-                items={clientsData}
-                fields={fields}
-                itemsPerPage={5}
-                hover
-                bordered
-                pagination
-              />
-            </CCardBody>
-          </CCard>
+          <TopClients clientsData={clientsData} fields={fields} />
         </CCol>
       </CRow>
-
       <CRow className="mt-5">
         <CCol sm="6" lg="6">
-          <CCard className="w-100">
-            <CCardHeader className="text-center">
-              <h3>Gross Profit vs Net Profit</h3>
-            </CCardHeader>
-            <CCardBody>
-              <LineChart datasets={purchaseOrder} callback={yLabel} />
-            </CCardBody>
-          </CCard>
+          <GrossNetProfit purchaseOrder={purchaseOrder} />
         </CCol>
-
         <CCol sm="6" lg="6">
           <CCard className="w-100">
             <CCardHeader>

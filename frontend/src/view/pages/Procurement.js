@@ -7,7 +7,7 @@ import { getStyle, hexToRgba } from "@coreui/utils/src";
 import ChartBarPercentage from "../charts/ChartBarPercentage";
 import ProgressBar from "../components/ProgressBar";
 import ChartBarMax from "../charts/ChartBarMax";
-import yLabel from '../utils/yLabel';
+import yLabel from "../utils/yLabel";
 
 const numberSuppliers = [
   {
