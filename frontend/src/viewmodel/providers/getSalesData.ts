@@ -1,5 +1,10 @@
 import SalesData from "../../model/salesData";
 import TopProduct from "../../model/topProducts";
+const axios = require("axios").default;
+
+const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
+axios.defaults.headers.common["Authorization"] = `Bearer ${process.env.REACT_APP_TOKEN}`;
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const getCOGS = async (year: number): Promise<Array<number>> => {
   return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
