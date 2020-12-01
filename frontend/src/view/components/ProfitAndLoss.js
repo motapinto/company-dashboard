@@ -11,7 +11,7 @@ export default ({
   year,
 }) => {
   return (
-    <CCard>
+    <CCard className="w-100">
       <CCardHeader>
         <h4 className="card-title mb-0">Profit and Loss</h4>
         <div className="small text-muted">{year}</div>

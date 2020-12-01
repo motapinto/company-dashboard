@@ -107,15 +107,16 @@ const Financial = () => {
         </CCol>
       </CRow>
       <CRow>
-        <CCol md="5">
+        <CCol md="5" className="d-flex align-items-stretch">
           <BalanceSheet
             balanceSheetAssets={balanceSheetAssets}
             balanceSheetEquity={balanceSheetEquity}
             year={2019}
           />
         </CCol>
-        <CCol md="7">
+        <CCol md="7" className="d-flex align-items-stretch">
           <ProfitAndLoss
+            className="d-flex align-items-stretch"
             profitAndLossCost={profitAndLossCost}
             profitAndLossRevenue={profitAndLossRevenue}
             year={2019}
