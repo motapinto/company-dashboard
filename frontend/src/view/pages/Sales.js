@@ -19,7 +19,7 @@ const RenderSales = (data) => {
       borderColor: brandInfo,
       pointHoverBackgroundColor: brandInfo,
       borderWidth: 2,
-      data: data.gpm,
+      data: data.profitMargin.grossProfit,
     },
     {
       label: "Net Profit Margin",
@@ -27,7 +27,7 @@ const RenderSales = (data) => {
       borderColor: brandSuccess,
       pointHoverBackgroundColor: brandSuccess,
       borderWidth: 2,
-      data: data.npm,
+      data: data.profitMargin.netProfit,
     },
   ];
 
@@ -52,14 +52,14 @@ const RenderSales = (data) => {
         <CCol>
           <SalesRegion
             labels={["America", "China", "Europe", "Australia", "Africa"]}
-            datasets={data.salesR}
+            datasets={data.salesRegion}
             year={2019}
           />
         </CCol>
       </CRow>
       <TopProducts
         fields={["name", "price", "totalSold", "status"]}
-        productsData={data.topProd}
+        productsData={data.topProducts}
         year={2019}
       />
     </>

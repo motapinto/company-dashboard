@@ -1,6 +1,6 @@
-import IntervalData from "./IntervalData";
-import Data from "./Data";
-import Dataset from "./Dataset";
+import IntervalData from "./intervalData";
+import Data from "./data";
+import Dataset from "./dataset";
 
 export default interface ProcurementData {
   suppliers: Dataset,

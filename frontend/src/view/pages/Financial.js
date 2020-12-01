@@ -18,7 +18,7 @@ const RenderFinancial = (data) => {
       borderColor: brandInfo,
       pointHoverBackgroundColor: brandInfo,
       borderWidth: 2,
-      data: data.gpm,
+      data: data.profitMargin.grossProfit,
     },
     {
       label: "Net Profit Margin",
@@ -26,7 +26,7 @@ const RenderFinancial = (data) => {
       borderColor: brandSuccess,
       pointHoverBackgroundColor: brandSuccess,
       borderWidth: 2,
-      data: data.npm,
+      data: data.profitMargin.netProfit,
     },
   ];
 
@@ -95,14 +95,14 @@ const RenderFinancial = (data) => {
         </CCol>
         <CCol md="7" className="d-flex align-items-stretch">
           <ProfitAndLoss
-            profitAndLossCost={[
+            cost={[
               {
                 label: "O",
                 backgroundColor: "#f87979",
                 data: data.cost,
               },
             ]}
-            profitAndLossRevenue={[
+            revenue={[
               {
                 label: "R",
                 backgroundColor: "#4dbd74",

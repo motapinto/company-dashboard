@@ -71,7 +71,7 @@ const RenderProduct = (data) => {
 
           <CCard className="w-100">
             <CCardHeader>
-              <h2 class="text-center">Annual Product Net Profit</h2>
+              <h2 class="text-center">Annual Net Profit</h2>
             </CCardHeader>
             <CCardBody>
               <h3 class="card-title text-center">{data.annualNetProfit}%</h3>

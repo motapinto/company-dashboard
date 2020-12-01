@@ -1,8 +1,9 @@
+import ProfitMargin from "./profitMargin";
+
 export default interface FinancialData {
   vatPaid: Array<number>,
   vatDeducted: Array<number>,
-  gpm: Array<number>,
-  npm: Array<number>,
+  profitMargin: ProfitMargin,
   nca: Array<number>,
   ca: Array<number>,
   cl: Array<number>,

@@ -1,4 +1,5 @@
 import FinancialData from "../../model/financialData";
+import getProfitMargin from "./shared/getProfitMargin";
 const axios = require("axios").default;
 
 const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
@@ -12,14 +13,6 @@ const getVatPaid = async (year: number): Promise<Array<number>> => {
 const getVatDeducted = async (year: number): Promise<Array<number>> => {
   return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
 };
-
-const getGrossProfitMargin = async(year: number): Promise<Array<number>> => {
-  return [98, 166, 159, 122, 109, 91, 139, 99, 140, 193, 79, 160];
-}
-
-const getNetProfitMargin = async(year: number): Promise<Array<number>> => {
-  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
-}
 
 const getNonCurrentAssets = async(year: number): Promise<Array<number>> => {
   return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
@@ -61,8 +54,7 @@ export default async (year: number): Promise<FinancialData> => {
   return {
     vatPaid: await getVatPaid(year),
     vatDeducted: await getVatDeducted(year),
-    gpm: await getGrossProfitMargin(year),
-    npm: await getNetProfitMargin(year),
+    profitMargin: await getProfitMargin(year),
     nca: await getNonCurrentAssets(year),
     ca: await getCurrentAssets(year),
     cl: await getCurrentLiabilities(year),

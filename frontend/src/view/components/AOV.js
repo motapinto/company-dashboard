@@ -13,7 +13,7 @@ export default ({ dataset }) => {
       footerSlot={
         <ChartLineSimple
           style={{ height: "70px" }}
-          backgroundColor="primary"
+          backgroundColor="danger"
           dataPoints={dataset}
           pointHoverBackgroundColor="danger"
           label="AOV"

@@ -4,8 +4,8 @@ import { CChartBar } from "@coreui/react-chartjs";
 import MoneyFormat from "../utils/MoneyFormat";
 
 export default ({
-  profitAndLossCost,
-  profitAndLossRevenue,
+  cost,
+  revenue,
   ebitda,
   ebitdaMargin,
   year,
@@ -21,10 +21,10 @@ export default ({
           <CCol md="12" lg="9">
             <CRow>
               <CCol className="justify-content-center text-center">
-                <h4>$ {MoneyFormat(profitAndLossRevenue[0].data[0])}</h4>
+                <h4>$ {MoneyFormat(revenue[0].data[0])}</h4>
               </CCol>
               <CCol className="justify-content-center text-center">
-                <h4>$ {MoneyFormat(profitAndLossCost[0].data[0])}</h4>
+                <h4>$ {MoneyFormat(cost[0].data[0])}</h4>
               </CCol>
             </CRow>
             <CRow>
@@ -33,7 +33,7 @@ export default ({
                   className="h-100"
                   type="bar"
                   labels={["Assets"]}
-                  datasets={profitAndLossRevenue}
+                  datasets={revenue}
                   options={{
                     maintainAspectRatio: false,
                     legend: {
@@ -50,8 +50,8 @@ export default ({
                         {
                           ticks: {
                             max: Math.max(
-                              profitAndLossCost[0].data[0],
-                              profitAndLossRevenue[0].data[0]
+                              cost[0].data[0],
+                              revenue[0].data[0]
                             ),
                           },
                           beginAtZero: true,
@@ -71,7 +71,7 @@ export default ({
                   className="h-100"
                   type="bar"
                   labels={["Assets"]}
-                  datasets={profitAndLossCost}
+                  datasets={cost}
                   options={{
                     maintainAspectRatio: false,
                     legend: {
@@ -88,8 +88,8 @@ export default ({
                         {
                           ticks: {
                             max: Math.max(
-                              profitAndLossCost[0].data[0],
-                              profitAndLossRevenue[0].data[0]
+                              cost[0].data[0],
+                              revenue[0].data[0]
                             ),
                           },
                           beginAtZero: true,

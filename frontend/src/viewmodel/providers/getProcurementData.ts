@@ -1,7 +1,7 @@
-import ProcurementData from "../../model/ProcurementData";
-import Dataset from "../../model/Dataset";
-import Data from "../../model/Data";
-import IntervalData from "../../model/IntervalData";
+import ProcurementData from "../../model/procurementData";
+import Dataset from "../../model/dataset";
+import Data from "../../model/data";
+import IntervalData from "../../model/intervalData";
 
 const getSuppliers = async (year: number): Promise<Dataset> => {
   return {
