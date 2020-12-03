@@ -42,40 +42,28 @@ const RenderInventory = (data) => {
   return (
     <>
       <CRow>
-        <CCol md="6">
-          <CRow>
-            <CCol>
-              <CCard>
-                <CCardHeader>
-                  <h4 className="card-title mb-0">Total Assets in Stock</h4>
-                  <div className="small text-muted">{2019}</div>
-                </CCardHeader>
-                <CCardBody>
-                  <h4>{data.assets}€</h4>
-                </CCardBody>
-              </CCard>
-            </CCol>
-          </CRow>
-          <CRow>
-            <CCol>
-              <CCard>
-                <CCardHeader>
-                  <h4 className="card-title mb-0">
-                    Average Days to Sell Inventory
-                  </h4>
-                  <div className="small text-muted">{2019}</div>
-                </CCardHeader>
-                <CCardBody>
-                  <h4>{data.daysToSell}</h4>
-                </CCardBody>
-              </CCard>
-            </CCol>
-          </CRow>
-          <CRow>
-            <CCol>
-              <MonthlyAvrgInv dataset={data.monthlyAvrgInv} year={2019} />
-            </CCol>
-          </CRow>
+        <CCol>
+          <CCard>
+            <CCardHeader>
+              <h4 className="card-title mb-0">Total Assets in Stock</h4>
+              <div className="small text-muted">{2019}</div>
+            </CCardHeader>
+            <CCardBody>
+              <h4>{data.assets}€</h4>
+            </CCardBody>
+          </CCard>
+          <CCard>
+            <CCardHeader>
+              <h4 className="card-title mb-0">
+                Average Days to Sell Inventory
+              </h4>
+              <div className="small text-muted">{2019}</div>
+            </CCardHeader>
+            <CCardBody>
+              <h4>{data.daysToSell}</h4>
+            </CCardBody>
+          </CCard>
+          <MonthlyAvrgInv dataset={data.monthlyAvrgInv} year={2019} />
         </CCol>
         <CCol md="6">
           <MontlyAvrgTurn
@@ -86,7 +74,7 @@ const RenderInventory = (data) => {
           />
         </CCol>
       </CRow>
-      <CRow className="h-100 mt-5">
+      <CRow className="mt-4">
         <CCol>
           <TopProducts
             fields={fields}

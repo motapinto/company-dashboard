@@ -13,7 +13,7 @@ import yLabel from "../utils/yLabel";
 
 export default ({ dataset, year }) => {
   return (
-    <CCard className="p-1 h-100">
+    <CCard className="mb-xs-4 mb-md-0" style={{ height: "57%" }}>
       <CCardHeader>
         <CRow>
           <CCol>
