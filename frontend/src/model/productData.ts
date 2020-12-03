@@ -1,5 +1,5 @@
 import ProductInfo from "./productInfo";
-import ClientsData from "./clientsData";
+import ClientsData from "./clientInfo";
 
 export default interface ProductData {
   info: ProductInfo;

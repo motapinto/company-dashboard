@@ -1,4 +1,4 @@
-export default interface ClientsData {
+export default interface ClientInfo {
   id: number;
   name: string;
   quantity: number;

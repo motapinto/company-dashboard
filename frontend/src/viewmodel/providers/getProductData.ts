@@ -1,7 +1,6 @@
 import ProductInfo from "../../model/productInfo";
-import ClientsData from "../../model/clientsData";
+import ClientsData from "../../model/clientInfo";
 import ProductData from "../../model/productData";
-import moneyFormat from '../../view/utils/MoneyFormat'
 
 const getInfo = async (
   productId: string,
