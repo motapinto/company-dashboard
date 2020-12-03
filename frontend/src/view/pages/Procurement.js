@@ -75,8 +75,10 @@ const RenderProcurement = (data) => {
         <CCol sm="6" lg="6">
           <CCard>
             <CCardHeader>
-              <h3>Number of Suppliers</h3>
+              <h4 className="card-title mb-0">Number of Suppliers</h4>
+              <div className="small text-muted">{2019}</div>
             </CCardHeader>
+
             <CCardBody>
               <ChartBarMax datasets={numberSuppliers} />
             </CCardBody>
@@ -86,7 +88,8 @@ const RenderProcurement = (data) => {
         <CCol sm="6" lg="6">
           <CCard>
             <CCardHeader>
-              <h3>Suppliers</h3>
+              <h4 className="card-title mb-0">Suppliers</h4>
+              <div className="small text-muted">{2019}</div>
             </CCardHeader>
             <CCardBody>
               <CChartDoughnut
@@ -103,7 +106,8 @@ const RenderProcurement = (data) => {
         <CCol sm="6" lg="6" className="mb-4">
           <CCard className="h-100">
             <CCardHeader>
-              <h3>Supplier Quality Rating</h3>
+              <h4 className="card-title mb-0">Supplier Quality Rating</h4>
+              <div className="small text-muted">{2019}</div>
             </CCardHeader>
             <CCardBody>
               <ChartBarPercentage
@@ -117,7 +121,8 @@ const RenderProcurement = (data) => {
         <CCol sm="6" lg="6" className="mb-4">
           <CCard className="h-100">
             <CCardHeader>
-              <h3>Purchases in Time and Budget</h3>
+              <h4 className="card-title mb-0">Purchases in Time and Budget</h4>
+              <div className="small text-muted">{2019}</div>
             </CCardHeader>
             <CCardBody>
               <h4 className="mb-0">Total</h4>
@@ -132,8 +137,11 @@ const RenderProcurement = (data) => {
       <CRow>
         <CCol>
           <CCard className="w-100">
-            <CCardHeader className="text-center">
-              <h3>Purchase Order Cycle Time and Lead Time</h3>
+            <CCardHeader>
+              <h4 className="card-title mb-0">
+                Purchase Order Cycle Time and Lead Time
+              </h4>
+              <div className="small text-muted">{2019}</div>
             </CCardHeader>
             <CCardBody>
               <LineChart datasets={purchaseOrder} callback={yLabel} />

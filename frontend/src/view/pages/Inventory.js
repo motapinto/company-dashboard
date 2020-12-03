@@ -63,10 +63,11 @@ const Inventory = () => {
             <CCol>
               <CCard>
                 <CCardHeader>
-                  <h4>Total Assets in Stock</h4>
+                  <h4 className="card-title mb-0">Total Assets in Stock</h4>
+                  <div className="small text-muted">{2019}</div>
                 </CCardHeader>
                 <CCardBody>
-                  <h2>9,323K €</h2>
+                  <h4>9,323K €</h4>
                 </CCardBody>
               </CCard>
             </CCol>
@@ -75,10 +76,13 @@ const Inventory = () => {
             <CCol>
               <CCard>
                 <CCardHeader>
-                  <h4>Average Days to Sell Inventory</h4>
+                  <h4 className="card-title mb-0">
+                    Average Days to Sell Inventory
+                  </h4>
+                  <div className="small text-muted">{2019}</div>
                 </CCardHeader>
                 <CCardBody>
-                  <h2>30</h2>
+                  <h4>30</h4>
                 </CCardBody>
               </CCard>
             </CCol>
