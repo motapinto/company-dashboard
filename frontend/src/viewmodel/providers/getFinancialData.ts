@@ -1,5 +1,6 @@
 import FinancialData from "../../model/financialData";
 import getProfitMargin from "./shared/getProfitMargin";
+import getBalanceSheet from "./shared/getBalanceSheet";
 const axios = require("axios").default;
 
 const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
@@ -13,26 +14,6 @@ const getVatPaid = async (year: number): Promise<Array<number>> => {
 const getVatDeducted = async (year: number): Promise<Array<number>> => {
   return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
 };
-
-const getNonCurrentAssets = async(year: number): Promise<Array<number>> => {
-  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
-}
-
-const getCurrentAssets = async(year: number): Promise<Array<number>> => {
-  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
-}
-
-const getCurrentLiabilities = async(year: number): Promise<Array<number>> => {
-  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
-}
-
-const getNonCurrentLiabilities = async(year: number): Promise<Array<number>> => {
-  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
-}
-
-const getEquity = async(year: number): Promise<Array<number>> => {
-  return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
-}
 
 const getRevenue = async(year: number): Promise<Array<number>> => {
   return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
@@ -55,11 +36,7 @@ export default async (year: number): Promise<FinancialData> => {
     vatPaid: await getVatPaid(year),
     vatDeducted: await getVatDeducted(year),
     profitMargin: await getProfitMargin(year),
-    nca: await getNonCurrentAssets(year),
-    ca: await getCurrentAssets(year),
-    cl: await getCurrentLiabilities(year),
-    ncl: await getNonCurrentLiabilities(year),
-    e: await getEquity(year),
+    balanceSheet: await getBalanceSheet(year),
     revenue: await getRevenue(year),
     cost: await getCost(year),
     ebitda: await getEbidta(year),

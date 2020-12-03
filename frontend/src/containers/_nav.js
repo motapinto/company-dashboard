@@ -1,7 +1,7 @@
 export default [
   {
     _tag: "CSidebarNavItem",
-    name: "Overview",
+    name: "Dashboard",
     to: "/dashboard",
     icon: "cil-chart-pie",
     badge: {

@@ -8,7 +8,7 @@ export default ({ kpis, year }) => {
       <CCardHeader>
         <CRow>
           <CCol>
-            <h4 className="card-title mb-0">Overview KPI's</h4>
+            <h4 className="card-title mb-0">Dashboard KPI's</h4>
             <div className="small text-muted">{year}</div>
           </CCol>
         </CRow>

@@ -65,29 +65,29 @@ const RenderFinancial = (data) => {
               {
                 label: "NCA",
                 backgroundColor: "#4dbd74",
-                data: data.nca,
+                data: data.balanceSheet.nca,
               },
               {
                 label: "CA",
                 backgroundColor: "#597D35",
-                data: data.ca,
+                data: data.balanceSheet.ca,
               },
             ]}
             balanceSheetEquity={[
               {
                 label: "CL",
                 backgroundColor: "#680C07",
-                data: data.cl,
+                data: data.balanceSheet.cl,
               },
               {
                 label: "NCL",
                 backgroundColor: "#900D09",
-                data: data.ncl,
+                data: data.balanceSheet.ncl,
               },
               {
                 label: "E",
                 backgroundColor: "#f87979",
-                data: data.e,
+                data: data.balanceSheet.e,
               },
             ]}
             year={2019}
@@ -111,7 +111,7 @@ const RenderFinancial = (data) => {
             ]}
             className="d-flex align-items-stretch"
             year={2019}
-            ebitda={data.ebidta}
+            ebitda={data.ebitda}
             ebitdaMargin={data.ebitdaMargin}
           />
         </CCol>
