@@ -1,8 +1,8 @@
 export default interface ProductInfo {
-  id: string;
+  id: number;
   name: string;
-  supplier: string;
-  cost: number;
-  profit: number;
-  details: string;
+  price: number;
+  totalSold: number;
+  status?: string;
+  details?: string;
 }

@@ -1,7 +1,7 @@
 import BalanceSheet from "./balanceSheet";
-import TopProduct from "./topProduct";
+import ProductInfo from "./productInfo";
 
 export default interface DashBoard {
-  topProducts: Array<TopProduct>,
+  topProducts: Array<ProductInfo>,
   balanceSheet: BalanceSheet,
 }
