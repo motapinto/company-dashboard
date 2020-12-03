@@ -32,7 +32,7 @@ const getReplacedTotal = async (year: number): Promise<number> => {
   return 20;
 };
 
-const getMonthlyAvrgInv = async (year: number): Promise<Array<number>> => {
+const getmonthlyAvgInv = async (year: number): Promise<Array<number>> => {
   return [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11];
 };
 
@@ -43,7 +43,7 @@ export default async (year: number): Promise<InventoryData> => {
     replacedTotal: await getReplacedTotal(year),
     replaced: await getReplaced(year),
     sold: await getSold(year),
-    monthlyAvrgInv: await getMonthlyAvrgInv(year),
+    monthlyAvgInv: await getmonthlyAvgInv(year),
     soldTotal: await getSoldTotal(year),
     topProducts: await getTopProducts(year),
   };

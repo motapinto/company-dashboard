@@ -8,6 +8,6 @@ export default interface InventoryData {
   replacedTotal: number;
   replaced: Array<number>;
   sold: Array<number>;
-  monthlyAvrgInv: Array<number>;
+  monthlyAvgInv: Array<number>;
   topProducts: Array<TopProduct>;
 }

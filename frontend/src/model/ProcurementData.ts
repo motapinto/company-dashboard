@@ -1,8 +1,21 @@
-import IntervalData from "./intervalData";
-import Data from "./data";
-import Dataset from "./dataset";
+export interface Data {
+  label: string|undefined,
+  data: Array<number>,
+}
 
-export default interface ProcurementData {
+export interface Dataset {
+  datasets: Array<Data>;
+  labels: Array<string>;
+}
+
+export interface IntervalData {
+  name: string,
+  value: number,
+  total: number,
+  percentile: number
+}
+
+export interface ProcurementData {
   suppliers: Dataset;
   numberSuppliers: Array<Data>;
   supplierQuality: Dataset;

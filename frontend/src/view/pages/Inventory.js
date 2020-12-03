@@ -1,18 +1,15 @@
 import React from "react";
-
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
-
-import MonthlyAvrgInv from "../components/MonthlyAvrgInv";
-import MontlyAvrgTurn from "../components/MontlyAvrgTurn";
+import MonthlyAvgInv from "../components/MonthlyAvgInv";
+import MontlyAvgTurn from "../components/MontlyAvgTurn";
 import TopProducts from "../components/TopProducts";
 import ResourceGetter from "../components/ResourceGetter";
 import getInventoryData from "../../viewmodel/providers/getInventoryData";
 
 const RenderInventory = (data) => {
   console.log(data);
-  const fields = ["name", "price", "totalSold", "status"];
 
-  const monthlyAvrgTurn = {
+  const monthlyAvgTurn = {
     labels: [
       "January",
       "February",
@@ -66,10 +63,10 @@ const RenderInventory = (data) => {
           <MonthlyAvrgInv dataset={data.monthlyAvrgInv} year={2019} />
         </CCol>
         <CCol md="6">
-          <MontlyAvrgTurn
-            labels={monthlyAvrgTurn.labels}
-            data1={monthlyAvrgTurn.sold}
-            data2={monthlyAvrgTurn.replaced}
+          <MontlyAvgTurn
+            labels={monthlyAvgTurn.labels}
+            data1={monthlyAvgTurn.sold}
+            data2={monthlyAvgTurn.replaced}
             year={2019}
           />
         </CCol>
@@ -77,7 +74,6 @@ const RenderInventory = (data) => {
       <CRow className="mt-4">
         <CCol>
           <TopProducts
-            fields={fields}
             productsData={data.topProducts}
             year={2019}
           />
