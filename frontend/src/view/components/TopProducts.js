@@ -26,7 +26,7 @@ const getBadge = (status) => {
   }
 };
 
-export default ({ fields, productsData, year}) => {
+export default ({ productsData, year}) => {
   let history = useHistory();
   return (
     <CCard className="w-100">
@@ -41,7 +41,7 @@ export default ({ fields, productsData, year}) => {
       <CCardBody>
         <CDataTable
           items={productsData}
-          fields={fields}
+          fields={["name", "price", "totalSold", "status"]}
           itemsPerPage={5}
           hover
           bordered

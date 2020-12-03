@@ -110,7 +110,6 @@ const RenderDashboard = (data) => {
       <CRow>
         <CCol md="12" lg="6" className="d-flex align-items-stretch">
           <TopProducts
-            fields={fields}
             productsData={productsData}
             year={2019}
           />

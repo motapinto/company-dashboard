@@ -54,7 +54,6 @@ const RenderSales = (data) => {
         </CCol>
       </CRow>
       <TopProducts
-        fields={["name", "price", "totalSold", "status"]}
         productsData={data.topProducts}
         year={2019}
       />
