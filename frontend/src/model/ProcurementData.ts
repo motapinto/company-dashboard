@@ -1,6 +1,6 @@
 export interface Data {
-  label: string|undefined,
-  data: Array<number>,
+  label: string | undefined;
+  data: Array<number>;
 }
 
 export interface Dataset {
@@ -9,10 +9,10 @@ export interface Dataset {
 }
 
 export interface IntervalData {
-  name: string,
-  value: number,
-  total: number,
-  percentile: number
+  name: string;
+  value: number;
+  total: number;
+  percentile: number;
 }
 
 export interface ProcurementData {

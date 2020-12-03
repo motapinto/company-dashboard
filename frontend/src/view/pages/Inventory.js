@@ -60,7 +60,7 @@ const RenderInventory = (data) => {
               <h4>{data.daysToSell}</h4>
             </CCardBody>
           </CCard>
-          <MonthlyAvrgInv dataset={data.monthlyAvrgInv} year={2019} />
+          <MonthlyAvgInv dataset={data.monthlyAvgInv} year={2019} />
         </CCol>
         <CCol md="6">
           <MontlyAvgTurn
@@ -73,10 +73,7 @@ const RenderInventory = (data) => {
       </CRow>
       <CRow className="mt-4">
         <CCol>
-          <TopProducts
-            productsData={data.topProducts}
-            year={2019}
-          />
+          <TopProducts productsData={data.topProducts} year={2019} />
         </CCol>
       </CRow>
     </>
