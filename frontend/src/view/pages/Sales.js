@@ -42,14 +42,10 @@ const RenderSales = (data) => {
         </CCol>
       </CRow>
       <CRow>
-        <CCol>
-          <ProfitMargin
-            profitMargin={profitMargin}
-            year={2019}
-            heightValue="auto"
-          />
+        <CCol md="6" lg="6" className="d-flex align-items-stretch">
+          <ProfitMargin profitMargin={profitMargin} year={2019} />
         </CCol>
-        <CCol>
+        <CCol md="6" lg="6">
           <SalesRegion
             labels={["America", "China", "Europe", "Australia", "Africa"]}
             datasets={data.salesRegion}
@@ -66,5 +62,10 @@ const RenderSales = (data) => {
   );
 };
 
-const Sales =  (year) => <ResourceGetter func={() => GetSalesData(year)} componentToRender={RenderSales}/>;
+const Sales = (year) => (
+  <ResourceGetter
+    func={() => GetSalesData(year)}
+    componentToRender={RenderSales}
+  />
+);
 export default Sales;

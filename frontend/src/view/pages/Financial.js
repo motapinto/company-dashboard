@@ -32,8 +32,8 @@ const RenderFinancial = (data) => {
 
   return (
     <>
-      <CRow className="mb-4">
-        <CCol sm="12" md="12" lg="6">
+      <CRow>
+        <CCol sm="12" md="12" lg="6" className="d-flex align-items-stretch">
           <VatPaidDeducted
             vatPaidDeducted={[
               {
@@ -50,12 +50,8 @@ const RenderFinancial = (data) => {
             year={2019}
           />
         </CCol>
-        <CCol md="12" lg="6" className="mt-4 mt-md-4 mt-lg-0">
-          <ProfitMargin
-            profitMargin={profitMargin}
-            year={2019}
-            heightValue="100%"
-          />
+        <CCol md="12" lg="6" className="d-flex align-items-stretch">
+          <ProfitMargin profitMargin={profitMargin} year={2019} />
         </CCol>
       </CRow>
       <CRow>

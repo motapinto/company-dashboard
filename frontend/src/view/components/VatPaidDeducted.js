@@ -12,7 +12,7 @@ import MoneyFormat from "../utils/MoneyFormat";
 
 export default ({ vatPaidDeducted, year }) => {
   return (
-    <CCard className="h-100">
+    <CCard className="w-100">
       <CCardHeader>
         <h4 id="traffic" className="card-title mb-0">
           Vat Paid/Deducted
