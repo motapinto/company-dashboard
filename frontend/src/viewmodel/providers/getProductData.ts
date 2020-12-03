@@ -6,7 +6,7 @@ const getInfo = async (
   year: number
 ): Promise<ProductInfo> => {
   return {
-    id: 1,
+    id: "1",
     name: "Tesla Model S",
     price: 10.15,
     totalSold: 2500,

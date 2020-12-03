@@ -1,5 +1,5 @@
 export default interface ProductInfo {
-  id: number;
+  id: string;
   name: string;
   price: number;
   totalSold: number;

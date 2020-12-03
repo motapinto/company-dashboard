@@ -19,7 +19,7 @@ const getBadge = (status) => {
       return "secondary";
     case "Pending":
       return "warning";
-    case "Banned":
+    case "Deleted":
       return "danger";
     default:
       return "primary";
