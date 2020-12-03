@@ -5,83 +5,40 @@ import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import MonthlyAvrgInv from "../components/MonthlyAvrgInv";
 import MontlyAvrgTurn from "../components/MontlyAvrgTurn";
 import TopProducts from "../components/TopProducts";
+import ResourceGetter from "../components/ResourceGetter";
+import getInventoryData from "../../viewmodel/providers/getInventoryData";
 
-const fields = ["name", "price", "totalSold", "status"];
-const productsData = [
-  {
-    id: 0,
-    name: "Tesla Model S",
-    price: "70.000 $",
-    totalSold: "24.000",
-    status: "Active",
-  },
-  {
-    id: 1,
-    name: "Tesla Model Y",
-    price: "45.000 $",
-    totalSold: "49.000",
-    status: "Inactive",
-  },
-  {
-    id: 2,
-    name: "Tesla Model 3",
-    price: "35.000 $",
-    totalSold: "77.000",
-    status: "Active",
-  },
-  {
-    id: 3,
-    name: "Tesla Model X",
-    price: "120.000 $",
-    totalSold: "34.500",
-    status: "Banned",
-  },
-  {
-    id: 4,
-    name: "Tesla Roadster",
-    price: "200.000 $",
-    totalSold: "0",
-    status: "Pending",
-  },
-  {
-    id: 5,
-    name: "Cybertruck",
-    price: "39.900 $",
-    totalSold: "0",
-    status: "Pending",
-  },
-];
+const RenderInventory = (data) => {
+  console.log(data);
+  const fields = ["name", "price", "totalSold", "status"];
 
-const monthlyAvrgInv = [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11];
+  const monthlyAvrgTurn = {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    sold: {
+      total: data.soldTotal,
+      data: data.sold,
+      label: "Sold",
+    },
+    replaced: {
+      total: data.replacedTotal,
+      data: data.replaced,
+      label: "Replaced",
+    },
+  };
 
-const monthlyAvrgTurn = {
-  labels: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ],
-  sold: {
-    total: 20000,
-    data: [34, 56, 12, 43, 22, 53, 9, 49, 55, 33, 65, 71],
-    label: "Sold"
-  },
-  replaced: {
-    total: 23122,
-    data: [78, 94, 67, 91, 73, 82, 69, 74, 72, 55, 83, 95],
-    label: "Replaced"
-  }
-}
-
-const Inventory = () => {
   return (
     <>
       <CRow>
@@ -94,7 +51,7 @@ const Inventory = () => {
                   <div className="small text-muted">{2019}</div>
                 </CCardHeader>
                 <CCardBody>
-                  <h4>9,323K €</h4>
+                  <h4>{data.assets}€</h4>
                 </CCardBody>
               </CCard>
             </CCol>
@@ -109,26 +66,31 @@ const Inventory = () => {
                   <div className="small text-muted">{2019}</div>
                 </CCardHeader>
                 <CCardBody>
-                  <h4>30</h4>
+                  <h4>{data.daysToSell}</h4>
                 </CCardBody>
               </CCard>
             </CCol>
           </CRow>
           <CRow>
             <CCol>
-              <MonthlyAvrgInv dataset={monthlyAvrgInv} year={2019} />
+              <MonthlyAvrgInv dataset={data.monthlyAvrgInv} year={2019} />
             </CCol>
           </CRow>
         </CCol>
         <CCol md="6">
-          <MontlyAvrgTurn labels={monthlyAvrgTurn.labels} data1={monthlyAvrgTurn.sold} data2={monthlyAvrgTurn.replaced} year={2019} />
+          <MontlyAvrgTurn
+            labels={monthlyAvrgTurn.labels}
+            data1={monthlyAvrgTurn.sold}
+            data2={monthlyAvrgTurn.replaced}
+            year={2019}
+          />
         </CCol>
       </CRow>
       <CRow className="h-100 mt-5">
         <CCol>
           <TopProducts
             fields={fields}
-            productsData={productsData}
+            productsData={data.topProducts}
             year={2019}
           />
         </CCol>
@@ -136,5 +98,12 @@ const Inventory = () => {
     </>
   );
 };
+
+const Inventory = (year) => (
+  <ResourceGetter
+    func={() => getInventoryData(year)}
+    componentToRender={RenderInventory}
+  />
+);
 
 export default Inventory;
