@@ -27,15 +27,15 @@ const RenderProcurement = (data) => {
       label: data.numberSuppliers[i].label,
       data: data.numberSuppliers[i].data,
       backgroundColor: colorOrder[i],
-    })
+    });
   }
 
   const suppliers = data.suppliers;
   suppliers.datasets[0] = {
     label: suppliers.datasets[0].label,
     data: suppliers.datasets[0].data,
-    backgroundColor: colorOrder
-  }
+    backgroundColor: colorOrder,
+  };
 
   const supplierQuality = data.supplierQuality;
   supplierQuality.datasets[0].backgroundColor = "#f87979";
@@ -48,7 +48,7 @@ const RenderProcurement = (data) => {
     borderColor: brandSuccess,
     pointHoverBackgroundColor: brandSuccess,
     borderWidth: 2,
-  }
+  };
   purchaseOrder[1] = {
     label: purchaseOrder[1].label,
     data: purchaseOrder[1].data,
@@ -56,13 +56,16 @@ const RenderProcurement = (data) => {
     borderColor: brandInfo,
     pointHoverBackgroundColor: brandInfo,
     borderWidth: 2,
-  }
+  };
 
   const progressBars = [];
 
   for (let i = 0; i < data.purchasesInTB.categories.length; i++) {
     progressBars.push(
-      <ProgressBar key={`categories${i}`} data={data.purchasesInTB.categories[i]} />
+      <ProgressBar
+        key={`categories${i}`}
+        data={data.purchasesInTB.categories[i]}
+      />
     );
   }
 
@@ -119,7 +122,6 @@ const RenderProcurement = (data) => {
             <CCardBody>
               <h4 className="mb-0">Total</h4>
               <ProgressBar data={data.purchasesInTB.totalPurchases} />
-
               <h4>By category</h4>
               {progressBars}
             </CCardBody>
@@ -143,5 +145,10 @@ const RenderProcurement = (data) => {
   );
 };
 
-const Procurement = (year) => <ResourceGetter func={() => getProcurementData(year)} componentToRender={RenderProcurement}/>;
+const Procurement = (year) => (
+  <ResourceGetter
+    func={() => getProcurementData(year)}
+    componentToRender={RenderProcurement}
+  />
+);
 export default Procurement;

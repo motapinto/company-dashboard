@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  CRow,
-  CCol,
-  CCard,
-  CCardBody,
-  CCardHeader,
-} from "@coreui/react";
+import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
 import ProductInfo from "../components/ProductInfo";
 import TopClients from "../components/TopClients";
@@ -36,6 +30,8 @@ const RenderProduct = (data) => {
     },
   ];
 
+  console.log(data);
+
   return (
     <>
       <CRow className="h-100">
@@ -43,12 +39,15 @@ const RenderProduct = (data) => {
           <ProductInfo ProductInfo={data.info} />
         </CCol>
         <CCol sm="6" lg="6">
-          <TopClients clientsData={data.clients} fields={["name", "quantity", "amount"]} />
+          <TopClients
+            clientsData={data.clients}
+            fields={["name", "quantity", "amount"]}
+          />
         </CCol>
       </CRow>
       <CRow className="mt-5">
         <CCol md="6" lg="6" className="d-flex align-items-stretch">
-          <GrossNetProfit purchaseOrder={netGrossProfit} />
+          <GrossNetProfit gpm={data.gpm} npm={data.npm} />
         </CCol>
         <CCol md="6" lg="6">
           <CCard className="w-100">

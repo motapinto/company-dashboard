@@ -1,6 +1,6 @@
-import Data from "./data";
+import Data from "./Data";
 
 export default interface Dataset {
-  datasets: Array<Data>,
-  labels: Array<string>
+  datasets: Array<Data>;
+  labels: Array<string>;
 }
