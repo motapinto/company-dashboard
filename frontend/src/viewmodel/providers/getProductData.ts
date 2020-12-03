@@ -1,6 +1,5 @@
 import ProductInfo from "../../model/productInfo";
-import ClientsData from "../../model/clientInfo";
-import ProductData from "../../model/productData";
+import { ProductData, ClientInfo } from "../../model/productData";
 
 const getInfo = async (
   productId: string,
@@ -27,7 +26,7 @@ const getNetProfitMargin = async(year: number): Promise<Array<number>> => {
 const getClients = async (
   productId: string,
   year: number
-): Promise<Array<ClientsData>> => {
+): Promise<Array<ClientInfo>> => {
   return [
     {
       id: 0,

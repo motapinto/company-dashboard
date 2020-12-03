@@ -41,7 +41,6 @@ const overviewKpis = {
 const regionSalesData = [40, 65, 42, 22, 15];
 const regionLabels = ["America", "China", "Europe", "Australia", "Africa"];
 
-const fields = ["name", "price", "totalSold", "status"];
 const productsData = [
   {
     id: 0,
