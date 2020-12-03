@@ -32,10 +32,10 @@ const RenderProduct = (data) => {
   return (
     <>
       <CRow className="h-100">
-        <CCol md="6" lg="6" className="d-flex align-items-stretch">
+        <CCol md="4" lg="4" className="d-flex align-items-stretch">
           <ProductInfo ProductInfo={data.info} />
         </CCol>
-        <CCol md="6" lg="6" className="d-flex align-items-stretch">
+        <CCol md="8" lg="8" className="d-flex align-items-stretch">
           <TopClients
             clientsData={data.clients}
             fields={["name", "quantity", "amount"]}

@@ -1,17 +1,17 @@
 import ProductInfo from "../../model/productInfo";
 import ClientsData from "../../model/clientsData";
 import ProductData from "../../model/productData";
+import moneyFormat from '../../view/utils/MoneyFormat'
 
 const getInfo = async (
   productId: string,
   year: number
 ): Promise<ProductInfo> => {
   return {
-    id: "1111",
+    id: 1,
     name: "Tesla Model S",
-    supplier: "Tesla",
-    cost: 70.0,
-    profit: 24.0,
+    price: 10.15,
+    totalSold: 2500,
     details:
       "Model S is built from the ground up as an electric vehicle, with high-strength architecture and a floor-mounted battery pack allowing for incredible impact protection.",
   };

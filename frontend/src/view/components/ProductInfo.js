@@ -12,9 +12,8 @@ export default ({ ProductInfo }) => {
         <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: {ProductInfo.id}</li>
           <li class="list-group-item">Name: {ProductInfo.name}</li>
-          <li class="list-group-item">Supplier: {ProductInfo.supplier}</li>
-          <li class="list-group-item">Cost: {ProductInfo.cost}</li>
-          <li class="list-group-item">Profit: {ProductInfo.profit}</li>
+          <li class="list-group-item">Price: {ProductInfo.price}</li>
+          <li class="list-group-item">Total Sold: {ProductInfo.totalSold}</li>
           <li class="list-group-item">Details: {ProductInfo.details}</li>
         </ul>
       </CCardBody>

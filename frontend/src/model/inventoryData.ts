@@ -1,5 +1,5 @@
 import ProfitMargin from "./profitMargin";
-import TopProduct from "./topProduct";
+import TopProduct from "./productInfo";
 
 export default interface InventoryData {
   daysToSell: number;
