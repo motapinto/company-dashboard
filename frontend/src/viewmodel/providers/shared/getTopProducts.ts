@@ -1,4 +1,4 @@
-import TopProduct from "../../../model/topProducts";
+import TopProduct from "../../../model/topProduct";
 const axios = require("axios").default;
 
 const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;

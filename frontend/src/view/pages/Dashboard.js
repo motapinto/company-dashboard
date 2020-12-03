@@ -5,37 +5,8 @@ import { CRow, CCol } from "@coreui/react";
 import SalesRegion from "../components/SalesRegion";
 import SalesSummary from "../components/SalesSummary";
 import OverviewKpis from "../components/OverviewKpis";
-
-const balanceSheetAssets = [
-  {
-    label: "NCA",
-    backgroundColor: "#4dbd74",
-    data: [8223232],
-  },
-  {
-    label: "CA",
-    backgroundColor: "#597D35",
-    data: [4343433],
-  },
-];
-
-const balanceSheetEquity = [
-  {
-    label: "CL",
-    backgroundColor: "#680C07",
-    data: [3123121],
-  },
-  {
-    label: "NCL",
-    backgroundColor: "#900D09",
-    data: [2323323],
-  },
-  {
-    label: "E",
-    backgroundColor: "#f87979",
-    data: [2323323],
-  },
-];
+import ResourceGetter from "../components/ResourceGetter";
+import GetDashboardData from "../../viewmodel/providers/getDashboardData";
 
 const sales = [
   {
@@ -116,7 +87,7 @@ const productsData = [
   },
 ];
 
-const Dashboard = () => {
+const RenderDashboard = (data) => {
   return (
     <>
       <CRow>
@@ -146,8 +117,35 @@ const Dashboard = () => {
         </CCol>
         <CCol md="12" lg="6" className="d-flex align-items-stretch">
           <BalanceSheet
-            balanceSheetAssets={balanceSheetAssets}
-            balanceSheetEquity={balanceSheetEquity}
+            balanceSheetAssets={[
+              {
+                label: "NCA",
+                backgroundColor: "#4dbd74",
+                data: data.balanceSheet.nca,
+              },
+              {
+                label: "CA",
+                backgroundColor: "#597D35",
+                data: data.balanceSheet.ca,
+              },
+            ]}
+            balanceSheetEquity={[
+              {
+                label: "CL",
+                backgroundColor: "#680C07",
+                data: data.balanceSheet.cl,
+              },
+              {
+                label: "NCL",
+                backgroundColor: "#900D09",
+                data: data.balanceSheet.ncl,
+              },
+              {
+                label: "E",
+                backgroundColor: "#f87979",
+                data: data.balanceSheet.e,
+              },
+            ]}
             year={2019}
           />
         </CCol>
@@ -155,5 +153,12 @@ const Dashboard = () => {
     </>
   );
 };
+
+const Dashboard = (year) => (
+  <ResourceGetter
+    func={() => GetDashboardData(year)}
+    componentToRender={RenderDashboard}
+  />
+);
 
 export default Dashboard;
