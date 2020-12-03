@@ -47,10 +47,10 @@ const RenderProduct = (data) => {
         </CCol>
       </CRow>
       <CRow className="mt-5">
-        <CCol sm="6" lg="6">
-          <GrossNetProfit purchaseOrder={profitMargin} />
+        <CCol md="6" lg="6" className="d-flex align-items-stretch">
+          <GrossNetProfit purchaseOrder={netGrossProfit} />
         </CCol>
-        <CCol sm="6" lg="6">
+        <CCol md="6" lg="6">
           <CCard className="w-100">
             <CCardHeader>
               <h2 class="text-center">Units in Stock</h2>
