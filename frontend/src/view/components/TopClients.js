@@ -1,11 +1,14 @@
 import React from "react";
-import { CCard, CCardBody, CDataTable } from "@coreui/react";
+import { CCard, CCardBody, CDataTable, CCardHeader } from "@coreui/react";
 
 export default ({ clientsData, fields }) => {
   return (
-    <CCard className="w-100 h-100">
+    <CCard className="w-100 ">
+      <CCardHeader>
+        <h4 className="card-title mb-0">Top Clients</h4>
+        <div className="small text-muted">{2019}</div>
+      </CCardHeader>
       <CCardBody>
-        <h3 class="card-title mb-1">Top Clients</h3>
         <CDataTable
           items={clientsData}
           fields={fields}

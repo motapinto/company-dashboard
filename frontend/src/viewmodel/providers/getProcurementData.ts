@@ -12,8 +12,8 @@ const getSuppliers = async (year: number): Promise<Dataset> => {
         data: [40, 20, 80, 10],
       },
     ],
-  }
-}
+  };
+};
 
 const getNumberSuppliers = async (year: number): Promise<Array<Data>> => {
   return [
@@ -29,8 +29,8 @@ const getNumberSuppliers = async (year: number): Promise<Array<Data>> => {
       label: "Long suppliers",
       data: [70],
     },
-  ]
-}
+  ];
+};
 
 const getSupplierQuality = async (year: number): Promise<Dataset> => {
   return {
@@ -38,7 +38,7 @@ const getSupplierQuality = async (year: number): Promise<Dataset> => {
       {
         label: "Supplier Quality Rating",
         data: [40, 20, 13, 40, 10, 40, 38, 80, 40, 20, 14, 11],
-      }
+      },
     ],
     labels: [
       "AGC",
@@ -53,9 +53,9 @@ const getSupplierQuality = async (year: number): Promise<Dataset> => {
       "AWS",
       "TES",
       "MJG",
-    ]
-  }
-}
+    ],
+  };
+};
 
 const getPurchaseOrder = async (year: number): Promise<Array<Data>> => {
   return [
@@ -66,11 +66,16 @@ const getPurchaseOrder = async (year: number): Promise<Array<Data>> => {
     {
       label: "Product Order Lead Time (days)",
       data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
-    }
-  ]
-}
+    },
+  ];
+};
 
-const getPurchasesInTB = async (year: number): Promise<{totalPurchases: IntervalData, categories: Array<IntervalData>}> => {
+const getPurchasesInTB = async (
+  year: number
+): Promise<{
+  totalPurchases: IntervalData;
+  categories: Array<IntervalData>;
+}> => {
   return {
     totalPurchases: {
       name: "",
@@ -103,9 +108,9 @@ const getPurchasesInTB = async (year: number): Promise<{totalPurchases: Interval
         total: 45058,
         percentile: 0.6063,
       },
-    ]
-  }
-}
+    ],
+  };
+};
 
 export default async (year: number): Promise<ProcurementData> => {
   return {
@@ -113,6 +118,6 @@ export default async (year: number): Promise<ProcurementData> => {
     numberSuppliers: await getNumberSuppliers(year),
     supplierQuality: await getSupplierQuality(year),
     purchaseOrder: await getPurchaseOrder(year),
-    purchasesInTB: await getPurchasesInTB(year)
+    purchasesInTB: await getPurchasesInTB(year),
   };
 };

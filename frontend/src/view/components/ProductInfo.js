@@ -3,9 +3,10 @@ import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 export default ({ ProductInfo }) => {
   return (
-    <CCard className="w-100 h-100">
-      <CCardHeader className="text-center">
-        <h3 class="card-title">Product Information</h3>
+    <CCard className="w-100">
+      <CCardHeader>
+        <h4 className="card-title mb-0">Product Information</h4>
+        <div className="small text-muted">{2019}</div>
       </CCardHeader>
       <CCardBody>
         <ul class="list-group list-group-flush">

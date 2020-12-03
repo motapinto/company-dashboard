@@ -29,53 +29,53 @@ const RenderProduct = (data) => {
       data: data.npm,
     },
   ];
-
-  console.log(data);
-
   return (
     <>
       <CRow className="h-100">
-        <CCol sm="6" lg="6">
+        <CCol md="6" lg="6" className="d-flex align-items-stretch">
           <ProductInfo ProductInfo={data.info} />
         </CCol>
-        <CCol sm="6" lg="6">
+        <CCol md="6" lg="6" className="d-flex align-items-stretch">
           <TopClients
             clientsData={data.clients}
             fields={["name", "quantity", "amount"]}
           />
         </CCol>
       </CRow>
-      <CRow className="mt-5">
-        <CCol md="6" lg="6" className="d-flex align-items-stretch">
-          <GrossNetProfit gpm={data.gpm} npm={data.npm} />
+      <CRow>
+        <CCol md="4" lg="4">
+          <CCard className="w-100">
+            <CCardHeader>
+              <h4 className="card-title mb-0">Units in Stock</h4>
+              <div className="small text-muted">{2019}</div>
+            </CCardHeader>
+            <CCardBody>
+              <h4>{data.stock}</h4>
+            </CCardBody>
+          </CCard>
+
+          <CCard className="w-100">
+            <CCardHeader>
+              <h4 className="card-title mb-0">Units Sold</h4>
+              <div className="small text-muted">{2019}</div>
+            </CCardHeader>
+            <CCardBody>
+              <h4>{data.sold}</h4>
+            </CCardBody>
+          </CCard>
+
+          <CCard className="w-100">
+            <CCardHeader>
+              <h4 className="card-title mb-0">Annual Net Profit</h4>
+              <div className="small text-muted">{2019}</div>
+            </CCardHeader>
+            <CCardBody>
+              <h4>{data.annualNetProfit}%</h4>
+            </CCardBody>
+          </CCard>
         </CCol>
-        <CCol md="6" lg="6">
-          <CCard className="w-100">
-            <CCardHeader>
-              <h2 class="text-center">Units in Stock</h2>
-            </CCardHeader>
-            <CCardBody>
-              <h3 class="card-title text-center">{data.stock}</h3>
-            </CCardBody>
-          </CCard>
-
-          <CCard className="w-100">
-            <CCardHeader>
-              <h2 class="text-center">Units Sold</h2>
-            </CCardHeader>
-            <CCardBody>
-              <h3 class="card-title text-center">{data.sold}</h3>
-            </CCardBody>
-          </CCard>
-
-          <CCard className="w-100">
-            <CCardHeader>
-              <h2 class="text-center">Annual Net Profit</h2>
-            </CCardHeader>
-            <CCardBody>
-              <h3 class="card-title text-center">{data.annualNetProfit}%</h3>
-            </CCardBody>
-          </CCard>
+        <CCol md="8" lg="8" className="d-flex align-items-stretch">
+          <GrossNetProfit dataset={profitMargin} />
         </CCol>
       </CRow>
     </>
