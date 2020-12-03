@@ -1,4 +1,4 @@
-import Data from "./Data";
+import Data from "./data";
 
 export default interface Dataset {
   datasets: Array<Data>;
