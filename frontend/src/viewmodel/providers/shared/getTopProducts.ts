@@ -1,7 +1,12 @@
 import ProductInfo from "../../../model/productInfo";
-import {getOrdersRequest, getProductsRequest} from "../requests";
+import { getOrdersRequest, getProductsRequest } from "../requests";
 
-export const capsReducer = (accumulator: string, value: string, index: number, array: Array<string>) => {
+export const capsReducer = (
+  accumulator: string,
+  value: string,
+  index: number,
+  array: Array<string>
+) => {
   value = value.toLowerCase();
   return accumulator + " " + value[0].toUpperCase() + value.slice(1);
 };
@@ -25,8 +30,8 @@ const getTopProducts = async (year: number): Promise<Array<ProductInfo>> => {
   for (let i = 0; i < jsonProducts.data.length; i++) {
     const jsonProduct = jsonProducts.data[i];
 
-    const id = jsonProduct.itemKey;
-    const name = parseItemKey(id);
+    const productKey = jsonProduct.itemKey;
+    const name = parseItemKey(productKey);
     const details = jsonProduct.complementaryDescription;
 
     const priceListLines = jsonProduct.priceListLines;
@@ -45,12 +50,12 @@ const getTopProducts = async (year: number): Promise<Array<ProductInfo>> => {
     );
 
     products.push({
-      productKey: id,
-      name: name,
-      price: price,
-      totalSold: totalSold,
-      details: details,
-      status: status,
+      productKey,
+      name,
+      price,
+      totalSold,
+      details,
+      status,
     });
   }
 

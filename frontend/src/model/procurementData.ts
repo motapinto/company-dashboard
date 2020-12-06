@@ -1,11 +1,11 @@
 export interface Data {
-  label: string | undefined;
+  label?: string;
   data: Array<number>;
 }
 
 export interface Dataset {
   datasets: Array<Data>;
-  labels: Array<string>;
+  labels: Array<string> | string;
 }
 
 export interface IntervalData {

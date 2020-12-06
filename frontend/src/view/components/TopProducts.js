@@ -28,6 +28,7 @@ const getBadge = (status) => {
 
 export default ({ productsData, year }) => {
   let history = useHistory();
+  console.log(productsData);
   return (
     <CCard className="w-100">
       <CCardHeader>
