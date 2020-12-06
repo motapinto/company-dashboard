@@ -19,10 +19,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.6.1"
   },
   "bugs": {
     "url": "https://github.com/motapinto/sinf-proj/issues"
   },
-  "homepage": "https://github.com/motapinto/sinf-proj#readme"
+  "homepage": "https://github.com/motapinto/sinf-proj#readme",
+  "dependencies": {}
 }
