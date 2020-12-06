@@ -1,9 +1,8 @@
 import commandLineArgs from 'command-line-args';
 
 const optionDefinitions = [
-  {name: 'source', alias: 's', type: String, defaultValue: 'saft.xml'}
+  {name: 'source', alias: 's', type: String}
 ]
 
 const options = commandLineArgs(optionDefinitions);
-console.log(options);
 export default options;

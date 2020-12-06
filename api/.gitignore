@@ -7,3 +7,4 @@ lib
 .env
 npm-debug.log*
 debug.log
+db.json

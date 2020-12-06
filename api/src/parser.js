@@ -4,10 +4,6 @@ import read from 'read-file'
 import writeFile from 'write'
 import shell from 'shelljs'
 
-(async () => {
-    await writeFile('foo.txt', 'This is content...');
-  })();
-
 if (shell.which('xmllint')) {
     shell.echo('Validating file ' + args.source);
     let ret = shell.exec('xmllint --noout --schema SAFTPT1.04_011.xsd ' + args.source);
