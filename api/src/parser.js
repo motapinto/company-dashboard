@@ -51,7 +51,10 @@ const parseContents = (json) => {
         ...TaxTable
     };
 
-    parseSourceDocuments(parsed);
+    if(parsed.SourceDocuments) {
+        parseSourceDocuments(parsed);
+    }
+
     return JSON.stringify(parsed);
 }
 
