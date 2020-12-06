@@ -1,10 +1,5 @@
 import ProductInfo from "../../../model/productInfo";
 import {getOrdersRequest, getProductsRequest} from "../requests";
-const axios = require("axios").default;
-
-const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
-axios.defaults.headers.common["Authorization"] = `Bearer ${process.env.REACT_APP_TOKEN}`;
-axios.defaults.headers.common["Content-Type"] = "application/json";
 
 export const capsReducer = (accumulator: string, value: string, index: number, array: Array<string>) => {
   value = value.toLowerCase();

@@ -89,7 +89,7 @@ see also:
 ### Basic usage
 
 ```bash
-# dev server with hot reload at http://localhost:3000
+# dev api with hot reload at http://localhost:3000
 $ npm start
 ```
 

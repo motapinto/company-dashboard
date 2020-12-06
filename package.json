@@ -1,0 +1,28 @@
+{
+  "name": "360",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "api": "cd api && npm start",
+    "start": "concurrently --kill-others \"npm run api\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motapinto/sinf-proj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  },
+  "bugs": {
+    "url": "https://github.com/motapinto/sinf-proj/issues"
+  },
+  "homepage": "https://github.com/motapinto/sinf-proj#readme"
+}
