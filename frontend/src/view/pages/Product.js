@@ -6,6 +6,7 @@ import TopClients from "../components/TopClients";
 import GrossNetProfit from "../components/GrossNetProfit";
 import GetProductData from "../../viewmodel/providers/getProductData";
 import ResourceGetter from "../components/ResourceGetter";
+import { match } from "assert";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 
@@ -82,9 +83,9 @@ const RenderProduct = (data) => {
   );
 };
 
-const Product = (id, year) => (
+const Product = ({ match, year }) => (
   <ResourceGetter
-    func={() => GetProductData(id, year)}
+    func={() => GetProductData(match.params.id, year)}
     componentToRender={RenderProduct}
   />
 );

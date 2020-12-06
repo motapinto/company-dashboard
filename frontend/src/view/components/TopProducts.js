@@ -26,7 +26,7 @@ const getBadge = (status) => {
   }
 };
 
-export default ({ productsData, year}) => {
+export default ({ productsData, year }) => {
   let history = useHistory();
   return (
     <CCard className="w-100">
@@ -50,7 +50,9 @@ export default ({ productsData, year}) => {
             aspectRatio: false,
           }}
           clickableRows
-          onRowClick={(row) => history.push(`/theme/products/${row.id}`)}
+          onRowClick={(row) =>
+            history.push(`/theme/products/${row.productKey}`)
+          }
           scopedSlots={{
             status: (item) => (
               <td>

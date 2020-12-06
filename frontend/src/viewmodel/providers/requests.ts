@@ -37,4 +37,11 @@ export const getProductsRequest = async (year: number): Promise<any> => {
 
 export const getOrdersRequest = async (year: number): Promise<any> => {
   return await axios.get(url + "/sales/orders");
-}
+};
+
+export const getProductInfo = async (
+  productKey: string,
+  year: number
+): Promise<any> => {
+  return await axios.get(url + "/salescore/salesitems/" + productKey);
+};

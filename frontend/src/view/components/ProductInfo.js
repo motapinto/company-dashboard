@@ -9,12 +9,16 @@ export default ({ ProductInfo }) => {
         <div className="small text-muted">{2019}</div>
       </CCardHeader>
       <CCardBody>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">ID: {ProductInfo.id}</li>
-          <li class="list-group-item">Name: {ProductInfo.name}</li>
-          <li class="list-group-item">Price: {ProductInfo.price}</li>
-          <li class="list-group-item">Total Sold: {ProductInfo.totalSold}</li>
-          <li class="list-group-item">Details: {ProductInfo.details}</li>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">
+            Product Key: {ProductInfo.productKey}
+          </li>
+          <li className="list-group-item">Name: {ProductInfo.name}</li>
+          <li className="list-group-item">Price: {ProductInfo.price}</li>
+          <li className="list-group-item">
+            Total Sold: {ProductInfo.totalSold}
+          </li>
+          <li className="list-group-item">Details: {ProductInfo.details}</li>
         </ul>
       </CCardBody>
     </CCard>
