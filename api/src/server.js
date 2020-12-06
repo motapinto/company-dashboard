@@ -1,8 +1,8 @@
 import jsonServer from 'json-server';
 import cors from 'cors';
-import salesController from './modules/sales';
-import generalAccountsController from './modules/generalAccounts';
-import headerController from './modules/header';
+import salesController from './modules/sales.js';
+import generalAccountsController from './modules/generalAccounts.js';
+import headerController from './modules/header.js';
 
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
@@ -25,4 +25,4 @@ server.listen(5000, () => {
     console.log('Server running at http://localhost:5000')
 });
 
-module.exports = server;
+export default server;
