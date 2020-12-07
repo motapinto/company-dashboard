@@ -6,7 +6,7 @@ import headerController from './modules/header.js';
 
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
-const middleware = jsonServer.defaults({noCors: false});
+const middleware = jsonServer.defaults({noCors: true});
 const db = router.db.__wrapped__;
 server.use(cors());
 
