@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
 const jasminAPI = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
-const saftAPI = process.env.SAFT_API_URL || 'localhost:5000';
+const saftAPI = process.env.SAFT_API_URL || 'http://localhost:5000';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.REACT_APP_TOKEN}`;
@@ -60,7 +60,11 @@ export const getProductInfo = async (
 // SAF-T Requests
 export const getHeader = async () => {
   try {
-    return await axios.get(saftAPI + '/Header');
+    console.log('dasdsasad');
+    console.log(saftAPI + '/header/fiscal-year');
+    console.log(await axios.get(saftAPI + '/header/fiscal-year'));
+    
+    return await axios.get(saftAPI + '/header/fiscal-year');
   } catch (error) {
     console.error('Could not getHeader!');
   }
@@ -106,4 +110,4 @@ export const getTaxTableEntries = async () => {
   }
 }
 
-console.log(getHeader());
+getHeader();

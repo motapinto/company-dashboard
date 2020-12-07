@@ -168,7 +168,6 @@ export default (server, db) => {
         });
     });
 
-
     server.get('/sales/total-orders-amount', (req, res) => {
 
         let startDate = 'start-date' in req.query ? new Date(req.query['start-date']) : null;
@@ -398,5 +397,4 @@ export default (server, db) => {
             products: products
         });
     });
-
 };

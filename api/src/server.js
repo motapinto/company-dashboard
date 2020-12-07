@@ -10,11 +10,6 @@ const middleware = jsonServer.defaults({noCors: true});
 const db = router.db.__wrapped__;
 server.use(cors());
 
-//Custom route test
-server.get('/echo', (req, res) => {
-    res.jsonp(req.query);
-})
-
 generalAccountsController(server, db);
 salesController(server, db);
 headerController(server, db);
