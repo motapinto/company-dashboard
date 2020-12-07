@@ -63,7 +63,7 @@ export const getHeader = async () => {
     console.log('dasdsasad');
     console.log(saftAPI + '/header/fiscal-year');
     console.log(await axios.get(saftAPI + '/header/fiscal-year'));
-    
+
     return await axios.get(saftAPI + '/header/fiscal-year');
   } catch (error) {
     console.error('Could not getHeader!');
@@ -72,17 +72,17 @@ export const getHeader = async () => {
 
 export const getGeneralLedgerEntries = async () => {
   try {
-    return await axios.get(saftAPI + '/getGeneralLedgerEntries');
+    return await axios.get(saftAPI + '/GeneralLedgerEntries');
   } catch (error) {
-    console.error('Could not getGeneralLedgerEntries!');
+    console.error('Could not get GeneralLedgerEntries!');
   }
 }
 
 export const getGeneralLedgerAccounts = async () => {
   try {
-    return await axios.get(saftAPI + '/getGeneralLedgerAccounts');
+    return await axios.get(saftAPI + '/GeneralLedgerAccounts');
   } catch (error) {
-    console.error('Could not getGeneralLedgerAccounts!');
+    console.error('Could not get GeneralLedgerAccounts!');
   }
 }
 
@@ -90,7 +90,7 @@ export const getCustomers = async () => {
   try {
     return await axios.get(saftAPI + '/Customer');
   } catch (error) {
-    console.error('Could not Customers!');
+    console.error('Could not get Customers!');
   }
 }
 
@@ -98,7 +98,7 @@ export const getSuppliers = async () => {
   try {
     return await axios.get(saftAPI + '/Supplier');
   } catch (error) {
-    console.error('Could not Suppliers!');
+    console.error('Could not get Suppliers!');
   }
 }
 
@@ -106,8 +106,16 @@ export const getTaxTableEntries = async () => {
   try {
     return await axios.get(saftAPI + '/TaxTableEntry');
   } catch (error) {
-    console.error('Could not getTaxTableEntries!');
+    console.error('Could not get TaxTableEntries!');
   }
 }
 
-getHeader();
+export const getSupplierSpending = async (year: number) => {
+  try {
+    return await axios.get(saftAPI + '/Supplier/spending');
+  } catch (error) {
+    console.error('Could not get Suppliers spending!');
+  }
+}
+
+// getHeader();

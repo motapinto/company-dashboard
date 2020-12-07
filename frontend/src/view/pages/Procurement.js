@@ -10,9 +10,12 @@ import ChartBarMax from "../charts/ChartBarMax";
 import yLabel from "../utils/yLabel";
 import ResourceGetter from "../components/ResourceGetter";
 import getProcurementData from "../../viewmodel/providers/getProcurementData";
+import SuppliersSpending from "../components/SuppliersSpending";
 
 export const formatNumber = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const n = number % 1 !== 0 ? number.toFixed(2) : number.toString()
+
+  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 const RenderProcurement = (data) => {
@@ -92,8 +95,7 @@ const RenderProcurement = (data) => {
               <div className="small text-muted">{2019}</div>
             </CCardHeader>
             <CCardBody>
-              <CChartDoughnut
-                type="doughnut"
+              <SuppliersSpending
                 datasets={suppliers.datasets}
                 labels={suppliers.labels}
               />

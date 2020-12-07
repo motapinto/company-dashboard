@@ -1,12 +1,29 @@
 import {ProcurementData, Dataset, Data, IntervalData} from "../../model/procurementData";
+import {getSupplierSpending} from "./requests";
+import {SpendingData} from "../../model/spendingData";
 
 const getSuppliers = async (year: number): Promise<Dataset> => {
+  const jsonRes = await getSupplierSpending(year);
+  console.log(jsonRes);
+
+  const suppliersData: Array<SpendingData> = jsonRes.data.sort((supplier1: any, supplier2: any) => supplier2.spending - supplier1.spending);
+
+  const suppliers = {
+    names: [...suppliersData.slice(0, 4).map((supplier) => supplier.companyName), "Others"],
+    spending: [
+      ...suppliersData.slice(0, 4).map((supplier) => supplier.spending),
+      suppliersData.slice(4).reduce((accumulator, supplier) => {
+        accumulator.spending += supplier.spending;
+        return accumulator;
+      }, {companyName: "Others", accountID: 0, spending: 0}).spending
+    ]
+  };
+
   return {
-    labels: ["AOC", "Fisher", "MOB", "Others"],
+    labels: suppliers.names,
     datasets: [
       {
-        label: undefined,
-        data: [40, 20, 80, 10],
+        data: suppliers.spending,
       },
     ],
   };

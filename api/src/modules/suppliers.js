@@ -31,6 +31,7 @@ export default (server, db) => {
                 }
             }
 
+            supplier.spending = parseFloat(supplier.spending.toFixed(2));
             suppliers.push(supplier);
         }
 

@@ -2,7 +2,6 @@ import React from "react";
 import { CChartBar } from "@coreui/react-chartjs";
 
 const ChartBarMax = (attributes) => {
-  console.log(attributes);
   const defaultOptions = ((datasets) => {
     return {
       scales: {
