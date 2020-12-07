@@ -60,9 +60,49 @@ export const getProductInfo = async (
 // SAF-T Requests
 export const getHeader = async () => {
   try {
-    return await axios.get(jasminAPI + '/Header');
+    return await axios.get(saftAPI + '/Header');
   } catch (error) {
     console.error('Could not getHeader!');
+  }
+}
+
+export const getGeneralLedgerEntries = async () => {
+  try {
+    return await axios.get(saftAPI + '/getGeneralLedgerEntries');
+  } catch (error) {
+    console.error('Could not getGeneralLedgerEntries!');
+  }
+}
+
+export const getGeneralLedgerAccounts = async () => {
+  try {
+    return await axios.get(saftAPI + '/getGeneralLedgerAccounts');
+  } catch (error) {
+    console.error('Could not getGeneralLedgerAccounts!');
+  }
+}
+
+export const getCustomers = async () => {
+  try {
+    return await axios.get(saftAPI + '/Customer');
+  } catch (error) {
+    console.error('Could not Customers!');
+  }
+}
+
+export const getSuppliers = async () => {
+  try {
+    return await axios.get(saftAPI + '/Supplier');
+  } catch (error) {
+    console.error('Could not Suppliers!');
+  }
+}
+
+export const getTaxTableEntries = async () => {
+  try {
+    return await axios.get(saftAPI + '/TaxTableEntry');
+  } catch (error) {
+    console.error('Could not getTaxTableEntries!');
   }
 }
 
