@@ -158,201 +158,187 @@ export default (server, db) => {
             
         };
 
+        const taxonomyCodesLeft = new Set();
+
         db.GeneralLedgerAccounts.Account.forEach(account => {
-            const accountID = account.AccountID;
-            const saldoConta = parseFloat(account.ClosingDebitBalance - account.ClosingCreditBalance);
+            const taxonomyCode = account.TaxonomyCode;
+            const accountBalance = parseFloat(account.ClosingDebitBalance- account.ClosingCreditBalance);
 
-            switch (accountID) {
-                case '11':
-                case '12':
-                case '13':
-                    balanceSheet.assets["Ativo corrente"]["Caixa e depósitos bancários"] += saldoConta;
+            if(taxonomyCode !== undefined && accountBalance !== 0) taxonomyCodesLeft.add(taxonomyCode);
+
+            switch (taxonomyCode) {
+                case taxonomyCode <= 23:
+                case 72:
+                case 79:
+                    balanceSheet.assets["Ativo corrente"] += accountBalance;
                     break;
-                case '14':
+                case taxonomyCode <= 56:
+                case 71: 
+                    balanceSheet.assets["Ativo corrente"] -= accountBalance;
+                    break;
+                case 211:
+                case 212:
+                case 219:
+                case 228:
+                case 229:
+                case 279:
+                case 232:
+                case 238:
+                case 239:
+                case 263:
+                case 281:
+                case 2721:
+                case 2713:
+                    balanceSheet.assets["Ativo corrente"] += accountBalance;
+                    break;
+                case 14:
                     {
-                        if (saldoConta >= 0)
-                            balanceSheet.assets["Ativo corrente"]["Outros ativos financeiros"] += saldoConta;
+                        if (accountBalance >= 0)
+                            balanceSheet.assets["Ativo corrente"] += accountBalance;
                         else
-                            balanceSheet.liabilities["Passivo corrente"]["Outros passivos financeiros"] += saldoConta;
+                            balanceSheet.liabilities["Passivo corrente"]["Outros passivos financeiros"] += accountBalance;
                     }
                     break;
-                case '211':
-                case '212':
-                    balanceSheet.assets["Ativo corrente"].Clientes += saldoConta;
+                case 218:
+                case 276:
+                    balanceSheet.liabilities["Passivo corrente"]["Adiantamentos de clientes"] += accountBalance;
                     break;
-                case '218':
-                case '276':
-                    balanceSheet.liabilities["Passivo corrente"]["Adiantamentos de clientes"] += saldoConta;
+                case 221:
+                case 222:
+                case 225:
+                    balanceSheet.liabilities["Passivo corrente"].Fornecedores += accountBalance;
                     break;
-                case '219':
-                    balanceSheet.assets["Ativo corrente"].Clientes -= saldoConta;
+                case 231:
+                case 238:
+                case 2722:
+                    balanceSheet.liabilities["Passivo corrente"]["Outras contas a pagar"] += accountBalance;
                     break;
-                case '221':
-                case '222':
-                case '225':
-                    balanceSheet.liabilities["Passivo corrente"].Fornecedores += saldoConta;
+                case 237:
+                case 275:
+                    balanceSheet.liabilities["Passivo não corrente"]["Outras contas a pagar"] += accountBalance;
                     break;
-                case '228':
-                case '2713':
-                    balanceSheet.assets["Ativo corrente"]["Adiantamentos a fornecedores"] += saldoConta;
-                    break;
-                case '229':
-                case '279':
+                case 24:
                     {
-                        balanceSheet.assets["Ativo corrente"]["Adiantamentos a fornecedores"] -= saldoConta;
-                        balanceSheet.assets["Ativo corrente"]["Outras Contas a Receber"] -= saldoConta;
-                    }
-                    break;
-                case '231':
-                case '238':
-                case '2722':
-                    balanceSheet.liabilities["Passivo corrente"]["Outras contas a pagar"] += saldoConta;
-                    break;
-                case '232':
-                case '238':
-                case '2721':
-                    balanceSheet.assets["Ativo corrente"]["Outras Contas a Receber"] += saldoConta;
-                    break;
-                case '237':
-                case '275':
-                    balanceSheet.liabilities["Passivo não corrente"]["Outras contas a pagar"] += saldoConta;
-                    break;
-                case '239':
-                    balanceSheet.assets["Ativo corrente"]["Outras Contas a Receber"] -= saldoConta;
-                    break;
-                case '24':
-                    {
-                        if (saldoConta >= 0)
-                            balanceSheet.assets["Ativo corrente"]["Estado e outros entes públicos"] += saldoConta;
+                        if (accountBalance >= 0)
+                            balanceSheet.assets["Ativo corrente"] += accountBalance;
                         else
-                            balanceSheet.liabilities["Passivo corrente"]["Estado e outros entes públicos"] += saldoConta;
+                            balanceSheet.liabilities["Passivo corrente"]["Estado e outros entes públicos"] += accountBalance;
                     }
                     break;
-                case '25':
+                case 25:
                     {
-                        balanceSheet.liabilities["Passivo não corrente"]["Financiamentos obtidos"] += saldoConta;
-                        balanceSheet.liabilities["Passivo corrente"]["Financiamentos obtidos"] += saldoConta;
+                        balanceSheet.liabilities["Passivo não corrente"]["Financiamentos obtidos"] += accountBalance;
+                        balanceSheet.liabilities["Passivo corrente"]["Financiamentos obtidos"] += accountBalance;
                     }
                     break;
-                case '261':
-                case '262':
-                    balanceSheet.equity["Capital próprio"]["Capital Realizado"] -= saldoConta;
+                case 261:
+                case 262:
+                    balanceSheet.equity["Capital próprio"]["Capital Realizado"] -= accountBalance;
                     break;
-                case '263':
-                    balanceSheet.assets["Ativo corrente"]["Accioninistas/Sócios"] += saldoConta;
-                    break;
-                case '264':
-                case '265':
-                    balanceSheet.liabilities["Passivo corrente"]["Accionistas/Sócios"] += saldoConta;
-                case '266':
-                case '268':
+                case 264:
+                case 265:
+                    balanceSheet.liabilities["Passivo corrente"]["Accionistas/Sócios"] += accountBalance;
+                case 266:
+                case 268:
                     {
-                        if (saldoConta > 0)
-                            balanceSheet.assets["Ativo corrente"]["Accioninistas/Sócios"] += saldoConta;
+                        if (accountBalance > 0)
+                            balanceSheet.assets["Ativo corrente"] += accountBalance;
                         else
-                            balanceSheet.liabilities["Passivo corrente"]["Accionistas/Sócios"] += saldoConta;
+                            balanceSheet.liabilities["Passivo corrente"]["Accionistas/Sócios"] += accountBalance;
                     }
                     break;
-                case '269':
+                case 269:
                     {
-                        balanceSheet.assets["Ativo não corrente"]["Accionistas/Sócios"] -= saldoConta;
-                        balanceSheet.assets["Ativo corrente"]["Accioninistas/Sócios"] -= saldoConta;
+                        balanceSheet.assets["Ativo não corrente"]["Accionistas/Sócios"] -= accountBalance;
+                        balanceSheet.assets["Ativo corrente"] -= accountBalance;
                     }
                     break;
-                case '2711':
-                case '2712':
+                case 2711:
+                case 2712:
                     {
-                        balanceSheet.liabilities["Passivo não corrente"]["Outras contas a pagar"] += saldoConta;
-                        balanceSheet.liabilities["Passivo corrente"]["Outras contas a pagar"] += saldoConta;
+                        balanceSheet.liabilities["Passivo não corrente"]["Outras contas a pagar"] += accountBalance;
+                        balanceSheet.liabilities["Passivo corrente"]["Outras contas a pagar"] += accountBalance;
                     }
                     break;
-                case '278':
+                case 278:
                     {
-                        if (saldoConta >= 0)
-                            balanceSheet.assets["Ativo corrente"]["Outras Contas a Receber"] += saldoConta;
+                        if (accountBalance >= 0)
+                            balanceSheet.assets["Ativo corrente"] += accountBalance;
                         else
-                            balanceSheet.liabilities["Passivo corrente"]["Outras contas a pagar"] += saldoConta;
+                            balanceSheet.liabilities["Passivo corrente"]["Outras contas a pagar"] += accountBalance;
                     }
-                    break;
-                case '281':
-                    balanceSheet.assets["Ativo corrente"].Diferimentos += saldoConta;
-                    break;
-                case '282':
-                case '283':
-                    balanceSheet.liabilities["Passivo corrente"].Diferimentos += saldoConta;
-                    break;
-                case '29':
-                    balanceSheet.liabilities["Passivo não corrente"].Provisões += saldoConta;
-                    break;
-                case '32':
-                case '33':
-                case '34':
-                case '35':
-                case '36':
-                case '39':
-                    balanceSheet.assets["Ativo corrente"].Inventários += saldoConta;
-                    break;
-                case '41':
-                    balanceSheet.assets["Ativo não corrente"]["Investimentos financeiros"] += saldoConta;
                     break;
 
-                case '42':
-                case '452':
-                case '455':
-                    balanceSheet.assets["Ativo não corrente"]["Propriedades de investimento"] += saldoConta;
+                case 282:
+                case 283:
+                    balanceSheet.liabilities["Passivo corrente"].Diferimentos += accountBalance;
                     break;
-                case '43':
-                case '453':
-                case '455':
-                    balanceSheet.assets["Ativo não corrente"]["Ativos fixos tangíveis"] += saldoConta;
+                case 29:
+                    balanceSheet.liabilities["Passivo não corrente"].Provisões += accountBalance;
                     break;
-                case '44':
-                case '454':
-                case '455':
-                    balanceSheet.assets["Ativo não corrente"]["Ativos intangíveis"] += saldoConta;
+                case 41:
+                    balanceSheet.assets["Ativo não corrente"]["Investimentos financeiros"] += accountBalance;
                     break;
-                case '459':
+
+                case 42:
+                case 452:
+                case 455:
+                    balanceSheet.assets["Ativo não corrente"]["Propriedades de investimento"] += accountBalance;
+                    break;
+                case 43:
+                case 453:
+                case 455:
+                    balanceSheet.assets["Ativo não corrente"]["Ativos fixos tangíveis"] += accountBalance;
+                    break;
+                case 44:
+                case 454:
+                case 455:
+                    balanceSheet.assets["Ativo não corrente"]["Ativos intangíveis"] += accountBalance;
+                    break;
+                case 459:
                     {
-                        balanceSheet.assets["Ativo não corrente"]["Ativos fixos tangíveis"] -= saldoConta;
-                        balanceSheet.assets["Ativo não corrente"]["Propriedades de investimento"] -= saldoConta;
-                        balanceSheet.assets["Ativo não corrente"]["Ativos intangíveis"] -= saldoConta;
+                        balanceSheet.assets["Ativo não corrente"]["Ativos fixos tangíveis"] -= accountBalance;
+                        balanceSheet.assets["Ativo não corrente"]["Propriedades de investimento"] -= accountBalance;
+                        balanceSheet.assets["Ativo não corrente"]["Ativos intangíveis"] -= accountBalance;
                     }
                     break;
-                case '51':
-                    balanceSheet.equity["Capital próprio"]["Capital Realizado"] += saldoConta;
+                case 51:
+                    balanceSheet.equity["Capital próprio"]["Capital Realizado"] += accountBalance;
                     break;
-                case '52':
-                    balanceSheet.equity["Capital próprio"]["Acções (quotas) próprias"] += saldoConta;
+                case 52:
+                    balanceSheet.equity["Capital próprio"]["Acções (quotas) próprias"] += accountBalance;
                     break;
-                case '53':
-                    balanceSheet.equity["Capital próprio"]["Outros instrumentos de capital próprio"] += saldoConta;
+                case 53:
+                    balanceSheet.equity["Capital próprio"]["Outros instrumentos de capital próprio"] += accountBalance;
                     break;
-                case '54':
-                    balanceSheet.equity["Capital próprio"]["Prémios de emissão"] += saldoConta;
+                case 54:
+                    balanceSheet.equity["Capital próprio"]["Prémios de emissão"] += accountBalance;
                     break;
-                case '551':
-                    balanceSheet.equity["Capital próprio"]["Reservas legais"] += saldoConta;
+                case 551:
+                    balanceSheet.equity["Capital próprio"]["Reservas legais"] += accountBalance;
                     break;
-                case '552':
-                    balanceSheet.equity["Capital próprio"]["Outras reservas"] += saldoConta;
+                case 552:
+                    balanceSheet.equity["Capital próprio"]["Outras reservas"] += accountBalance;
                     break;
-                case '56':
-                    balanceSheet.equity["Capital próprio"]["Resultados transitados"] += saldoConta;
+                case 56:
+                    balanceSheet.equity["Capital próprio"]["Resultados transitados"] += accountBalance;
                     break;
-                case '58':
-                    balanceSheet.equity["Capital próprio"]["Excedentes de revalorização"] += saldoConta;
+                case 58:
+                    balanceSheet.equity["Capital próprio"]["Excedentes de revalorização"] += accountBalance;
                     break;
-                case '59':
-                    balanceSheet.equity["Capital próprio"]["Outras variações no capital próprio"] += saldoConta;
+                case 59:
+                    balanceSheet.equity["Capital próprio"]["Outras variações no capital próprio"] += accountBalance;
                     break;
-                case '818':
-                    balanceSheet.equity["Capital próprio"]["Resultado líquido do período"] += saldoConta;
+                case 818:
+                    balanceSheet.equity["Capital próprio"]["Resultado líquido do período"] += accountBalance;
                     break;
                 default:
                     break;
             }
 
         });
+
+        console.log(taxonomyCodesLeft);
         
         //totals
         balanceSheet.assets["Total do ativo"] += getParcelSum(balanceSheet.assets["Ativo corrente"]);
@@ -400,5 +386,4 @@ export default (server, db) => {
             totalEquityAndLiabilities: balanceSheet['Total do Capital Próprio e do Passivo']
         });
     });
-
 };
