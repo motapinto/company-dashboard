@@ -57,36 +57,36 @@ const RenderFinancial = (data) => {
       <CRow>
         <CCol md="5" className="d-flex align-items-stretch">
           <BalanceSheet
-            balanceSheetAssets={[
-              {
-                label: "NCA",
-                backgroundColor: "#4dbd74",
-                data: data.balanceSheet.nca,
-              },
-              {
-                label: "CA",
-                backgroundColor: "#597D35",
-                data: data.balanceSheet.ca,
-              },
-            ]}
-            balanceSheetEquity={[
-              {
-                label: "CL",
-                backgroundColor: "#680C07",
-                data: data.balanceSheet.cl,
-              },
-              {
-                label: "NCL",
-                backgroundColor: "#900D09",
-                data: data.balanceSheet.ncl,
-              },
-              {
-                label: "E",
-                backgroundColor: "#f87979",
-                data: data.balanceSheet.e,
-              },
-            ]}
-            year={2019}
+           balanceSheetAssets={[
+            {
+              label: "NCA",
+              backgroundColor: "#4dbd74",
+              data: [data.balanceSheet.nca],
+            },
+            {
+              label: "CA",
+              backgroundColor: "#597D35",
+              data: [data.balanceSheet.ca],
+            },
+          ]}
+          balanceSheetLiabilitiesEquity={[
+            {
+              label: "CL",
+              backgroundColor: "#680C07",
+              data: [data.balanceSheet.cl],
+            },
+            {
+              label: "NCL",
+              backgroundColor: "#900D09",
+              data: [data.balanceSheet.ncl],
+            },
+            {
+              label: "E",
+              backgroundColor: "#f87979",
+              data: [data.balanceSheet.e],
+            },
+          ]}
+          year={2019}
           />
         </CCol>
         <CCol md="7" className="d-flex align-items-stretch">
