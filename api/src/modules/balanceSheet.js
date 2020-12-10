@@ -12,31 +12,28 @@ export default (server, db) => {
             taxonomyCodesLeft.add(taxonomyCode);
 
 
-            switch (taxonomyCode) {
+            switch (true) {
                 case taxonomyCode <= 3:
                     isPositive ? 
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Caixa e depósitos bancários'], Math.abs(accountBalance)) :
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Financiamentos obtidos'], Math.abs(accountBalance));
                     break;
-                case 4:
-                case 6:
+                case taxonomyCode == 4:
+                case taxonomyCode == 6:
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Ativos financeiros detidos para negociação'], Math.abs(accountBalance));
                     break;
-                case 5:
-                case 7:
+                case taxonomyCode == 5:
+                case taxonomyCode == 7:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Passivos financeiros detidos para negociação'], Math.abs(accountBalance));
                     break;
-                case 8:
+                case taxonomyCode == 8:
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Outros ativos financeiros'], Math.abs(accountBalance));
                     break;
-                case 9:
+                case taxonomyCode == 9:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Outros passivos financeiros'], Math.abs(accountBalance));
                     break;
-                case taxonomyCode <= 22:
+                case taxonomyCode <= 23:
                     isPositive ? addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Clientes'], Math.abs(accountBalance)) : 
-                    addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Adiantamentos de clientes'], Math.abs(accountBalance));
-                    break;
-                case 23:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Adiantamentos de clientes'], Math.abs(accountBalance));
                     break;
                 case taxonomyCode <= 36:
@@ -45,108 +42,96 @@ export default (server, db) => {
                 case taxonomyCode <= 50:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Fornecedores'], Math.abs(accountBalance));
                     break;
-                case 51:
-                case 52:
-                case 53:
-                case 54:
-                case 55:
-                case 56:
-                case 57:
-                case 59:
-                case 61:
-                case 63:
-                case 65:
-                case 66:
-                case 67:
-                case 69:
+                case taxonomyCode <= 59:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance));
                     break;
-                case 58:
-                case 60:
-                case 62:
-                case 64:
-                case 68:
-                case 70:
+                case taxonomyCode == 61:
+                case taxonomyCode == 63:
+                case taxonomyCode == 65:
+                case taxonomyCode == 66:
+                case taxonomyCode == 67:
+                case taxonomyCode == 69:
+                    addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance));
+                    break;
+                case taxonomyCode == 58:
+                case taxonomyCode == 60:
+                case taxonomyCode == 62:
+                case taxonomyCode == 64:
+                case taxonomyCode == 68:
+                case taxonomyCode == 70:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Não Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance));
                     break;
                 case taxonomyCode <= 85:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Estado e outros entes públicos'], Math.abs(accountBalance));                   
                     break;
-                case 86:
-                case 88:
-                case 90:
-                case 92:
-                case 94:
-                case 96:
-                case 98:
-                case 100:
-                case 102:
-                case 104:
+                case taxonomyCode == 86:
+                case taxonomyCode == 88:
+                case taxonomyCode == 90:
+                case taxonomyCode == 92:
+                case taxonomyCode == 94:
+                case taxonomyCode == 96:
+                case taxonomyCode == 98:
+                case taxonomyCode == 100:
+                case taxonomyCode == 102:
+                case taxonomyCode == 104:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Financiamentos obtidos'], Math.abs(accountBalance));
                     break;
-                case 87:
-                case 89:
-                case 91:
-                case 93:
-                case 95:
-                case 97:
-                case 99:
-                case 101:
-                case 103:
-                case 105:
+                case taxonomyCode == 87:
+                case taxonomyCode == 89:
+                case taxonomyCode == 91:
+                case taxonomyCode == 93:
+                case taxonomyCode == 95:
+                case taxonomyCode == 97:
+                case taxonomyCode == 99:
+                case taxonomyCode == 101:
+                case taxonomyCode == 103:
+                case taxonomyCode == 105:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Não Corrente', 'Financiamentos obtidos'], Math.abs(accountBalance));
                     break;
-                case 106:
-                case 107:
+                case taxonomyCode == 106:
+                case taxonomyCode == 107:
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Capital subscrito e não realizado'], Math.abs(accountBalance));
                     break;
                 case taxonomyCode <= 123:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Não Corrente', 'Outras dívidas a pagar']);
                     break;
-                case 124:
-                case 126:
-                case 128:
-                case 138:
-                case 140:
-                case 142:
-                case 144:
+                case taxonomyCode == 124:
+                case taxonomyCode == 126:
+                case taxonomyCode == 128:
+                case taxonomyCode == 138:
+                case taxonomyCode == 140:
+                case taxonomyCode == 142:
+                case taxonomyCode == 144:
                     isPositive ?
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Outros créditos a receber'], Math.abs(accountBalance)) :
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance));
                     break;
-                case 125:
-                case 127:
-                case 129:
-                case 139: 
-                case 141:
-                case 143:
-                case 145:
+                case taxonomyCode == 125:
+                case taxonomyCode == 127:
+                case taxonomyCode == 129:
+                case taxonomyCode == 139: 
+                case taxonomyCode == 141:
+                case taxonomyCode == 143:
+                case taxonomyCode == 145:
                     isPositive ? 
                     addValue(balanceSheet, ['Ativo', 'Ativo não corrente', 'Créditos a receber'], Math.abs(accountBalance)) : 
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Não Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance)); 
                     break;
-                case 131:
-                case 132:
-                case 135:
-                case 136:
-                case 137:
-                case 134:
+                case taxonomyCode == 131:
+                case taxonomyCode == 132:
+                case taxonomyCode == 135:
+                case taxonomyCode == 136:
+                case taxonomyCode == 137:
+                case taxonomyCode == 134:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance));
                     break;
-                case 146:
+                case taxonomyCode == 146:
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Diferimentos'], Math.abs(accountBalance));
                     break;
-                case 147:
+                case taxonomyCode == 147:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Diferimentos'], Math.abs(accountBalance));
                     break;
-                case 148:
-                case 149:
-                case 150:
-                case 151:
-                case 152:
-                case 153:
-                case 154:
-                case 155:
+                case taxonomyCode <= 155:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Não Corrente', 'Provisões'], Math.abs(accountBalance));
                     break; 
                 case taxonomyCode <= 214:
@@ -159,122 +144,29 @@ export default (server, db) => {
                     addValue(balanceSheet, ['Ativo', 'Ativo não corrente', 'Outros investimentos financeiros'], Math.abs(accountBalance)) :
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Passivo', 'Passivo Corrente', 'Outras dívidas a pagar'], Math.abs(accountBalance));
                     break;
-                case 259:
-                case 260:
-                case 261:
-                case 262:
-                case 263:
-                case 264:
-                case 265:
-                case 266:
-                case 267:
-                case 268:
-                case 269:
-                case 270:
-                case 271:
-                case 272:
-                case 273:
-                case 274:
-                case 275:
-                case 276:
-                case 277:
-                case 278:
-                case 279:
-                case 280:
-                case 281:
-                case 282:
-                case 283:
-                case 284:
-                case 285:
-                case 286:
-                case 287:
-                case 288:
-                case 290:
-                case 291:
-                case 292:
-                case 293:
-                case 295:
-                case 296:
-                case 297:
-                case 298:
-                case 300:
-                case 301:
-                case 302:
-                case 303:
-                case 304:
-                case 305:
-                case 306:
-                case 307:
-                case 308:
-                case 309:
-                case 310:
-                case 311:
-                case 312:
-                case 313:
-                case 314:
-                case 315:
-                case 316:
-                case 317:
-                case 318:
-                case 319:
+                case taxonomyCode <= 319:
                     addValue(balanceSheet, ['Ativo', 'Ativo não corrente', 'Propriedades de investimento'], Math.abs(accountBalance));
                     break;        
-                case 320:
-                case 321:
-                case 322:
-                case 323:
-                case 324:
+                case taxonomyCode <= 324:
                     addValue(balanceSheet, ['Ativo', 'Ativo corrente', 'Ativos não correntes detidos para venda'], Math.abs(accountBalance));
                     break;
-                case 325:
-                case 326:
-                case 327:
-                case 328:
-                case 329:
-                case 330:
-                case 331:
-                case 332:
-                case 333:
-                case 334:
-                case 335:
-                case 336:
-                case 337:
-                case 338:
-                case 339:
-                case 340:
-                case 341:
-                case 342:
-                case 343:
-                case 344:
-                case 345:
-                case 346: 
-                case 347:
-                case 348:
-                case 349:
-                case 350:
-                case 351:
-                case 352:
-                case 352:
+                case taxonomyCode <= 352:
                     isPositive ?
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Capital Próprio', 'Ajustamentos / outras variações no capital próprio'], Math.abs(accountBalance)) :
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Capital Próprio', 'Ajustamentos / outras variações no capital próprio'], Math.abs(accountBalance));
                     break;    
-                case 646:
+                case taxonomyCode == 646:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Capital Próprio', 'Resultado líquido do período'], Math.abs(accountBalance));
                     break;
-                case 647:
+                case taxonomyCode == 647:
                     addValue(balanceSheet, ['Capital Próprio e Passivo', 'Capital Próprio', 'Dividendos antecipados'], Math.abs(accountBalance));
                     break
                 default:
                     console.log('Unhandled Taxonomy Code:', taxonomyCode, '\tWith balance of:', Math.abs(accountBalance));
                     break;
             }
-
-            console.log(taxonomyCodesLeft);
-
         });
 
-        console.log(taxonomyCodesLeft);
         // ATIVO
         balanceSheet['Ativo']['Total do Ativo corrente'] = sumProperties(balanceSheet['Ativo']['Ativo corrente']);
         balanceSheet['Ativo']['Total do Ativo não corrente'] = sumProperties(balanceSheet['Ativo']['Ativo não corrente']);
