@@ -4,6 +4,7 @@ import salesController from './modules/sales.js';
 import generalAccountsController from './modules/generalAccounts.js';
 import headerController from './modules/header.js';
 import suppliersController from './modules/suppliers.js';
+import balanceSheetController from './modules/balanceSheet.js';
 
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
@@ -20,6 +21,7 @@ generalAccountsController(server, db);
 salesController(server, db);
 headerController(server, db);
 suppliersController(server, db);
+balanceSheetController(server, db);
 
 server.use(middleware);
 server.use(router);

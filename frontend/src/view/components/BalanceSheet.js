@@ -30,7 +30,8 @@ export default ({
               {"$ "}
               {MoneyFormat(
                 balanceSheetLiabilitiesEquity[0].data[0] +
-                  balanceSheetLiabilitiesEquity[1].data[0]
+                  balanceSheetLiabilitiesEquity[1].data[0] + 
+                  balanceSheetLiabilitiesEquity[2].data[0]
               )}
             </h4>
           </CCol>
@@ -82,7 +83,7 @@ export default ({
             <CChartBar
               className="h-100"
               type="bar"
-              labels={["Equity $ Liabilities"]}
+              labels={["Equity & Liabilities"]}
               datasets={balanceSheetLiabilitiesEquity}
               options={{
                 maintainAspectRatio: false,
