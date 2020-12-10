@@ -4,7 +4,8 @@ import RegionSales from "../../model/regionSales";
 import getBalanceSheet from "./shared/getBalanceSheet";
 import getTopProducts from "./shared/getTopProducts";
 import { Data } from "../../model/procurementData";
-import {getSalesRegion} from "./shared/getSalesByRegion";
+import { getSalesRegion } from "./shared/getSalesByRegion";
+import { getMonthlySales } from "./requests";
 const axios = require("axios").default;
 
 const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
@@ -14,23 +15,12 @@ axios.defaults.headers.common[
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const getSales = async (year: number): Promise<Data> => {
+  const salesByRegionData = (await getMonthlySales(year)).data;
+  console.log(salesByRegionData);
   return {
     label: "Montly Sales",
 
-    data: [
-      2323323,
-      2212122,
-      2312312,
-      1211221,
-      4312232,
-      1112312,
-      7512321,
-      5542565,
-      9523534,
-      4322423,
-      3222423,
-      4324322,
-    ],
+    data: salesByRegionData.monthlySales,
   };
 };
 
