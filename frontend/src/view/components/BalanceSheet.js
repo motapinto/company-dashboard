@@ -3,7 +3,13 @@ import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
 import MoneyFormat from "../utils/MoneyFormat";
 
-export default ({ balanceSheetAssets, balanceSheetLiabilitiesEquity, year }) => {
+export default ({
+  balanceSheetAssets,
+  balanceSheetLiabilitiesEquity,
+  year,
+}) => {
+  console.log(balanceSheetAssets);
+  console.log(balanceSheetLiabilitiesEquity);
   return (
     <CCard className="w-100">
       <CCardHeader>
@@ -16,7 +22,7 @@ export default ({ balanceSheetAssets, balanceSheetLiabilitiesEquity, year }) => 
             <h4>
               {"$ "}
               {MoneyFormat(
-                balanceSheetAssets[0] + balanceSheetAssets[1]
+                balanceSheetAssets[0].data[0] + balanceSheetAssets[1].data[0]
               )}
             </h4>
           </CCol>
@@ -25,7 +31,8 @@ export default ({ balanceSheetAssets, balanceSheetLiabilitiesEquity, year }) => 
             <h4>
               {"$ "}
               {MoneyFormat(
-                balanceSheetLiabilitiesEquity[0] + balanceSheetLiabilitiesEquity[1]
+                balanceSheetLiabilitiesEquity[0].data[0] +
+                  balanceSheetLiabilitiesEquity[1].data[0]
               )}
             </h4>
           </CCol>
@@ -53,11 +60,11 @@ export default ({ balanceSheetAssets, balanceSheetLiabilitiesEquity, year }) => 
                     {
                       ticks: {
                         max: Math.max(
-                          balanceSheetAssets[0] +
-                            balanceSheetAssets[1],
-                          balanceSheetLiabilitiesEquity[0] +
-                            balanceSheetLiabilitiesEquity[1] +
-                            balanceSheetLiabilitiesEquity[2]
+                          balanceSheetAssets[0].data[0] +
+                            balanceSheetAssets[1].data[0],
+                          balanceSheetLiabilitiesEquity[0].data[0] +
+                            balanceSheetLiabilitiesEquity[1].data[0] +
+                            balanceSheetLiabilitiesEquity[2].data[0]
                         ),
                       },
                       beginAtZero: true,
@@ -95,8 +102,8 @@ export default ({ balanceSheetAssets, balanceSheetLiabilitiesEquity, year }) => 
                     {
                       ticks: {
                         max:
-                          balanceSheetAssets[0] +
-                          balanceSheetAssets[1],
+                          balanceSheetAssets[0].data[0] +
+                          balanceSheetAssets[1].data[0],
                       },
                       beginAtZero: true,
                       display: false,

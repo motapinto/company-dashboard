@@ -39,29 +39,29 @@ const RenderDashboard = (data) => {
               {
                 label: "NCA",
                 backgroundColor: "#4dbd74",
-                data: data.balanceSheet.nca,
+                data: [data.balanceSheet.nca],
               },
               {
                 label: "CA",
                 backgroundColor: "#597D35",
-                data: data.balanceSheet.ca,
+                data: [data.balanceSheet.ca],
               },
             ]}
             balanceSheetLiabilitiesEquity={[
               {
                 label: "CL",
                 backgroundColor: "#680C07",
-                data: data.balanceSheet.cl,
+                data: [data.balanceSheet.cl],
               },
               {
                 label: "NCL",
                 backgroundColor: "#900D09",
-                data: data.balanceSheet.ncl,
+                data: [data.balanceSheet.ncl],
               },
               {
                 label: "E",
                 backgroundColor: "#f87979",
-                data: data.balanceSheet.e,
+                data: [data.balanceSheet.e],
               },
             ]}
             year={2019}
