@@ -4,6 +4,7 @@ import RegionSales from "../../model/regionSales";
 import getBalanceSheet from "./shared/getBalanceSheet";
 import getTopProducts from "./shared/getTopProducts";
 import { Data } from "../../model/procurementData";
+import {getSalesRegion} from "./shared/getSalesByRegion";
 const axios = require("axios").default;
 
 const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
@@ -11,13 +12,6 @@ axios.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${process.env.REACT_APP_TOKEN}`;
 axios.defaults.headers.common["Content-Type"] = "application/json";
-
-const getRegionSales = async (year: number): Promise<RegionSales> => {
-  return {
-    labels: ["America", "China", "Europe", "Australia", "Africa"],
-    data: [40, 65, 42, 22, 15],
-  };
-};
 
 const getSales = async (year: number): Promise<Data> => {
   return {
@@ -57,6 +51,6 @@ export default async (year: number): Promise<dashboardData> => {
     balanceSheet: await getBalanceSheet(year),
     overviewKpis: await getOverviewKpis(year),
     sales: await getSales(year),
-    regionSales: await getRegionSales(year),
+    regionSales: await getSalesRegion(year),
   };
 };

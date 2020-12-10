@@ -47,8 +47,8 @@ const RenderSales = (data) => {
         </CCol>
         <CCol md="6" lg="6">
           <SalesRegion
-            labels={["America", "China", "Europe", "Australia", "Africa"]}
-            datasets={data.salesRegion}
+            labels={data.salesRegion.regions}
+            datasets={data.salesRegion.data}
             year={2019}
           />
         </CCol>

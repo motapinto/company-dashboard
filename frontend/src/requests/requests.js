@@ -10,7 +10,6 @@ export const getOrders = async () => {
   try {
     const res = await axios.get(url + "/sales/orders");
   } catch (err) {
-    console.error(err);
   }
 };
 

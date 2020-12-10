@@ -1,6 +1,9 @@
 import SalesData from "../../model/salesData";
 import getProfitMargin from "./shared/getProfitMargin";
 import getTopProducts from "./shared/getTopProducts";
+import {getSalesRegion} from "./shared/getSalesByRegion";
+import SalesRegionData from "../../model/salesRegionData";
+
 const axios = require("axios").default;
 
 const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
@@ -13,10 +16,6 @@ const getCOGS = async (year: number): Promise<Array<number>> => {
 
 const getAOV = async(year: number): Promise<Array<number>> => {
   return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
-}
-
-const getSalesRegion = async(year: number): Promise<Array<number>> => {
-  return [40, 65, 42, 22, 15];
 }
 
 export default async (year: number): Promise<SalesData> => {

@@ -20,6 +20,7 @@ const getInfo = async (
   year: number
 ): Promise<ProductInfo> => {
   const jsonProductInfo = await getProductInfo(productKey, year);
+
   const priceListLines = jsonProductInfo.data.priceListLines;
 
   const price =

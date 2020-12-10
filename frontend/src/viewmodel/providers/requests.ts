@@ -120,4 +120,16 @@ export const getSupplierSpending = async (year: number) => {
   }
 }
 
+export const getSalesByRegion = async (year: number): Promise<any> => {
+  const startDate = year + "01-01";
+  const endDate = year + "12-31";
+
+  try {
+    return await axios.get(saftAPI + "/sales/sales-by-region");
+  } catch (error) {
+    console.error('Could not get sales by region!');
+    return [];
+  }
+}
+
 // getHeader();

@@ -103,39 +103,53 @@ export default (server, db) => {
         let startDate = 'start-date' in req.query ? new Date(req.query['start-date']) : null;
         let endDate = 'end-date' in req.query ? new Date(req.query['end-date']) : null;
 
-        let countries = {};
+        let regions = [];
 
-        db.SalesInvoices.forEach((invoice) => {
-            const type = invoice.InvoiceType;
-            if (!(invoice.Line.length && (type == 'FT' || type == 'FS' || type == 'FR' || type == 'VD')))
-                return;
+        db.Customer.forEach((customer) => {
+            const customerRegion = customer.BillingAddress.Region;
 
-            let invoiceDate = new Date(invoice.InvoiceDate);
-            if ((startDate != null && invoiceDate < startDate) || (endDate != null && invoiceDate > endDate))
-                return;
-
-            const country = invoice.ShipTo.Address.Country;
-
-            if (countries.hasOwnProperty(country)) {
-                countries[country].quantity++;
-                countries[country].netTotal += parseInt(invoice.DocumentTotals.NetTotal);
+            const mappedRegion = regions.find((region, index, array) => region.name === customerRegion);
+            if (mappedRegion === undefined) {
+               regions.push({
+                   name: customerRegion,
+                   customers: [customer.CustomerID],
+                   salesTotal: 0,
+                   sales: 0
+               });
             } else {
-                countries[country] = {
-                    quantity: 1,
-                    netTotal: parseInt(invoice.DocumentTotals.NetTotal)
-                };
+                mappedRegion.customers.push(customer.CustomerID);
             }
         });
 
-        countries = Object.keys(countries)
-            //.sort((a, b) => countries[b].quantity - countries[a].quantity)
-            .map(elem => ({
-                id: elem,
-                value: countries[elem].quantity,
-                netTotal: countries[elem].netTotal
-            }));
+        db.GeneralLedgerEntries.Journal.forEach((journal) => {
+            journal.Transaction.forEach((transaction) => {
+                const customer = transaction.CustomerID;
 
-        res.json(countries);
+                let transactionDate = new Date(transaction.TransactionDate);
+                if ((startDate != null && transactionDate < startDate) || (endDate != null && transactionDate > endDate))
+                    return;
+
+                const regionWithCustomer = regions.find((region) => region.customers.indexOf(customer) !== -1);
+                if(regionWithCustomer === undefined) {
+                    return;
+                }
+
+                if(transaction.Lines.DebitLine.hasOwnProperty("RecordID")) {
+                    regionWithCustomer.sales += 1;
+                    regionWithCustomer.salesTotal += transaction.Lines.DebitLine.DebitAmount;
+                } else {
+                    transaction.Lines.DebitLine.forEach((debitLine) => {
+                        regionWithCustomer.sales += 1;
+                        regionWithCustomer.salesTotal += debitLine.DebitAmount;
+                    })
+                }
+            })
+        })
+
+        regions = regions
+            .sort((a, b) => b.sales - a.sales);
+
+        res.json(regions);
     });
 
     server.get('/sales/total-tax', (req, res) => {

@@ -24,7 +24,7 @@ const RenderDashboard = (data) => {
         <CCol md="12" lg="6" className="d-flex align-items-stretch">
           <SalesRegion
             datasets={data.regionSales.data}
-            labels={data.regionSales.labels}
+            labels={data.regionSales.regions}
             year={2019}
           />
         </CCol>
