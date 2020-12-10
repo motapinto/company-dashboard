@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { getColor, deepObjectsMerge } from '@coreui/utils/src'
 import { CChartLine } from '@coreui/react-chartjs'
+import {formatNumber} from "../pages/Procurement";
 
 const ChartLineSimple = props => {
 
@@ -10,7 +11,7 @@ const ChartLineSimple = props => {
     backgroundColor,
     pointHoverBackgroundColor,
     dataPoints,
-    label,
+    labels,
     pointed,
     ...attributes
   } = props
@@ -32,13 +33,26 @@ const ChartLineSimple = props => {
         backgroundColor: getColor(backgroundColor),
         pointBackgroundColor: getColor(pointHoverColor),
         pointHoverBackgroundColor: getColor(pointHoverColor),
-        label
+        labels
       }
     ]
   })()
 
-  const pointedOptions = (()=>{
+
+  const defaultOptions = (()=>{
     return {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: true,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            return "$ " + formatNumber(tooltipItem.yLabel);
+          },
+        },
+      },
       scales: {
         xAxes: [
           {
@@ -53,12 +67,12 @@ const ChartLineSimple = props => {
             }
           }
         ],
-        yAxes: [
+          yAxes: [
           {
             display: false,
             ticks: {
               display: false,
-              min: Math.min.apply(Math, dataPoints) - 5,
+              beginAtZero: true,
               max: Math.max.apply(Math, dataPoints) + 5
             }
           }
@@ -70,52 +84,15 @@ const ChartLineSimple = props => {
         },
         point: {
           radius: 4,
-          hitRadius: 10,
-          hoverRadius: 4
+            hitRadius: 10,
+            hoverRadius: 4
         }
       }
     }
-  })()
-
-  const straightOptions = (()=>{
-    return {
-      scales: {
-        xAxes: [{
-          display: false
-        }],
-        yAxes: [{
-          display: false
-        }]
-      },
-      elements: {
-        line: {
-          borderWidth: 2
-        },
-        point: {
-          radius: 0,
-          hitRadius: 10,
-          hoverRadius: 4
-        }
-      }
-    }
-  })()
-
-  const defaultOptions = (()=>{
-    const options = pointed ? pointedOptions : straightOptions
-      return Object.assign({}, options, {
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        }
-      })
   })()
 
   const computedDatasets = (() => {
     return deepObjectsMerge(defaultDatasets, attributes.datasets || {})
-  })()
-
-  const computedOptions = (() => {
-    return deepObjectsMerge(defaultOptions, attributes.options || {})
   })()
 
   // render
@@ -125,8 +102,8 @@ const ChartLineSimple = props => {
       {...attributes}
       type="line"
       datasets={computedDatasets}
-      options={computedOptions}
-      labels={label}
+      options={defaultOptions}
+      labels={labels}
     />
   )
 }

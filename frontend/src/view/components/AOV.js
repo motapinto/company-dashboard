@@ -12,14 +12,27 @@ export default ({ dataset }) => {
       text="Average Order Value (AOV)"
       footerSlot={
         <ChartLineSimple
-          style={{ height: "70px" }}
+          style={{height: "70px"}}
           backgroundColor="danger"
           dataPoints={dataset}
           pointHoverBackgroundColor="danger"
           label="AOV"
-          labels="months"
+          labels={[
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ]}
         />
       }
-    ></CWidgetDropdown>
+    />
   );
-};
+}

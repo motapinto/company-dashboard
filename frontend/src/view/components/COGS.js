@@ -2,6 +2,7 @@ import React from "react";
 import { CWidgetDropdown } from "@coreui/react";
 import ChartBarSimple from "../charts/ChartBarSimple";
 import MoneyFormat from "../utils/MoneyFormat";
+import ChartLineSimple from "../charts/ChartLineSimple";
 
 export default ({ dataset }) => {
   return (
@@ -12,14 +13,27 @@ export default ({ dataset }) => {
       text="Cost of Goods Sold"
       footerSlot={
         <ChartBarSimple
-          style={{ height: "70px" }}
+          style={{height: "70px"}}
           backgroundColor="danger"
           dataPoints={dataset}
           pointHoverBackgroundColor="danger"
           label="COGS"
-          labels="months"
+          labels={[
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ]}
         />
       }
-    ></CWidgetDropdown>
+    />
   );
 };

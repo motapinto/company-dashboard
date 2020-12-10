@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { getColor } from '@coreui/utils/src'
 import { CChartBar } from '@coreui/react-chartjs'
+import {formatNumber} from "../pages/Procurement";
 
 const ChartBarSimple = props => {
 
@@ -10,6 +11,7 @@ const ChartBarSimple = props => {
     pointHoverBackgroundColor,
     dataPoints,
     label,
+    labels,
     pointed,
     ...attributes
   } = props
@@ -29,13 +31,24 @@ const ChartBarSimple = props => {
 
   const defaultOptions = (()=>{
     return {
+      tooltips: {
+        enabled: true,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            return "$ " + formatNumber(tooltipItem.yLabel);
+          },
+        },
+      },
       maintainAspectRatio: false,
       legend: {
         display: false
       },
       scales: {
         xAxes: [{
-          display: false
+          display: false,
+          ticks: {
+            beginAtZero: true,
+          }
         }],
         yAxes: [{
           display: false
@@ -51,7 +64,7 @@ const ChartBarSimple = props => {
       type="bar"
       datasets={defaultDatasets}
       options={defaultOptions}
-      labels={label}
+      labels={labels}
     />
   )
 }
