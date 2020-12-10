@@ -25,13 +25,15 @@ const getStatus = (isActive: boolean, isDeleted: boolean, isDraft: boolean) => {
 export default async (): Promise<Array<ProductInfo>> => {
   const jsonProducts = await getProductsRequest();
 
-  const products = [];
+  const products: any = [];
 
   for (let i = 0; i < jsonProducts.data.length; i++) {
     const jsonProduct = jsonProducts.data[i];
 
     const productKey = jsonProduct.itemKey;
     const name = parseItemKey(productKey);
+    
+    if(productKey == 'TESLAMODELS' || productKey == 'PORTES') continue;
     const details = jsonProduct.complementaryDescription;
 
     const priceListLines = jsonProduct.priceListLines;
