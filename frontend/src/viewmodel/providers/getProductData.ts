@@ -1,7 +1,6 @@
 import ProductInfo from "../../model/productInfo";
 import { ProductData, ClientInfo } from "../../model/productData";
-import { getProductInfo, getOrdersRequest } from "./requests";
-import { string } from "prop-types";
+import { getProductInfo, getOrdersRequest, getHeader } from "./requests";
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -17,9 +16,9 @@ function separateProductKey(productKey: string) {
 
 const getInfo = async (
   productKey: string,
-  year: number
+  
 ): Promise<ProductInfo> => {
-  const jsonProductInfo = await getProductInfo(productKey, year);
+  const jsonProductInfo = await getProductInfo(productKey);
 
   const priceListLines = jsonProductInfo.data.priceListLines;
 
@@ -29,7 +28,7 @@ const getInfo = async (
     }, 0) / priceListLines.length;
 
   let totalSold = 0;
-  const jsonOrders = await getOrdersRequest(year);
+  const jsonOrders = await getOrdersRequest();
 
   for (let i = 0; i < jsonOrders.data.length; i++) {
     const documentLines = jsonOrders.data[i].documentLines;
@@ -56,18 +55,15 @@ const getInfo = async (
   };
 };
 
-const getGrossProfitMargin = async (year: number): Promise<Array<number>> => {
+const getGrossProfitMargin = async (): Promise<Array<number>> => {
   return [98, 166, 159, 122, 109, 91, 139, 99, 140, 193, 79, 160];
 };
 
-const getNetProfitMargin = async (year: number): Promise<Array<number>> => {
+const getNetProfitMargin = async (): Promise<Array<number>> => {
   return [86, 82, 92, 81, 86, 88, 80, 92, 88, 84, 46, 65];
 };
 
-const getClients = async (
-  productId: string,
-  year: number
-): Promise<Array<ClientInfo>> => {
+const getClients = async (productId: string): Promise<Array<ClientInfo>> => {
   return [
     {
       id: 0,
@@ -102,32 +98,30 @@ const getClients = async (
   ];
 };
 
-const getSold = async (productId: string, year: number): Promise<number> => {
+const getSold = async (productId: string): Promise<number> => {
   return 2000;
 };
 
-const getStock = async (productId: string, year: number): Promise<number> => {
+const getStock = async (productId: string): Promise<number> => {
   return 2000;
 };
 
 const getAnnualNetProfit = async (
   productId: string,
-  year: number
+
 ): Promise<number> => {
   return 2000;
 };
 
-export default async (
-  productKey: string,
-  year: number
-): Promise<ProductData> => {
+export default async (productKey: string): Promise<ProductData> => {
   return {
-    info: await getInfo(productKey, year),
-    gpm: await getGrossProfitMargin(year),
-    npm: await getNetProfitMargin(year),
-    clients: await getClients(productKey, year),
-    sold: await getSold(productKey, year),
-    stock: await getStock(productKey, year),
-    annualNetProfit: await getAnnualNetProfit(productKey, year),
+    year: await getHeader(),
+    info: await getInfo(productKey),
+    gpm: await getGrossProfitMargin(),
+    npm: await getNetProfitMargin(),
+    clients: await getClients(productKey),
+    sold: await getSold(productKey),
+    stock: await getStock(productKey),
+    annualNetProfit: await getAnnualNetProfit(productKey),
   };
 };

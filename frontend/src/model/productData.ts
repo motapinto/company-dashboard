@@ -8,6 +8,7 @@ export interface ClientInfo {
 }
 
 export interface ProductData {
+  year: number,
   info: ProductInfo;
   gpm: Array<number>,
   npm: Array<number>,

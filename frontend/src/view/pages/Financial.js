@@ -47,11 +47,11 @@ const RenderFinancial = (data) => {
                 data: data.vatDeducted,
               },
             ]}
-            year={2019}
+            year={data.year}
           />
         </CCol>
         <CCol md="12" lg="6" className="d-flex align-items-stretch">
-          <ProfitMargin profitMargin={profitMargin} year={2019} />
+          <ProfitMargin profitMargin={profitMargin} year={data.year} />
         </CCol>
       </CRow>
       <CRow>
@@ -86,7 +86,7 @@ const RenderFinancial = (data) => {
               data: [data.balanceSheet.e],
             },
           ]}
-          year={2019}
+          year={data.year}
           />
         </CCol>
         <CCol md="7" className="d-flex align-items-stretch">
@@ -106,7 +106,7 @@ const RenderFinancial = (data) => {
               },
             ]}
             className="d-flex align-items-stretch"
-            year={2019}
+            year={data.year}
             ebitda={data.ebitda}
             ebitdaMargin={data.ebitdaMargin}
           />

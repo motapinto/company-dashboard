@@ -240,6 +240,8 @@ export default (server, db) => {
     });
   });
 
+  /* Below is code not ours that should be deleted soon */
+
   server.get("/sales/total-tax", (req, res) => {
     let startDate =
       "start-date" in req.query ? new Date(req.query["start-date"]) : null;
@@ -261,7 +263,6 @@ export default (server, db) => {
     });
   });
 
-  //Average sales value
   server.get("/sales/average-sales-value", (req, res) => {
     const { NumberOfEntries, TotalCredit } = db.SalesInvoicesInfo;
     const averageSalesValue = TotalCredit / NumberOfEntries;

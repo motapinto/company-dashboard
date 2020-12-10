@@ -1,9 +1,8 @@
 import BalanceSheet from '../../../model/balanceSheet'
 import { getBalanceSheet } from '../requests';
 
-export default async(year: number): Promise<BalanceSheet> => {
+const assembleBalanceSheet  = async(): Promise<BalanceSheet> => {
   const balanceSheet = (await getBalanceSheet()).data;
-  console.log(balanceSheet);
   
   return {
     nca: balanceSheet['Ativo']['Total do Ativo corrente'],
@@ -13,3 +12,5 @@ export default async(year: number): Promise<BalanceSheet> => {
     e: balanceSheet['Capital Próprio e Passivo']['Capital Próprio']['Total do Capital Próprio'],
   };
 };
+
+export default assembleBalanceSheet;

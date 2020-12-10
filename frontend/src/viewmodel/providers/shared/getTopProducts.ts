@@ -22,8 +22,8 @@ const getStatus = (isActive: boolean, isDeleted: boolean, isDraft: boolean) => {
   return "Inactive";
 };
 
-export default async (year: number): Promise<Array<ProductInfo>> => {
-  const jsonProducts = await getProductsRequest(year);
+export default async (): Promise<Array<ProductInfo>> => {
+  const jsonProducts = await getProductsRequest();
 
   const products = [];
 
@@ -59,7 +59,7 @@ export default async (year: number): Promise<Array<ProductInfo>> => {
     });
   }
 
-  const jsonOrders = await getOrdersRequest(year);
+  const jsonOrders = await getOrdersRequest();
 
   for (let i = 0; i < jsonOrders.data.length; i++) {
     const documentLines = jsonOrders.data[i].documentLines;
@@ -68,7 +68,7 @@ export default async (year: number): Promise<Array<ProductInfo>> => {
       const documentLine = documentLines[j];
 
       for (let k = 0; k < products.length; k++) {
-        if (products[k].productKey == documentLine.salesItem) {
+        if (products[k].productKey === documentLine.salesItem) {
           products[k].totalSold += documentLine.quantity;
           break;
         }

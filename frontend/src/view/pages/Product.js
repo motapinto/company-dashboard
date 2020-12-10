@@ -47,7 +47,7 @@ const RenderProduct = (data) => {
           <CCard className="w-100">
             <CCardHeader>
               <h4 className="card-title mb-0">Units in Stock</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <h4>{data.stock}</h4>
@@ -57,7 +57,7 @@ const RenderProduct = (data) => {
           <CCard className="w-100">
             <CCardHeader>
               <h4 className="card-title mb-0">Units Sold</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <h4>{data.sold}</h4>
@@ -67,7 +67,7 @@ const RenderProduct = (data) => {
           <CCard className="w-100">
             <CCardHeader>
               <h4 className="card-title mb-0">Annual Net Profit</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <h4>{data.annualNetProfit}%</h4>

@@ -79,7 +79,7 @@ const RenderProcurement = (data) => {
           <CCard>
             <CCardHeader>
               <h4 className="card-title mb-0">Number of Suppliers</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
 
             <CCardBody>
@@ -92,7 +92,7 @@ const RenderProcurement = (data) => {
           <CCard>
             <CCardHeader>
               <h4 className="card-title mb-0">Suppliers</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <SuppliersSpending
@@ -109,7 +109,7 @@ const RenderProcurement = (data) => {
           <CCard className="h-100">
             <CCardHeader>
               <h4 className="card-title mb-0">Supplier Quality Rating</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <ChartBarPercentage
@@ -124,7 +124,7 @@ const RenderProcurement = (data) => {
           <CCard className="h-100">
             <CCardHeader>
               <h4 className="card-title mb-0">Purchases in Time and Budget</h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <h4 className="mb-0">Total</h4>
@@ -143,7 +143,7 @@ const RenderProcurement = (data) => {
               <h4 className="card-title mb-0">
                 Purchase Order Cycle Time and Lead Time
               </h4>
-              <div className="small text-muted">{2019}</div>
+              <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
               <LineChart datasets={purchaseOrder} callback={yLabel} />

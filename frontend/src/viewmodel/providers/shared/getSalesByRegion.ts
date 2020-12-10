@@ -1,8 +1,8 @@
 import SalesRegionData from "../../../model/salesRegionData";
 import {getSalesByRegion} from "../requests";
 
-export const getSalesRegion = async(year: number): Promise<SalesRegionData> => {
-  const salesByRegionData = (await getSalesByRegion(year)).data;
+export const getSalesRegion = async(): Promise<SalesRegionData> => {
+  const salesByRegionData = (await getSalesByRegion()).data;
 
   return {
     // @ts-ignore

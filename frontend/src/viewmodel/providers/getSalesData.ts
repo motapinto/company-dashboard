@@ -2,7 +2,7 @@ import SalesData from "../../model/salesData";
 import getProfitMargin from "./shared/getProfitMargin";
 import getTopProducts from "./shared/getTopProducts";
 import { getSalesRegion } from "./shared/getSalesByRegion";
-import { getAOVRequest } from "./requests";
+import { getAOV, getHeader } from "./requests";
 
 const axios = require("axios").default;
 
@@ -12,21 +12,22 @@ axios.defaults.headers.common[
 ] = `Bearer ${process.env.REACT_APP_TOKEN}`;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
-const getCOGS = async (year: number): Promise<Array<number>> => {
+const assembleCOGS = async (): Promise<Array<number>> => {
   return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
 };
 
-const getAOV = async (year: number): Promise<Array<number>> => {
-  const request = await getAOVRequest(year);
+const assembleAOV = async (): Promise<Array<number>> => {
+  const request = await getAOV();
   return request.data.aov;
 };
 
-export default async (year: number): Promise<SalesData> => {
+export default async (): Promise<SalesData> => {
   return {
-    cogs: await getCOGS(year),
-    aov: await getAOV(year),
-    profitMargin: await getProfitMargin(year),
-    salesRegion: await getSalesRegion(year),
-    topProducts: await getTopProducts(year),
+    year: await getHeader(),
+    cogs: await assembleCOGS(),
+    aov: await assembleAOV(),
+    profitMargin: await getProfitMargin(),
+    salesRegion: await getSalesRegion(),
+    topProducts: await getTopProducts(),
   };
 };

@@ -43,19 +43,19 @@ const RenderSales = (data) => {
       </CRow>
       <CRow>
         <CCol md="6" lg="6" className="d-flex align-items-stretch">
-          <ProfitMargin profitMargin={profitMargin} year={2019} />
+          <ProfitMargin profitMargin={profitMargin} year={data.year} />
         </CCol>
         <CCol md="6" lg="6">
           <SalesRegion
             labels={data.salesRegion.regions}
             datasets={data.salesRegion.data}
-            year={2019}
+            year={data.year}
           />
         </CCol>
       </CRow>
       <TopProducts
         productsData={data.topProducts}
-        year={2019}
+        year={data.year}
       />
     </>
   );

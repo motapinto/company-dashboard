@@ -39,7 +39,7 @@ const refreshToken = async (): Promise<any> => {
   //axios.defaults.headers.common['Authorization'] = `${responseJson.data.token_type} ${responseJson.data.access_token}`;
 };
 
-export const getProductsRequest = async (year: number): Promise<any> => {
+export const getProductsRequest = async (): Promise<any> => {
   try {
     return await axios.get(jasminAPI + "/salescore/salesitems");
   } catch (e) {
@@ -48,7 +48,7 @@ export const getProductsRequest = async (year: number): Promise<any> => {
   }
 };
 
-export const getOrdersRequest = async (year: number): Promise<any> => {
+export const getOrdersRequest = async (): Promise<any> => {
   try {
     return await axios.get(jasminAPI + "/sales/orders");
   } catch (error) {
@@ -58,7 +58,7 @@ export const getOrdersRequest = async (year: number): Promise<any> => {
 
 export const getProductInfo = async (
   productKey: string,
-  year: number
+  
 ): Promise<any> => {
   try {
     return await axios.get(jasminAPI + "/salescore/salesitems/" + productKey);
@@ -70,7 +70,7 @@ export const getProductInfo = async (
 // SAF-T Requests
 export const getHeader = async () => {
   try {
-    return await axios.get(saftAPI + "/header/fiscal-year");
+    return (await axios.get(saftAPI + "/header/fiscal-year")).data;
   } catch (error) {
     console.error("Could not getHeader!");
   }
@@ -124,7 +124,7 @@ export const getTaxTableEntries = async () => {
   }
 };
 
-export const getSupplierSpending = async (year: number) => {
+export const getSupplierSpending = async () => {
   try {
     return await axios.get(saftAPI + "/Supplier/spending");
   } catch (error) {
@@ -132,10 +132,7 @@ export const getSupplierSpending = async (year: number) => {
   }
 };
 
-export const getSalesByRegion = async (year: number): Promise<any> => {
-  const startDate = year + "01-01";
-  const endDate = year + "12-31";
-
+export const getSalesByRegion = async (): Promise<any> => {
   try {
     return await axios.get(saftAPI + "/sales/sales-by-region");
   } catch (error) {
@@ -144,7 +141,7 @@ export const getSalesByRegion = async (year: number): Promise<any> => {
   }
 };
 
-export const getMonthlySales = async (year: number): Promise<any> => {
+export const getMonthlySales = async (): Promise<any> => {
   try {
     return await axios.get(saftAPI + "/sales/sales-summary");
   } catch (error) {
@@ -153,7 +150,7 @@ export const getMonthlySales = async (year: number): Promise<any> => {
   }
 };
 
-export const getAOVRequest = async (year: number): Promise<any> => {
+export const getAOV = async (): Promise<any> => {
   try {
     return await axios.get(saftAPI + "/sales/AOV");
   } catch (error) {

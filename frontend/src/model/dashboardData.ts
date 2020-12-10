@@ -5,6 +5,7 @@ import ProductInfo from "./productInfo";
 import SalesRegionData from "./salesRegionData";
 
 export default interface DashBoard {
+  year: number
   topProducts: Array<ProductInfo>;
   balanceSheet: BalanceSheet;
   overviewKpis: OverviewKpis;

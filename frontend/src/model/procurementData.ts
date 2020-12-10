@@ -16,6 +16,7 @@ export interface IntervalData {
 }
 
 export interface ProcurementData {
+  year: number,
   suppliers: Dataset;
   numberSuppliers: Array<Data>;
   supplierQuality: Dataset;

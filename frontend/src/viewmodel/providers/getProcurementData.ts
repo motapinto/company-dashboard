@@ -1,9 +1,9 @@
 import {ProcurementData, Dataset, Data, IntervalData} from "../../model/procurementData";
-import {getSupplierSpending} from "./requests";
+import {getHeader, getSupplierSpending} from "./requests";
 import {SpendingData} from "../../model/spendingData";
 
-const getSuppliers = async (year: number): Promise<Dataset> => {
-  const jsonRes = await getSupplierSpending(year);
+const getSuppliers = async (): Promise<Dataset> => {
+  const jsonRes = await getSupplierSpending();
 
   const suppliersData: Array<SpendingData> = jsonRes.data.sort((supplier1: any, supplier2: any) => supplier2.spending - supplier1.spending);
 
@@ -28,7 +28,7 @@ const getSuppliers = async (year: number): Promise<Dataset> => {
   };
 };
 
-const getNumberSuppliers = async (year: number): Promise<Array<Data>> => {
+const getNumberSuppliers = async (): Promise<Array<Data>> => {
   return [
     {
       label: "Short suppliers",
@@ -45,7 +45,7 @@ const getNumberSuppliers = async (year: number): Promise<Array<Data>> => {
   ];
 };
 
-const getSupplierQuality = async (year: number): Promise<Dataset> => {
+const getSupplierQuality = async (): Promise<Dataset> => {
   return {
     datasets: [
       {
@@ -70,7 +70,7 @@ const getSupplierQuality = async (year: number): Promise<Dataset> => {
   };
 };
 
-const getPurchaseOrder = async (year: number): Promise<Array<Data>> => {
+const getPurchaseOrder = async (): Promise<Array<Data>> => {
   return [
     {
       label: "Product Order Cycle Time (days)",
@@ -83,12 +83,7 @@ const getPurchaseOrder = async (year: number): Promise<Array<Data>> => {
   ];
 };
 
-const getPurchasesInTB = async (
-  year: number
-): Promise<{
-  totalPurchases: IntervalData;
-  categories: Array<IntervalData>;
-}> => {
+const getPurchasesInTB = async (): Promise<{ totalPurchases: IntervalData; categories: Array<IntervalData>;}> => {
   return {
     totalPurchases: {
       name: "",
@@ -125,12 +120,13 @@ const getPurchasesInTB = async (
   };
 };
 
-export default async (year: number): Promise<ProcurementData> => {
+export default async (): Promise<ProcurementData> => {
   return {
-    suppliers: await getSuppliers(year),
-    numberSuppliers: await getNumberSuppliers(year),
-    supplierQuality: await getSupplierQuality(year),
-    purchaseOrder: await getPurchaseOrder(year),
-    purchasesInTB: await getPurchasesInTB(year),
+    year: await getHeader(),
+    suppliers: await getSuppliers(),
+    numberSuppliers: await getNumberSuppliers(),
+    supplierQuality: await getSupplierQuality(),
+    purchaseOrder: await getPurchaseOrder(),
+    purchasesInTB: await getPurchasesInTB(),
   };
 };
