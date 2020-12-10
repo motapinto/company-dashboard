@@ -10,6 +10,7 @@ import {
 } from "@coreui/react";
 
 import { useHistory } from "react-router-dom";
+import {formatNumber} from "../pages/Procurement";
 
 const getBadge = (status) => {
   switch (status) {
@@ -53,7 +54,17 @@ export default ({ productsData, year }) => {
           onRowClick={(row) =>
             history.push(`/theme/products/${row.productKey}`)
           }
+          columnHeaderSlot={{
+            "price": (
+              <div className="d-inline text-center align-content-center pl-4">Price</div>
+            )
+          }}
           scopedSlots={{
+            price: (item) => (
+              <td className="align-content-end text-right pr-3">
+                {"$ " + formatNumber(item.price)}
+              </td>
+            ),
             status: (item) => (
               <td>
                 <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
