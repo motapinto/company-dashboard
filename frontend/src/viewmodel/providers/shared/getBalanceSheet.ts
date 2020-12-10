@@ -3,7 +3,8 @@ import { getBalanceSheet } from '../requests';
 
 export default async(year: number): Promise<BalanceSheet> => {
   const balanceSheet = (await getBalanceSheet()).data;
-
+  console.log(balanceSheet);
+  
   return {
     nca: balanceSheet['Ativo']['Total do Ativo corrente'],
     ca: balanceSheet['Ativo']['Total do Ativo não corrente'],
@@ -11,4 +12,4 @@ export default async(year: number): Promise<BalanceSheet> => {
     ncl: balanceSheet['Capital Próprio e Passivo']['Passivo']['Total do Passivo não corrente'],
     e: balanceSheet['Capital Próprio e Passivo']['Capital Próprio']['Total do Capital Próprio'],
   };
-}
+};

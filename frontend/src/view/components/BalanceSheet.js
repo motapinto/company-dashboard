@@ -8,8 +8,6 @@ export default ({
   balanceSheetLiabilitiesEquity,
   year,
 }) => {
-  console.log(balanceSheetAssets);
-  console.log(balanceSheetLiabilitiesEquity);
   return (
     <CCard className="w-100">
       <CCardHeader>

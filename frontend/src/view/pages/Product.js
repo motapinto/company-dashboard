@@ -11,7 +11,6 @@ const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 
 const RenderProduct = (data) => {
-  console.log(data);
   const profitMargin = [
     {
       label: "Gross Profit",

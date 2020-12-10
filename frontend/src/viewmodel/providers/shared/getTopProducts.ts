@@ -22,7 +22,7 @@ const getStatus = (isActive: boolean, isDeleted: boolean, isDraft: boolean) => {
   return "Inactive";
 };
 
-const getTopProducts = async (year: number): Promise<Array<ProductInfo>> => {
+export default async (year: number): Promise<Array<ProductInfo>> => {
   const jsonProducts = await getProductsRequest(year);
 
   const products = [];
@@ -78,5 +78,3 @@ const getTopProducts = async (year: number): Promise<Array<ProductInfo>> => {
 
   return products;
 };
-
-export default getTopProducts;

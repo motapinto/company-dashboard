@@ -7,8 +7,6 @@ import ResourceGetter from "../components/ResourceGetter";
 import getInventoryData from "../../viewmodel/providers/getInventoryData";
 
 const RenderInventory = (data) => {
-  console.log(data);
-
   const monthlyAvgTurn = {
     labels: [
       "January",

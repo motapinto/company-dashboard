@@ -19,12 +19,7 @@ const getInfo = async (
   productKey: string,
   year: number
 ): Promise<ProductInfo> => {
-  console.log(productKey);
-  console.log(year);
   const jsonProductInfo = await getProductInfo(productKey, year);
-
-  console.log(jsonProductInfo);
-
   const priceListLines = jsonProductInfo.data.priceListLines;
 
   const price =
@@ -34,8 +29,6 @@ const getInfo = async (
 
   let totalSold = 0;
   const jsonOrders = await getOrdersRequest(year);
-  console.log("here");
-  console.log(jsonOrders);
 
   for (let i = 0; i < jsonOrders.data.length; i++) {
     const documentLines = jsonOrders.data[i].documentLines;

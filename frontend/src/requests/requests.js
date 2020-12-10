@@ -9,7 +9,6 @@ axios.defaults.headers.common["Content-Type"] = "application/json";
 export const getOrders = async () => {
   try {
     const res = await axios.get(url + "/sales/orders");
-    console.log(res.data);
   } catch (err) {
     console.error(err);
   }
@@ -18,7 +17,6 @@ export const getOrders = async () => {
 export const getExpenses = async () => {
   try {
     const res = await axios.get(url + "/invoiceReceipt/expenses");
-    console.log(res.data);
   } catch (err) {
     console.error(err);
   }

@@ -24,7 +24,6 @@ const refreshToken = async (): Promise<any> => {
       body: formData
   })
 
-  console.log(responseJson)
   //axios.defaults.headers.common['Authorization'] = `${responseJson.data.token_type} ${responseJson.data.access_token}`;
 }
 
@@ -33,7 +32,6 @@ export const getProductsRequest = async (year: number): Promise<any> => {
     return await axios.get(jasminAPI + '/salescore/salesitems')
   } catch (e) {
     /*await refreshToken();
-    console.log(axios.defaults.headers.common)
     return await axios.get(url + '/salescore/salesitems');*/
   }
 }
@@ -68,7 +66,7 @@ export const getHeader = async () => {
 
 export const getBalanceSheet = async () => {
   try {
-    return await axios.get(saftAPI + '/GeneralAccounts/balanceSheet');
+    return await axios.get(saftAPI + '/balanceSheet');
   } catch (error) {
     console.error('Could not getBalanceSheet!');
   }

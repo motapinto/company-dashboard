@@ -4,7 +4,6 @@ import {SpendingData} from "../../model/spendingData";
 
 const getSuppliers = async (year: number): Promise<Dataset> => {
   const jsonRes = await getSupplierSpending(year);
-  console.log(jsonRes);
 
   const suppliersData: Array<SpendingData> = jsonRes.data.sort((supplier1: any, supplier2: any) => supplier2.spending - supplier1.spending);
 
