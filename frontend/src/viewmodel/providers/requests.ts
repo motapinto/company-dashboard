@@ -148,7 +148,16 @@ export const getMonthlySales = async (year: number): Promise<any> => {
   try {
     return await axios.get(saftAPI + "/sales/sales-summary");
   } catch (error) {
-    console.error("Could not get sales by region!");
+    console.error("Could not get sales summary!");
+    return [];
+  }
+};
+
+export const getAOVRequest = async (year: number): Promise<any> => {
+  try {
+    return await axios.get(saftAPI + "/sales/AOV");
+  } catch (error) {
+    console.error("Could not get aov!");
     return [];
   }
 };

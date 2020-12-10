@@ -169,6 +169,43 @@ export default (server, db) => {
     res.json(regions);
   });
 
+  server.get("/sales/AOV", (req, res) => {
+    let aov = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let orderCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    db.GeneralLedgerEntries.Journal.forEach((journal) => {
+      journal.Transaction.forEach((transaction) => {
+        const customer = transaction.CustomerID;
+        let transactionDate = new Date(transaction.TransactionDate);
+
+        if (
+          customer != null &&
+          customer != undefined &&
+          transaction.Lines.DebitLine != undefined
+        ) {
+          if (transaction.Lines.DebitLine.hasOwnProperty("RecordID")) {
+            aov[transactionDate.getMonth()] +=
+              transaction.Lines.DebitLine.DebitAmount;
+            orderCount[transactionDate.getMonth()]++;
+          } else {
+            transaction.Lines.DebitLine.forEach((debitLine) => {
+              aov[transactionDate.getMonth()] += debitLine.DebitAmount;
+              orderCount[transactionDate.getMonth()]++;
+            });
+          }
+        }
+      });
+    });
+
+    for (let i = 0; i < aov.length; i++) {
+      aov[i] = aov[i] / orderCount[i];
+    }
+
+    res.json({
+      aov: aov,
+    });
+  });
+
   server.get("/sales/sales-summary", (req, res) => {
     let monthlySales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 

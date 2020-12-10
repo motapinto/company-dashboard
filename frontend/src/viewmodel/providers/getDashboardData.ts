@@ -16,10 +16,8 @@ axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const getSales = async (year: number): Promise<Data> => {
   const salesByRegionData = (await getMonthlySales(year)).data;
-  console.log(salesByRegionData);
   return {
     label: "Montly Sales",
-
     data: salesByRegionData.monthlySales,
   };
 };
