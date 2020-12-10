@@ -3,7 +3,7 @@ import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
 import MoneyFormat from "../utils/MoneyFormat";
 
-export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
+export default ({ balanceSheetAssets, balanceSheetLiabilitiesEquity, year }) => {
   return (
     <CCard className="w-100">
       <CCardHeader>
@@ -16,7 +16,7 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
             <h4>
               {"$ "}
               {MoneyFormat(
-                balanceSheetAssets[0].data[0] + balanceSheetAssets[1].data[0]
+                balanceSheetAssets[0] + balanceSheetAssets[1]
               )}
             </h4>
           </CCol>
@@ -25,7 +25,7 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
             <h4>
               {"$ "}
               {MoneyFormat(
-                balanceSheetEquity[0].data[0] + balanceSheetEquity[1].data[0]
+                balanceSheetLiabilitiesEquity[0] + balanceSheetLiabilitiesEquity[1]
               )}
             </h4>
           </CCol>
@@ -53,11 +53,11 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
                     {
                       ticks: {
                         max: Math.max(
-                          balanceSheetAssets[0].data[0] +
-                            balanceSheetAssets[1].data[0],
-                          balanceSheetEquity[0].data[0] +
-                            balanceSheetEquity[1].data[0] +
-                            balanceSheetEquity[2].data[0]
+                          balanceSheetAssets[0] +
+                            balanceSheetAssets[1],
+                          balanceSheetLiabilitiesEquity[0] +
+                            balanceSheetLiabilitiesEquity[1] +
+                            balanceSheetLiabilitiesEquity[2]
                         ),
                       },
                       beginAtZero: true,
@@ -78,7 +78,7 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
               className="h-100"
               type="bar"
               labels={["Equity $ Liabilities"]}
-              datasets={balanceSheetEquity}
+              datasets={balanceSheetLiabilitiesEquity}
               options={{
                 maintainAspectRatio: false,
                 legend: {
@@ -95,8 +95,8 @@ export default ({ balanceSheetAssets, balanceSheetEquity, year }) => {
                     {
                       ticks: {
                         max:
-                          balanceSheetAssets[0].data[0] +
-                          balanceSheetAssets[1].data[0],
+                          balanceSheetAssets[0] +
+                          balanceSheetAssets[1],
                       },
                       beginAtZero: true,
                       display: false,

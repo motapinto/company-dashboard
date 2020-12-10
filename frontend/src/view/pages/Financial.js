@@ -29,7 +29,7 @@ const RenderFinancial = (data) => {
       data: data.profitMargin.netProfit,
     },
   ];
-
+  
   return (
     <>
       <CRow>

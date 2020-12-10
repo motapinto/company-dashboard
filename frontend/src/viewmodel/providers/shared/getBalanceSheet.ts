@@ -1,33 +1,14 @@
 import BalanceSheet from '../../../model/balanceSheet'
+import { getBalanceSheet } from '../requests';
 
-const getNonCurrentAssets = async(year: number): Promise<Array<number>> => {
-  return [8223232];
-}
+export default async(year: number): Promise<BalanceSheet> => {
+  const balanceSheet = (await getBalanceSheet()).data;
 
-const getCurrentAssets = async(year: number): Promise<Array<number>> => {
-  return [4343433];
-}
-
-const getCurrentLiabilities = async(year: number): Promise<Array<number>> => {
-  return [3123121];
-}
-
-const getNonCurrentLiabilities = async(year: number): Promise<Array<number>> => {
-  return [2323323];
-}
-
-const getEquity = async(year: number): Promise<Array<number>> => {
-  return [2323323];
-}
-
-const getBalanceSheet = async(year: number): Promise<BalanceSheet> => {
   return {
-    nca: await getNonCurrentAssets(year),
-    ca: await getCurrentAssets(year),
-    cl: await getCurrentLiabilities(year),
-    ncl: await getNonCurrentLiabilities(year),
-    e: await getEquity(year),
+    nca: balanceSheet['Ativo']['Total do Ativo corrente'],
+    ca: balanceSheet['Ativo']['Total do Ativo não corrente'],
+    cl: balanceSheet['Capital Próprio e Passivo']['Passivo']['Total do Passivo corrente'],
+    ncl: balanceSheet['Capital Próprio e Passivo']['Passivo']['Total do Passivo não corrente'],
+    e: balanceSheet['Capital Próprio e Passivo']['Capital Próprio']['Total do Capital Próprio'],
   };
 }
-
-export default getBalanceSheet;

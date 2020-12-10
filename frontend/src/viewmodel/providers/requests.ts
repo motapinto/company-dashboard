@@ -60,13 +60,17 @@ export const getProductInfo = async (
 // SAF-T Requests
 export const getHeader = async () => {
   try {
-    console.log('dasdsasad');
-    console.log(saftAPI + '/header/fiscal-year');
-    console.log(await axios.get(saftAPI + '/header/fiscal-year'));
-
     return await axios.get(saftAPI + '/header/fiscal-year');
   } catch (error) {
     console.error('Could not getHeader!');
+  }
+}
+
+export const getBalanceSheet = async () => {
+  try {
+    return await axios.get(saftAPI + '/GeneralAccounts/balanceSheet');
+  } catch (error) {
+    console.error('Could not getBalanceSheet!');
   }
 }
 

@@ -1,7 +1,7 @@
 export default interface BalanceSheet {
-  nca: Array<number>,
-  ca: Array<number>,
-  cl: Array<number>,
-  ncl: Array<number>,
-  e: Array<number>,
+  nca: number,
+  ca: number,
+  cl: number,
+  ncl: number,
+  e: number,
 }

@@ -47,7 +47,7 @@ const RenderDashboard = (data) => {
                 data: data.balanceSheet.ca,
               },
             ]}
-            balanceSheetEquity={[
+            balanceSheetLiabilitiesEquity={[
               {
                 label: "CL",
                 backgroundColor: "#680C07",
