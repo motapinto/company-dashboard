@@ -130,6 +130,40 @@ export default (server, db) => {
 
       switch (accountTaxCode) {
         case 165:
+        case 166:
+        case 167:
+        case 171:
+        case 172:
+        case 173:
+        case 174:
+        case 175:
+        case 176:
+        case 183:
+        case 184:
+        case 187:
+        case 188:
+        case 189:
+        case 193:
+        case 209:
+        case 210:
+        case 211:
+        case 212:
+        case 213:
+        case 168:
+        case 169:
+        case 170:
+        case 177:
+        case 178:
+        case 179:
+        case 180:
+        case 181:
+        case 182:
+        case 185:
+        case 186:
+        case 190:
+        case 191:
+        case 192:
+        case 194:
           inventory +=
             account.OpeningDebitBalance -
             account.OpeningCreditBalance -
