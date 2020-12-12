@@ -3,13 +3,10 @@ import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
 import MoneyFormat from "../utils/MoneyFormat";
 
-export default ({
-  cost,
-  revenue,
-  ebitda,
-  ebitdaMargin,
-  year,
-}) => {
+export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
+  console.log(expenses[0].data);
+  console.log(revenue[0].data);
+  console.log(ebitda);
   return (
     <CCard className="w-100">
       <CCardHeader>
@@ -21,10 +18,10 @@ export default ({
           <CCol md="12" lg="9">
             <CRow>
               <CCol className="justify-content-center text-center">
-                <h4>$ {MoneyFormat(revenue[0].data[0])}</h4>
+                <h4>$ {MoneyFormat(revenue[0].data)}</h4>
               </CCol>
               <CCol className="justify-content-center text-center">
-                <h4>$ {MoneyFormat(cost[0].data[0])}</h4>
+                <h4>$ {MoneyFormat(expenses[0].data)}</h4>
               </CCol>
             </CRow>
             <CRow>
@@ -32,7 +29,7 @@ export default ({
                 <CChartBar
                   className="h-100"
                   type="bar"
-                  labels={["Assets"]}
+                  labels={["Revenue"]}
                   datasets={revenue}
                   options={{
                     maintainAspectRatio: false,
@@ -50,8 +47,8 @@ export default ({
                         {
                           ticks: {
                             max: Math.max(
-                              cost[0].data[0],
-                              revenue[0].data[0]
+                              expenses[0].data,
+                              revenue[0].data
                             ),
                           },
                           beginAtZero: true,
@@ -70,8 +67,8 @@ export default ({
                 <CChartBar
                   className="h-100"
                   type="bar"
-                  labels={["Assets"]}
-                  datasets={cost}
+                  labels={["Expenses"]}
+                  datasets={expenses}
                   options={{
                     maintainAspectRatio: false,
                     legend: {
@@ -88,8 +85,8 @@ export default ({
                         {
                           ticks: {
                             max: Math.max(
-                              cost[0].data[0],
-                              revenue[0].data[0]
+                              expenses[0].data,
+                              revenue[0].data
                             ),
                           },
                           beginAtZero: true,
@@ -110,7 +107,7 @@ export default ({
                 <h4>Revenue</h4>
               </CCol>
               <CCol className="justify-content-center text-center">
-                <h4>Cost</h4>
+                <h4>expenses</h4>
               </CCol>
             </CRow>
           </CCol>

@@ -1,5 +1,5 @@
 export default (server, db) => {
-  server.get("/balanceSheet", (req, res) => {
+  server.get("/balanceSheet", (_req, res) => {
     let balanceSheet = {
       Ativo: {
         "Ativo não corrente": {

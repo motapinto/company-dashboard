@@ -1,5 +1,3 @@
-import {convertToJson} from "fast-xml-parser";
-
 export default (server, db) => {
     server.get('/Supplier/spending', (req, res) => {
         const suppliers = [];

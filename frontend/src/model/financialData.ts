@@ -8,7 +8,7 @@ export default interface FinancialData {
   profitMargin: ProfitMargin,
   balanceSheet: BalanceSheet
   revenue: Array<number>,
-  cost: Array<number>,
+  expenses: Array<number>,
   ebitda: number,
   ebitdaMargin: number,
 }

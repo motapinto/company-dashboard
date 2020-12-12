@@ -182,4 +182,11 @@ export const getSGT = async (): Promise<any> => {
   }
 };
 
-// getHeader();
+export const getRevenueAndExpenses = async (): Promise<any> => {
+  try {
+    return await axios.get(saftAPI + "/revenueAndExpenses");
+  } catch (error) {
+    console.error("Could not get revenue and expenses!");
+    return [];
+  }
+};

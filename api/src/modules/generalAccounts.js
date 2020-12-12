@@ -1,3 +1,27 @@
+export const getGrossSales = (journals) => {
+  let sales = 0;
+
+  journals.forEach((journal) => {
+    journal.Transaction.forEach((transaction) => {
+      const customer = transaction.CustomerID;
+      if (
+        customer != null &&
+        customer != undefined &&
+        transaction.Lines.DebitLine != undefined
+      ) {
+        if (transaction.Lines.DebitLine.hasOwnProperty("RecordID")) {
+          sales += transaction.Lines.DebitLine.DebitAmount;
+        } else {
+          transaction.Lines.DebitLine.forEach((debitLine) => {
+            sales += debitLine.DebitAmount;
+          });
+        }
+      }
+    });
+  });
+};
+
+
 export default (server, db) => {
   server.get("/GeneralAccounts/GroupingCategory/:filter", (req, res) => {
     let accounts = db.GeneralLedgerAccounts.Account.filter(
@@ -98,28 +122,6 @@ export default (server, db) => {
     };
   }
 
-  function getGrossSales() {
-    let sales = 0;
-
-    db.GeneralLedgerEntries.Journal.forEach((journal) => {
-      journal.Transaction.forEach((transaction) => {
-        const customer = transaction.CustomerID;
-        if (
-          customer != null &&
-          customer != undefined &&
-          transaction.Lines.DebitLine != undefined
-        ) {
-          if (transaction.Lines.DebitLine.hasOwnProperty("RecordID")) {
-            sales += transaction.Lines.DebitLine.DebitAmount;
-          } else {
-            transaction.Lines.DebitLine.forEach((debitLine) => {
-              sales += debitLine.DebitAmount;
-            });
-          }
-        }
-      });
-    });
-
     /* Using taxonomy codes are all 0 for the entries necessary to produce gross sales total
     db.GeneralLedgerAccounts.Account.forEach((account) => {
       const accountId = account.AccountID;
@@ -167,14 +169,14 @@ export default (server, db) => {
           sales -= accountBal;
           break;
       }
-    });*/
+    });
 
     return sales;
-  }
+  }*/
 
   server.get("/GeneralAccounts/GrossTotal", (req, res) => {
     res.json({
-      grossTotal: getGrossSales(),
+      grossTotal: getGrossSales(db.GeneralLedgerEntries.Journal),
     });
   });
 

@@ -91,16 +91,16 @@ const RenderFinancial = (data) => {
         </CCol>
         <CCol md="7" className="d-flex align-items-stretch">
           <ProfitAndLoss
-            cost={[
+            expenses={[
               {
-                label: "O",
+                label: "Expenses",
                 backgroundColor: "#f87979",
-                data: data.cost,
+                data: data.expenses,
               },
             ]}
             revenue={[
               {
-                label: "R",
+                label: "Revenue",
                 backgroundColor: "#4dbd74",
                 data: data.revenue,
               },
