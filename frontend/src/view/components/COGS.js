@@ -4,18 +4,18 @@ import ChartBarSimple from "../charts/ChartBarSimple";
 import MoneyFormat from "../utils/MoneyFormat";
 import ChartLineSimple from "../charts/ChartLineSimple";
 
-export default ({ dataset }) => {
+export default ({ cogs }) => {
   return (
     <CWidgetDropdown
       color="dark"
       className="w-100"
-      header={"$ " + MoneyFormat(dataset.reduce((a, b) => a + b, 0))}
+      header={"$ " + MoneyFormat(cogs)}
       text="Cost of Goods Sold"
       footerSlot={
         <ChartBarSimple
-          style={{height: "70px"}}
+          style={{ height: "70px" }}
           backgroundColor="danger"
-          dataPoints={dataset}
+          dataPoints={[78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56]}
           pointHoverBackgroundColor="danger"
           label="COGS"
           labels={[

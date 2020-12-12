@@ -2,7 +2,7 @@ import SalesData from "../../model/salesData";
 import getProfitMargin from "./shared/getProfitMargin";
 import getTopProducts from "./shared/getTopProducts";
 import { getSalesRegion } from "./shared/getSalesByRegion";
-import { getAOV, getHeader } from "./requests";
+import { getAOV, getCOGS, getHeader } from "./requests";
 
 const axios = require("axios").default;
 
@@ -13,7 +13,8 @@ axios.defaults.headers.common[
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const assembleCOGS = async (): Promise<Array<number>> => {
-  return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
+  const request = await getCOGS();
+  return request.data.cogs;
 };
 
 const assembleAOV = async (): Promise<Array<number>> => {

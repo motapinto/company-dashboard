@@ -35,7 +35,7 @@ const RenderSales = (data) => {
     <>
       <CRow>
         <CCol sm="6" lg="6" className="d-flex align-items-stretch">
-          <COGS dataset={data.cogs} />
+          <COGS cogs={data.cogs} />
         </CCol>
         <CCol sm="6" lg="6" className="d-flex align-items-stretch">
           <AOV dataset={data.aov} />
@@ -53,10 +53,7 @@ const RenderSales = (data) => {
           />
         </CCol>
       </CRow>
-      <TopProducts
-        productsData={data.topProducts}
-        year={data.year}
-      />
+      <TopProducts productsData={data.topProducts} year={data.year} />
     </>
   );
 };

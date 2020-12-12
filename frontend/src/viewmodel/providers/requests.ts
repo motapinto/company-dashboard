@@ -56,10 +56,7 @@ export const getOrdersRequest = async (): Promise<any> => {
   }
 };
 
-export const getProductInfo = async (
-  productKey: string,
-  
-): Promise<any> => {
+export const getProductInfo = async (productKey: string): Promise<any> => {
   try {
     return await axios.get(jasminAPI + "/salescore/salesitems/" + productKey);
   } catch (error) {
@@ -155,6 +152,15 @@ export const getAOV = async (): Promise<any> => {
     return await axios.get(saftAPI + "/sales/AOV");
   } catch (error) {
     console.error("Could not get aov!");
+    return [];
+  }
+};
+
+export const getCOGS = async (): Promise<any> => {
+  try {
+    return await axios.get(saftAPI + "/GeneralAccounts/COGS");
+  } catch (error) {
+    console.error("Could not get COGS!");
     return [];
   }
 };
