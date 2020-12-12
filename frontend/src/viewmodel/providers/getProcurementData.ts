@@ -1,8 +1,8 @@
-import {ProcurementData, Dataset, Data, IntervalData} from "../../model/procurementData";
-import {getHeader, getSupplierSpending} from "./requests";
+import {ProcurementData, Dataset, Data, IntervalData, QualityRatingData} from "../../model/procurementData";
+import {getHeader, getSupplierQualityRatings, getSupplierSpending} from "./requests";
 import {SpendingData} from "../../model/spendingData";
 
-const getSuppliers = async (): Promise<Dataset> => {
+const getSuppliers = async (): Promise<{suppliers: Dataset, numberSuppliers: Array<Data>}> => {
   const jsonRes = await getSupplierSpending();
 
   const suppliersData: Array<SpendingData> = jsonRes.data.sort((supplier1: any, supplier2: any) => supplier2.spending - supplier1.spending);
@@ -18,55 +18,70 @@ const getSuppliers = async (): Promise<Dataset> => {
     ]
   };
 
+  const longTerm = []
+  suppliersData.forEach((spendingData) => {
+    if(spendingData.spending > 100000)
+      longTerm.push(spendingData);
+  });
+
+  const mediumTerm = []
+  suppliersData.forEach((spendingData) => {
+    if(spendingData.spending > 1000 && spendingData.spending <= 100000)
+      mediumTerm.push(spendingData);
+  });
+
+  const shortTerm = []
+  suppliersData.forEach((spendingData) => {
+    if(spendingData.spending < 1000)
+      shortTerm.push(spendingData);
+  });
+
+
+
   return {
-    labels: suppliers.names,
-    datasets: [
+    suppliers: {
+      labels: suppliers.names,
+      datasets: [
+        {
+          data: suppliers.spending,
+        },
+      ],
+    },
+    numberSuppliers: [
       {
-        data: suppliers.spending,
+        label: "Low transactions",
+        data: [shortTerm.length],
       },
-    ],
+      {
+        label: "Medium transactions",
+        data: [mediumTerm.length],
+      },
+      {
+        label: "High transactions",
+        data: [longTerm.length],
+      },
+    ]
   };
 };
 
-const getNumberSuppliers = async (): Promise<Array<Data>> => {
-  return [
-    {
-      label: "Short suppliers",
-      data: [40],
-    },
-    {
-      label: "Medium suppliers",
-      data: [25],
-    },
-    {
-      label: "Long suppliers",
-      data: [70],
-    },
-  ];
-};
-
 const getSupplierQuality = async (): Promise<Dataset> => {
+  const supplierQualityRating: Array<QualityRatingData> = (await getSupplierQualityRatings()).data;
+
+  console.log( supplierQualityRating.slice(0, 12).map((qualityRatingData) => {
+    return qualityRatingData.qualityRating
+  }))
   return {
     datasets: [
       {
         label: "Supplier Quality Rating",
-        data: [40, 20, 13, 40, 10, 40, 38, 80, 40, 20, 14, 11],
+        data: supplierQualityRating.slice(0, 12).map((qualityRatingData) => {
+          return qualityRatingData.qualityRating * 100
+        }),
       },
     ],
-    labels: [
-      "AGC",
-      "Brembo",
-      "ZF",
-      "Fisher",
-      "Sika",
-      "akg",
-      "IRL",
-      "MOB",
-      "WES",
-      "AWS",
-      "TES",
-      "MJG",
-    ],
+    labels: supplierQualityRating.slice(0, 12).map((qualityRatingData) => {
+      return qualityRatingData.companyName.slice(0, 10)
+    }),
   };
 };
 
@@ -83,7 +98,10 @@ const getPurchaseOrder = async (): Promise<Array<Data>> => {
   ];
 };
 
-const getPurchasesInTB = async (): Promise<{ totalPurchases: IntervalData; categories: Array<IntervalData>;}> => {
+const getPurchasesInTB = async (): Promise<{
+  totalPurchases: IntervalData;
+  categories: Array<IntervalData>;
+}> => {
   return {
     totalPurchases: {
       name: "",
@@ -120,11 +138,13 @@ const getPurchasesInTB = async (): Promise<{ totalPurchases: IntervalData; categ
   };
 };
 
-export default async (): Promise<ProcurementData> => {
+export default async (year: number): Promise<ProcurementData> => {
+  const supplierData = await getSuppliers();
+
   return {
     year: await getHeader(),
-    suppliers: await getSuppliers(),
-    numberSuppliers: await getNumberSuppliers(),
+    suppliers: supplierData.suppliers,
+    numberSuppliers: supplierData.numberSuppliers,
     supplierQuality: await getSupplierQuality(),
     purchaseOrder: await getPurchaseOrder(),
     purchasesInTB: await getPurchasesInTB(),

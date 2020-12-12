@@ -1,7 +1,6 @@
 import React from "react";
 
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
-import { CChartDoughnut } from "@coreui/react-chartjs";
 import LineChart from "../components/LineChart";
 import { getStyle, hexToRgba } from "@coreui/utils/src";
 import ChartBarPercentage from "../charts/ChartBarPercentage";
@@ -78,7 +77,7 @@ const RenderProcurement = (data) => {
         <CCol sm="6" lg="6">
           <CCard>
             <CCardHeader>
-              <h4 className="card-title mb-0">Number of Suppliers</h4>
+              <h4 className="card-title mb-0">Types of Suppliers</h4>
               <div className="small text-muted">{data.year}</div>
             </CCardHeader>
 

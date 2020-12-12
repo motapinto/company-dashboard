@@ -129,6 +129,14 @@ export const getSupplierSpending = async () => {
   }
 };
 
+export const getSupplierQualityRatings = async () => {
+  try {
+    return await axios.get(saftAPI + "/Supplier/quality");
+  } catch (error) {
+    console.error("Could not get Suppliers quality!");
+  }
+};
+
 export const getSalesByRegion = async (): Promise<any> => {
   try {
     return await axios.get(saftAPI + "/sales/sales-by-region");

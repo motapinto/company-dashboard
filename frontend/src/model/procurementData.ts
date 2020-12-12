@@ -26,3 +26,10 @@ export interface ProcurementData {
   };
   purchaseOrder: Array<Data>;
 }
+
+export interface QualityRatingData {
+  companyName: string;
+  accountID: number;
+  qualityRating: number;
+}
+

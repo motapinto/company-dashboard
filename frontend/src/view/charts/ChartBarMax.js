@@ -8,13 +8,6 @@ const ChartBarMax = (attributes) => {
         yAxes: [
           {
             ticks: {
-              max:
-                Math.max.apply(
-                  Math,
-                  datasets.map((element) => {
-                    return element.data[0];
-                  })
-                ) + 10,
               beginAtZero: true,
             },
           },
