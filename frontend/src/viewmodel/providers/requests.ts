@@ -165,4 +165,13 @@ export const getCOGS = async (): Promise<any> => {
   }
 };
 
+export const getSGT = async (): Promise<any> => {
+  try {
+    return await axios.get(saftAPI + "/GeneralAccounts/GrossTotal");
+  } catch (error) {
+    console.error("Could not get COGS!");
+    return [];
+  }
+};
+
 // getHeader();

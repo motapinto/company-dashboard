@@ -98,6 +98,32 @@ export default (server, db) => {
     };
   }
 
+  server.get("/GeneralAccounts/GrossTotal", (req, res) => {
+    let sales = 0;
+
+    db.GeneralLedgerEntries.Journal.forEach((journal) => {
+      journal.Transaction.forEach((transaction) => {
+        const customer = transaction.CustomerID;
+        if (
+          customer != null &&
+          customer != undefined &&
+          transaction.Lines.DebitLine != undefined
+        ) {
+          if (transaction.Lines.DebitLine.hasOwnProperty("RecordID")) {
+            sales += transaction.Lines.DebitLine.DebitAmount;
+          } else {
+            transaction.Lines.DebitLine.forEach((debitLine) => {
+              sales += debitLine.DebitAmount;
+            });
+          }
+        }
+      });
+    });
+    res.json({
+      grossTotal: sales,
+    });
+  });
+
   server.get("/GeneralAccounts/COGS", (req, res) => {
     let inventory = 0;
     let purchased = 0;
