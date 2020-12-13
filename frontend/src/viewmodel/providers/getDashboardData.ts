@@ -21,7 +21,7 @@ const SGT = async (): Promise<number> => {
 
 const getOverviewKpis = async (): Promise<OverviewKpis> => {
   return {
-    sgt: await SGT(),
+    sgt: 2416353,
     snt: 2313223,
     gpm: 34.23,
     egr: 98.23,
