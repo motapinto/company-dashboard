@@ -4,7 +4,7 @@ import { getStyle, hexToRgba } from "@coreui/utils/src";
 import VatPaidDeducted from "../components/VatPaidDeducted";
 import ProfitMargin from "../components/ProfitMargin";
 import BalanceSheet from "../components/BalanceSheet";
-import ProfitAndLoss from "../components/ProfitAndLoss";
+import RevenueAndExpenses from "../components/RevenueAndExpenses";
 import GetFinancialData from "../../viewmodel/providers/getFinancialData";
 import ResourceGetter from "../components/ResourceGetter";
 const brandSuccess = getStyle("success") || "#4dbd74";
@@ -90,7 +90,7 @@ const RenderFinancial = (data) => {
           />
         </CCol>
         <CCol md="7" className="d-flex align-items-stretch">
-          <ProfitAndLoss
+          <RevenueAndExpenses
             expenses={[
               {
                 label: "Expenses",

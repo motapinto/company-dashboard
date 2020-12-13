@@ -11,10 +11,6 @@ const getVatDeducted = async (): Promise<Array<number>> => {
   return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
 };
 
-const getEbidtaMargin = async(): Promise<number> => {
-  return 21;
-}
-
 export default async (): Promise<FinancialData> => {
   const revenueAndLosses = (await getRevenueAndExpenses()).data;
   
@@ -27,6 +23,6 @@ export default async (): Promise<FinancialData> => {
     revenue: revenueAndLosses.revenue,
     expenses: revenueAndLosses.expenses,
     ebitda: revenueAndLosses.ebitda,
-    ebitdaMargin: await getEbidtaMargin(),
+    ebitdaMargin: revenueAndLosses.ebitdaMargin,
   };
 };
