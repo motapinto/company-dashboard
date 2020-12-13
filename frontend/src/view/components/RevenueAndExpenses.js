@@ -7,7 +7,7 @@ export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
   return (
     <CCard className="w-100">
       <CCardHeader>
-        <h4 className="card-title mb-0">Profit and Loss</h4>
+        <h4 className="card-title mb-0">Revenue and Expenses</h4>
         <div className="small text-muted">{year}</div>
       </CCardHeader>
       <CCardBody>
@@ -109,10 +109,10 @@ export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
             </CRow>
           </CCol>
           <CCol md="12" lg="3" className="d-none d-lg-block">
-            <h4>EBITDA</h4>
-            <h4>$ {MoneyFormat(ebitda)}</h4>
-            <h4>EBITDA Margin</h4>
-            <h4>{ebitdaMargin}%</h4>
+            <h5>EBITDA</h5>
+            <h5>$ {MoneyFormat(ebitda)}</h5>
+            <h5>EBITDA Margin</h5>
+            <h5>{ebitdaMargin.toFixed(2)}%</h5>
           </CCol>
         </CRow>
       </CCardBody>
