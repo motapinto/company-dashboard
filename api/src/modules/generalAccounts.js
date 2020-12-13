@@ -98,7 +98,7 @@ export default (server, db) => {
     };
   }
 
-  server.get("/GeneralAccounts/GrossTotal", (req, res) => {
+  function getGrossSales() {
     let sales = 0;
 
     db.GeneralLedgerEntries.Journal.forEach((journal) => {
@@ -119,8 +119,62 @@ export default (server, db) => {
         }
       });
     });
+
+    /* Using taxonomy codes are all 0 for the entries necessary to produce gross sales total
+    db.GeneralLedgerAccounts.Account.forEach((account) => {
+      const accountId = account.AccountID;
+      let accountTaxCode = account.TaxonomyCode;
+      const accountGroupingCat = account.GroupingCategory;
+
+      if (accountTaxCode === undefined) return;
+
+      if (accountGroupingCat !== "GM") {
+        console.log("> Unexpected Grouping Category:", accountGroupingCat);
+        return;
+      }
+
+      const accountDebit = parseFloat(
+        account.ClosingDebitBalance - account.OpeningDebitBalance
+      );
+      const accountCredit = parseFloat(
+        account.ClosingCreditBalance - account.OpeningCreditBalance
+      );
+      const accountBal = Math.abs(accountDebit - accountCredit);
+      const isSaldoDevedor = accountDebit > accountCredit;
+
+      if (accountBal === 0) return;
+
+      //TAX SNC 506+507+508+509+/-510-511-512+513+514+515+516+/-517-518
+
+      accountTaxCode = parseInt(accountTaxCode);
+
+      switch (accountTaxCode) {
+        case 506:
+        case 507:
+        case 508:
+        case 509:
+        case 510:
+        case 513:
+        case 514:
+        case 515:
+        case 516:
+        case 517:
+          sales += accountBal;
+          break;
+        case 511:
+        case 512:
+        case 518:
+          sales -= accountBal;
+          break;
+      }
+    });*/
+
+    return sales;
+  }
+
+  server.get("/GeneralAccounts/GrossTotal", (req, res) => {
     res.json({
-      grossTotal: sales,
+      grossTotal: getGrossSales(),
     });
   });
 
