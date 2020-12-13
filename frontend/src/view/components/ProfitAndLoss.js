@@ -4,9 +4,6 @@ import { CChartBar } from "@coreui/react-chartjs";
 import MoneyFormat from "../utils/MoneyFormat";
 
 export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
-  console.log(expenses[0].data);
-  console.log(revenue[0].data);
-  console.log(ebitda);
   return (
     <CCard className="w-100">
       <CCardHeader>
@@ -61,7 +58,7 @@ export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
                       enabled: true,
                     },
                   }}
-                ></CChartBar>
+                />
               </CCol>
               <CCol style={{ height: "20rem" }} className="text-center">
                 <CChartBar
@@ -99,7 +96,7 @@ export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
                       enabled: true,
                     },
                   }}
-                ></CChartBar>
+                />
               </CCol>
             </CRow>
             <CRow>
@@ -107,7 +104,7 @@ export default ({ expenses, revenue, ebitda, ebitdaMargin, year }) => {
                 <h4>Revenue</h4>
               </CCol>
               <CCol className="justify-content-center text-center">
-                <h4>expenses</h4>
+                <h4>Expenses</h4>
               </CCol>
             </CRow>
           </CCol>

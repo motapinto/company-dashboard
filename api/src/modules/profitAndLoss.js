@@ -4,7 +4,6 @@ export default (server, db) => {
   server.get('/revenueAndExpenses', (_req, res) => {
     let revenue = 0;
     let expenses = 0;
-    let ebitda = 0;
     
     for (const journal of db.GeneralLedgerEntries.Journal) {
       for(const transaction of journal.Transaction) {
@@ -15,42 +14,40 @@ export default (server, db) => {
           for(const debit of debitLine) {
             if(isRevenueTaxonomy(getAccount(debit.AccountID))) {
               revenue += debit.DebitAmount;
-              ebitda += debit.DebitAmount;
             }        
           }
         } else {
           if(isRevenueTaxonomy(getAccount(debitLine.AccountID))) {
             revenue += debitLine.DebitAmount;
-            ebitda += debitLine.DebitAmount;
-          }  
+          }      
         }
 
         if(creditLine && creditLine instanceof Array) {
           for(const credit of creditLine) {
             if(isExpenseTaxonomy(getAccount(credit.AccountID))) {
               expenses += credit.CreditAmount;
-              ebitda += credit.CreditAmount;
-            }        
+            }     
           }
         } else {
+
           if(isExpenseTaxonomy(getAccount(creditLine.AccountID))) {
             expenses += creditLine.CreditAmount;
-            ebitda +=creditLine.CreditAmount;
           }  
         }
       };
     };
 
+    const ebitda = revenue - expenses;
     const ebitdaMargin = ebitda / getGrossSales(db.GeneralLedgerEntries.Journal);
     res.json({ revenue, expenses, ebitda, ebitdaMargin });
   });
 
-  const getAccount = async (account) => {
+  const getAccount =  (accountID) => {
     return db.GeneralLedgerAccounts.Account.filter(
-      account => account.AccountID ===account );
+      account => account.AccountID === accountID )[0];
   };
 
-  const isRevenueTaxonomy = async (account) => {
+  const isRevenueTaxonomy = (account) => {
     const taxonomyCode = account.TaxonomyCode;
 
     switch(true) {
@@ -86,7 +83,8 @@ export default (server, db) => {
     }
   }
 
-  const isExpenseTaxonomy = async (account) => {
+  const isExpenseTaxonomy = (account) => {
+    console.log(account);
     const taxonomyCode = account.TaxonomyCode;
 
     switch(true) {
@@ -121,7 +119,7 @@ export default (server, db) => {
       /* Outros gastos */
       case taxonomyCode >= 471 && taxonomyCode <= 478: return true;
       case taxonomyCode >= 483 && taxonomyCode <= 499: return true;
-  
+
       default: false;
     }
   }

@@ -29,7 +29,7 @@ const RenderFinancial = (data) => {
       data: data.profitMargin.netProfit,
     },
   ];
-  
+
   return (
     <>
       <CRow>
@@ -95,14 +95,14 @@ const RenderFinancial = (data) => {
               {
                 label: "Expenses",
                 backgroundColor: "#f87979",
-                data: data.expenses,
+                data: [data.expenses],
               },
             ]}
             revenue={[
               {
                 label: "Revenue",
                 backgroundColor: "#4dbd74",
-                data: data.revenue,
+                data: [data.revenue],
               },
             ]}
             className="d-flex align-items-stretch"
