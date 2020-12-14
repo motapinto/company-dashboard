@@ -10,6 +10,7 @@ import {
 } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
 import yLabel from "../utils/yLabel";
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ dataset, year }) => {
   return (
@@ -53,6 +54,19 @@ export default ({ dataset, year }) => {
                 },
                 tooltips: {
                   enabled: true,
+                  callbacks: {
+                    label: function (tooltipItem, data) {
+                      let label =
+                          data.datasets[tooltipItem.datasetIndex].label || "";
+
+                      if (label) {
+                        label += ": ";
+                      }
+
+                      label += "$" + formatNumber(tooltipItem.yLabel);
+                      return label;
+                    }
+                  }
                 },
               }}
             />

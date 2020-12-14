@@ -27,7 +27,7 @@ const getReplacedTotal = async (): Promise<number> => {
 };
 
 const getmonthlyAvgInv = async (): Promise<Array<number>> => {
-  return [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11];
+  return [40000000, 20000000, 12000000, 39000000, 10000000, 40000000, 39000000, 80000000, 40000000, 20000000, 12000000, 35611601.40];
 };
 
 export default async (): Promise<InventoryData> => {
