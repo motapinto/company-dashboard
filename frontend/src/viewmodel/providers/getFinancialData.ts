@@ -1,23 +1,16 @@
 import FinancialData from "../../model/financialData";
 import getProfitMargin from "./shared/getProfitMargin";
 import getBalanceSheet from "./shared/getBalanceSheet";
-import { getHeader, getRevenueAndExpenses } from "./requests";
-
-const getVatPaid = async (): Promise<Array<number>> => {
-  return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
-};
-
-const getVatDeducted = async (): Promise<Array<number>> => {
-  return [78, 81, 80, 45, 34, 12, 40, 55, 67, 89, 76, 56];
-};
+import {getHeader, getRevenueAndExpenses, getVat} from "./requests";
 
 export default async (): Promise<FinancialData> => {
   const revenueAndLosses = (await getRevenueAndExpenses()).data;
-  
+  const vat = (await getVat())?.data;
+
   return {
     year: await getHeader(),
-    vatPaid: await getVatPaid(),
-    vatDeducted: await getVatDeducted(),
+    vatPaid: vat.paid,
+    vatDeducted: vat.deducted,
     profitMargin: await getProfitMargin(),
     balanceSheet: await getBalanceSheet(),
     revenue: revenueAndLosses.revenue,

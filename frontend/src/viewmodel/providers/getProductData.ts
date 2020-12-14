@@ -74,7 +74,6 @@ const getInfo = async (productKey: string): Promise<{p: ProductInfo, c: any, s: 
 };
 
 const getProfit = async (sales: any, year: any): Promise<{gp: Array<number>, np: Array<number>}> => {
-  console.log(sales)
   const gp: number[] = [];
   const np: number[] = [];
   for (let i = 1; i <= 12; i++) {

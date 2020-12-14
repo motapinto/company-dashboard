@@ -9,6 +9,7 @@ import {
 } from "@coreui/react";
 import { CChartBar } from "@coreui/react-chartjs";
 import MoneyFormat from "../utils/MoneyFormat";
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ vatPaidDeducted, year }) => {
   return (
@@ -22,7 +23,7 @@ export default ({ vatPaidDeducted, year }) => {
       <CCardBody className="align-middle pt-0">
         <CRow>
           <CCol xs="6" sm="6">
-            <CCallout color="lightRed">
+            <CCallout color="danger">
               <small className="text-muted">Paid</small>
               <br />
               <strong className="h4">
@@ -32,7 +33,7 @@ export default ({ vatPaidDeducted, year }) => {
             </CCallout>
           </CCol>
           <CCol xs="6" sm="6">
-            <CCallout color="lightGreen">
+            <CCallout color="success">
               <small className="text-muted">Deducted</small>
               <br />
               <strong className="h4">
@@ -59,7 +60,7 @@ export default ({ vatPaidDeducted, year }) => {
                   ticks: {
                     // Include a dollar sign in the ticks
                     callback: function (value, index, values) {
-                      return "$ " + value;
+                      return "$ " + formatNumber(value);
                     },
                   },
                 },
@@ -67,6 +68,18 @@ export default ({ vatPaidDeducted, year }) => {
             },
             tooltips: {
               enabled: true,
+              callbacks: {
+                label: function (tooltipItem, data) {
+                  let label =
+                    data.datasets[tooltipItem.datasetIndex].label || "";
+
+                  if (label) {
+                    label += ": ";
+                  }
+                  label += "$ " + formatNumber(tooltipItem.yLabel);
+                  return label;
+                },
+              }
             },
           }}
         />

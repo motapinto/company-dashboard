@@ -199,3 +199,11 @@ export const getProductStock = async (productId: string): Promise<AxiosResponse<
     console.error("Could not get revenue and expenses!");
   }
 }
+
+export const getVat = async (): Promise<AxiosResponse<any>|undefined> => {
+  try {
+    return await axios.get(saftAPI + `/GeneralAccounts/Vat`);
+  } catch (error) {
+    console.error("Could not get revenue and expenses!");
+  }
+}

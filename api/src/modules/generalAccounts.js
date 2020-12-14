@@ -1,3 +1,5 @@
+import { getAccount } from "./shared/utils.js";
+
 export default (server, db) => {
   server.get("/GeneralAccounts/GroupingCategory/:filter", (req, res) => {
     let accounts = db.GeneralLedgerAccounts.Account.filter(
@@ -14,89 +16,6 @@ export default (server, db) => {
 
     res.json(accounts);
   });
-
-  // Sum of credit/debit lines of a single transaction
-  function processTransaction(transaction, account_filter, startDate, endDate) {
-    function processLine(line, type) {
-      if (line.AccountID.indexOf(account_filter) != 0) return 0;
-      return type == "credit"
-        ? Number.parseInt(line.CreditAmount)
-        : Number.parseInt(line.DebitAmount);
-    }
-
-    let transactionDate = new Date(transaction.TransactionDate);
-    if (
-      (startDate != null && transactionDate < startDate) ||
-      (endDate != null && transactionDate > endDate)
-    ) {
-      return {
-        totalCredit: 0,
-        totalDebit: 0,
-      };
-    }
-
-    let totalCredit = 0;
-    let totalDebit = 0;
-    if (
-      transaction.Lines.CreditLine &&
-      Array.isArray(transaction.Lines.CreditLine)
-    ) {
-      totalCredit += transaction.Lines.CreditLine.map((line) => {
-        return processLine(line, "credit");
-      }).reduce((n1, n2) => n1 + n2);
-    } else if (transaction.Lines.CreditLine) {
-      totalCredit += processLine(transaction.Lines.CreditLine, "credit");
-    }
-
-    if (
-      transaction.Lines.DebitLine &&
-      Array.isArray(transaction.Lines.DebitLine)
-    ) {
-      totalDebit += transaction.Lines.DebitLine.map((line) => {
-        return processLine(line, "debit");
-      }).reduce((n1, n2) => n1 + n2);
-    } else if (transaction.Lines.DebitLine) {
-      totalDebit += processLine(transaction.Lines.DebitLine, "debit");
-    }
-
-    return {
-      totalCredit: totalCredit,
-      totalDebit: totalDebit,
-    };
-  }
-
-  function accountSumBetweenDates(account_id_filter, startDate, endDate) {
-    let totalCredit = 0;
-    let totalDebit = 0;
-    db.GeneralLedgerEntries.Journal.forEach((journal) => {
-      if (Array.isArray(journal.Transaction)) {
-        for (let i = 0; i < journal.Transaction.length; i++) {
-          let ret = processTransaction(
-            journal.Transaction[i],
-            account_id_filter,
-            startDate,
-            endDate
-          );
-          totalCredit += ret.totalCredit;
-          totalDebit += ret.totalDebit;
-        }
-      } else if (journal.Transaction) {
-        let ret = processTransaction(
-          journal.Transaction,
-          account_id_filter,
-          startDate,
-          endDate
-        );
-        totalCredit += ret.totalCredit;
-        totalDebit += ret.totalDebit;
-      }
-    });
-
-    return {
-      totalCredit: totalCredit,
-      totalDebit: totalDebit,
-    };
-  }
 
   server.get("/GeneralAccounts/GrossTotal", (req, res) => {
     res.json({
@@ -246,4 +165,152 @@ export default (server, db) => {
 
     res.json(accountSumByMonth);
   });
+
+  server.get("/GeneralAccounts/Vat", (req, res) => {
+    const year = db.Header.FiscalYear;
+    const vatPaid = [];
+    const vatDeducted = [];
+
+    for (let i = 1; i <= 12; i++) {
+      vatPaid.push(0);
+      vatDeducted.push(0);
+    }
+
+    db.GeneralLedgerEntries.Journal.forEach((journal) => {
+      journal.Transaction.forEach((transaction) => {
+        const transactionYear = transaction.TransactionDate.slice(0, 4);
+        if(transactionYear != year) return;
+
+        const month = parseInt(transaction.TransactionDate.slice(5, 7)) - 1;
+
+        const debitLine = transaction.Lines.DebitLine;
+        const creditLine = transaction.Lines.CreditLine;
+
+        if(debitLine instanceof Array) {
+          debitLine.forEach((line) => {
+            if(isVatDeducted(db, line.AccountID)) vatDeducted[month] += line.DebitAmount;
+          })
+        } else {
+          if(isVatDeducted(db, debitLine.AccountID)) vatDeducted[month] += debitLine.DebitAmount;
+        }
+
+        if(creditLine instanceof Array) {
+          creditLine.forEach((line) => {
+            if(isVatPaid(db, line.AccountID)) vatPaid[month] += line.CreditAmount;
+          })
+        } else {
+          if(isVatPaid(db, creditLine.AccountID)) vatPaid[month] += creditLine.CreditAmount;
+        }
+      });
+    });
+
+    res.json({
+      paid: vatPaid,
+      deducted: vatDeducted
+    });
+  });
+
+  // Sum of credit/debit lines of a single transaction
+  function processTransaction(transaction, account_filter, startDate, endDate) {
+    function processLine(line, type) {
+      if (line.AccountID.indexOf(account_filter) != 0) return 0;
+      return type == "credit"
+          ? Number.parseInt(line.CreditAmount)
+          : Number.parseInt(line.DebitAmount);
+    }
+
+    let transactionDate = new Date(transaction.TransactionDate);
+    if (
+        (startDate != null && transactionDate < startDate) ||
+        (endDate != null && transactionDate > endDate)
+    ) {
+      return {
+        totalCredit: 0,
+        totalDebit: 0,
+      };
+    }
+
+    let totalCredit = 0;
+    let totalDebit = 0;
+    if (
+        transaction.Lines.CreditLine &&
+        Array.isArray(transaction.Lines.CreditLine)
+    ) {
+      totalCredit += transaction.Lines.CreditLine.map((line) => {
+        return processLine(line, "credit");
+      }).reduce((n1, n2) => n1 + n2);
+    } else if (transaction.Lines.CreditLine) {
+      totalCredit += processLine(transaction.Lines.CreditLine, "credit");
+    }
+
+    if (
+        transaction.Lines.DebitLine &&
+        Array.isArray(transaction.Lines.DebitLine)
+    ) {
+      totalDebit += transaction.Lines.DebitLine.map((line) => {
+        return processLine(line, "debit");
+      }).reduce((n1, n2) => n1 + n2);
+    } else if (transaction.Lines.DebitLine) {
+      totalDebit += processLine(transaction.Lines.DebitLine, "debit");
+    }
+
+    return {
+      totalCredit: totalCredit,
+      totalDebit: totalDebit,
+    };
+  }
+
+  function accountSumBetweenDates(account_id_filter, startDate, endDate) {
+    let totalCredit = 0;
+    let totalDebit = 0;
+    db.GeneralLedgerEntries.Journal.forEach((journal) => {
+      if (Array.isArray(journal.Transaction)) {
+        for (let i = 0; i < journal.Transaction.length; i++) {
+          let ret = processTransaction(
+              journal.Transaction[i],
+              account_id_filter,
+              startDate,
+              endDate
+          );
+          totalCredit += ret.totalCredit;
+          totalDebit += ret.totalDebit;
+        }
+      } else if (journal.Transaction) {
+        let ret = processTransaction(
+            journal.Transaction,
+            account_id_filter,
+            startDate,
+            endDate
+        );
+        totalCredit += ret.totalCredit;
+        totalDebit += ret.totalDebit;
+      }
+    });
+
+    return {
+      totalCredit: totalCredit,
+      totalDebit: totalDebit,
+    };
+  }
 };
+
+
+function isVatPaid(db, accountID) {
+  const account = getAccount(db, accountID);
+
+  switch (account.TaxonomyCode) {
+    case 71: case 76: case 77: case 81: case 82: case 84: case 85: return true;
+  }
+
+  return false;
+}
+
+function isVatDeducted(db, accountID) {
+  const account = getAccount(db, accountID);
+
+  switch (account.TaxonomyCode) {
+    case 73: case 74: case 79: case 80: return true;
+  }
+
+  return false;
+}
