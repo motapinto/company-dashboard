@@ -208,6 +208,79 @@ export default (server, db) => {
     });
   });
 
+  server.get("/GeneralAccounts/OrderTime", (req, res) => {
+    const year = db.Header.FiscalYear;
+    const ordersStart = [];
+    const ordersEnd = [];
+
+    for (let i = 1; i <= 12; i++) {
+      ordersStart.push([]);
+      ordersEnd.push([]);
+    }
+
+    db.GeneralLedgerEntries.Journal.forEach((journal) => {
+      journal.Transaction.forEach((transaction) => {
+        const transactionYear = transaction.TransactionDate.slice(0, 4);
+        if(transactionYear != year) return;
+
+        const month = parseInt(transaction.TransactionDate.slice(5, 7)) - 1;
+
+        const debitLine = transaction.Lines.DebitLine;
+        const creditLine = transaction.Lines.CreditLine;
+
+        if(debitLine instanceof Array) {
+          debitLine.forEach((line) => {
+            if(isCostumer(db, line.AccountID)) ordersStart[month].push(line);
+          })
+        } else {
+          if(isCostumer(db, debitLine.AccountID)) ordersStart[month].push(debitLine);
+        }
+
+        if(creditLine instanceof Array) {
+          creditLine.forEach((line) => {
+            if(isCostumer(db, line.AccountID)) ordersEnd[month].push(line);
+          })
+        } else {
+          if(isCostumer(db, creditLine.AccountID)) ordersEnd[month].push(creditLine);
+        }
+      });
+    });
+
+    const orderCycle = [];
+    const orderLead = [];
+    const ordersStartSort = ordersStart.map((monthOrders) => monthOrders.sort((a, b) => new Date(a.SystemEntryDate).getTime() - new Date(b.SystemEntryDate).getTime()));
+
+    const ordersEndSort = ordersEnd.map((monthOrders) => monthOrders.sort((a, b) => new Date(a.SystemEntryDate).getTime() - new Date(b.SystemEntryDate).getTime()));
+    for (let month = 0; month < ordersStartSort.length; month++) {
+      let lastOrderDate = null;
+
+      orderCycle.push([]);
+      orderLead.push([]);
+
+      const orders = ordersStartSort[month];
+      orders.forEach((order) => {
+        const orderDate = new Date(order.SystemEntryDate);
+        if(lastOrderDate != null) {
+          orderCycle[month].push((orderDate.getTime() - lastOrderDate.getTime()) / (24 * 3600 * 1000));
+        }
+
+        lastOrderDate = orderDate;
+
+        const fulfilOrder = ordersEndSort.slice(month).reduce((previousValue, monthOrders) => previousValue ? previousValue : monthOrders.find((monthOrder) => monthOrder.AccountID === order.AccountID && monthOrder.CreditAmount === order.DebitAmount), null)
+
+        if(fulfilOrder == null) return;
+
+        const fulfilDate = new Date(fulfilOrder.SystemEntryDate);
+        orderLead[month].push((fulfilDate.getTime() - orderDate.getTime()) / (24 * 3600 * 1000))
+      })
+    }
+
+    res.json({
+      lead: orderLead.map((timeArray) => timeArray.reduce((previous, current) => previous + current, 0) / (timeArray.length === 0 ? 1 : timeArray.length)),
+      cycle: orderCycle.map((timeArray) => timeArray.reduce((previous, current) => previous + current, 0) / (timeArray.length === 0 ? 1 : timeArray.length))
+    });
+  })
+
   // Sum of credit/debit lines of a single transaction
   function processTransaction(transaction, account_filter, startDate, endDate) {
     function processLine(line, type) {
@@ -321,4 +394,8 @@ function isVatDeducted(db, accountID) {
   }
 
   return false;
+}
+
+function isCostumer(db, accountID) {
+  return db.Customer.some((costumer) => costumer.AccountID === accountID);
 }

@@ -202,13 +202,21 @@ export const getProductStock = async (
       jasminAPI + `/materialsCore/materialsItems/${productId}/extension`
     );
   } catch (error) {
-    console.error("Could not get revenue and expenses!");
+    console.error("Could not get product stock!");
   }
 };
 
 export const getVat = async (): Promise<AxiosResponse<any> | undefined> => {
   try {
     return await axios.get(saftAPI + `/GeneralAccounts/Vat`);
+  } catch (error) {
+    console.error("Could not get vat!");
+  }
+}
+
+export const getPurchaseOrderTimes = async (): Promise<AxiosResponse<any>|undefined> => {
+  try {
+    return await axios.get(saftAPI + `/GeneralAccounts/OrderTime`);
   } catch (error) {
     console.error("Could not get revenue and expenses!");
   }

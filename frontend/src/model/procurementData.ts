@@ -20,10 +20,6 @@ export interface ProcurementData {
   suppliers: Dataset;
   numberSuppliers: Array<Data>;
   supplierQuality: Dataset;
-  purchasesInTB: {
-    totalPurchases: IntervalData;
-    categories: Array<IntervalData>;
-  };
   purchaseOrder: Array<Data>;
 }
 

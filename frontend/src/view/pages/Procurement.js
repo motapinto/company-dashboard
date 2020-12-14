@@ -60,17 +60,6 @@ const RenderProcurement = (data) => {
     borderWidth: 2,
   };
 
-  const progressBars = [];
-
-  for (let i = 0; i < data.purchasesInTB.categories.length; i++) {
-    progressBars.push(
-      <ProgressBar
-        key={`categories${i}`}
-        data={data.purchasesInTB.categories[i]}
-      />
-    );
-  }
-
   return (
     <>
       <CRow>
@@ -128,7 +117,23 @@ const RenderProcurement = (data) => {
               <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
-              <LineChart datasets={purchaseOrder} callback={yLabel} />
+              <LineChart
+                datasets={purchaseOrder}
+                callback={value => value}
+                tooltipCallback={
+                  function (tooltipItem, data) {
+                    let label =
+                      data.datasets[tooltipItem.datasetIndex].label || "";
+
+                    if (label) {
+                      label += ": ";
+                    }
+
+                    label += formatNumber(tooltipItem.yLabel) + " days";
+                    return label;
+                  }
+                }
+              />
             </CCardBody>
           </CCard>
         </CCol>

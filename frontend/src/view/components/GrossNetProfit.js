@@ -2,6 +2,7 @@ import React from "react";
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import yLabel from "../utils/yLabel";
 import LineChart from "../components/LineChart";
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ dataset }) => {
   return (
@@ -11,7 +12,23 @@ export default ({ dataset }) => {
         <div className="small text-muted">{2019}</div>
       </CCardHeader>
       <CCardBody>
-        <LineChart datasets={dataset} callback={yLabel} />
+        <LineChart
+          datasets={dataset}
+          callback={yLabel}
+          tooltipCallback={
+            function (tooltipItem, data) {
+              let label =
+                data.datasets[tooltipItem.datasetIndex].label || "";
+
+              if (label) {
+                label += ": ";
+              }
+
+              label += "$" + formatNumber(tooltipItem.yLabel);
+              return label;
+            }
+          }
+        />
       </CCardBody>
     </CCard>
   );
