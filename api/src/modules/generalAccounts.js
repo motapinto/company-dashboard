@@ -264,7 +264,6 @@ export default (server, db) => {
         const orderDate = new Date(order.SystemEntryDate);
         if(lastOrderDate != null) {
           orderCycle[month].push((orderDate.getTime() - lastOrderDate.getTime()) / (24 * 3600 * 1000));
-          console.log((orderDate.getTime() - lastOrderDate.getTime()) / (24 * 3600 * 1000))
         }
 
         lastOrderDate = orderDate;
