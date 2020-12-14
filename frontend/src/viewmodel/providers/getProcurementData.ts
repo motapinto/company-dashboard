@@ -1,5 +1,5 @@
 import {ProcurementData, Dataset, Data, IntervalData, QualityRatingData} from "../../model/procurementData";
-import {getHeader, getSupplierQualityRatings, getSupplierSpending} from "./requests";
+import {getHeader, getPurchaseOrderTimes, getSupplierQualityRatings, getSupplierSpending} from "./requests";
 import {SpendingData} from "../../model/spendingData";
 
 const getSuppliers = async (): Promise<{suppliers: Dataset, numberSuppliers: Array<Data>}> => {
@@ -83,56 +83,20 @@ const getSupplierQuality = async (): Promise<Dataset> => {
 };
 
 const getPurchaseOrder = async (): Promise<Array<Data>> => {
+  const times = (await getPurchaseOrderTimes())?.data;
+
+  console.log(times)
+
   return [
     {
       label: "Product Order Cycle Time (days)",
-      data: [123, 31, 45, 123, 25, 42, 23, 83, 112, 32, 180, 91],
+      data: times.cycle,
     },
     {
       label: "Product Order Lead Time (days)",
-      data: [91, 88, 79, 87, 93, 97, 85, 82, 79, 86, 94, 86],
+      data: times.lead,
     },
   ];
-};
-
-const getPurchasesInTB = async (): Promise<{
-  totalPurchases: IntervalData;
-  categories: Array<IntervalData>;
-}> => {
-  return {
-    totalPurchases: {
-      name: "",
-      value: 192235,
-      total: 343277,
-      percentile: 0.559,
-    },
-    categories: [
-      {
-        name: "Electrical Supply",
-        value: 76129,
-        total: 160372,
-        percentile: 0.4747,
-      },
-      {
-        name: "Logistics",
-        value: 51223,
-        total: 87941,
-        percentile: 0.58247,
-      },
-      {
-        name: "Packaging",
-        value: 37564,
-        total: 49906,
-        percentile: 0.75269,
-      },
-      {
-        name: "Services",
-        value: 27319,
-        total: 45058,
-        percentile: 0.6063,
-      },
-    ],
-  };
 };
 
 export default async (year: number): Promise<ProcurementData> => {
@@ -143,7 +107,6 @@ export default async (year: number): Promise<ProcurementData> => {
     suppliers: supplierData.suppliers,
     numberSuppliers: supplierData.numberSuppliers,
     supplierQuality: await getSupplierQuality(),
-    purchaseOrder: await getPurchaseOrder(),
-    purchasesInTB: await getPurchasesInTB(),
+    purchaseOrder: await getPurchaseOrder()
   };
 };

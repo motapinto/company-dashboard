@@ -2,23 +2,13 @@ import React from "react";
 import { CChartLine } from "@coreui/react-chartjs";
 import {formatNumber} from "../pages/Procurement";
 
-export default ({ datasets, callback }) => {
+export default ({ datasets, callback, tooltipCallback }) => {
   const defaultOptions = (() => {
     return {
       tooltips: {
         enabled: true,
         callbacks: {
-          label: function (tooltipItem, data) {
-            let label =
-              data.datasets[tooltipItem.datasetIndex].label || "";
-
-            if (label) {
-              label += ": ";
-            }
-
-            label += "$" + formatNumber(tooltipItem.yLabel);
-            return label;
-          },
+          label: tooltipCallback
         },
       },
       maintainAspectRatio: true,
