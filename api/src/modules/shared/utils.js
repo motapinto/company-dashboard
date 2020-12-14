@@ -4,13 +4,6 @@ export const getAccount = (db, accountID) => {
   )[0];
 };
 
-export const getOtherDashboardKPI = (db) => {
-  return {
-    gpm: 12011,
-    npm: 121221,
-  };
-};
-
 export const getGrossNetSales = (db) => {
   let netSalesMonthly = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let grossSalesMonthly = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -308,7 +301,6 @@ const updateNetIncome = (netIncome, account, amount) => {
 };
 
 export const getCOGS = (db) => {
-  let cogs = 0;
   let cogsMonthly = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   for (const journal of db.GeneralLedgerEntries.Journal) {
@@ -319,7 +311,6 @@ export const getCOGS = (db) => {
       if (debitLine && debitLine instanceof Array) {
         for (const debit of debitLine) {
           cogsMonthly[transactionDate.getMonth()] = updateCOGS(
-            db,
             cogsMonthly[transactionDate.getMonth()],
             getAccount(db, debit.AccountID),
             debit.DebitAmount
@@ -327,7 +318,6 @@ export const getCOGS = (db) => {
         }
       } else {
         cogsMonthly[transactionDate.getMonth()] = updateCOGS(
-          db,
           cogsMonthly[transactionDate.getMonth()],
           getAccount(db, debitLine.AccountID),
           debitLine.DebitAmount
@@ -361,12 +351,12 @@ export const getCOGS = (db) => {
       (previousValue, current) => previousValue + current,
       0
     ),
-    cogsMonthly: cogsMonthly,
+    cogsMonthly,
   };
 };
 
 //TAX SNC 353+354+355
-export const updateCOGS = (db, cogs, account, amount) => {
+export const updateCOGS = (cogs, account, amount) => {
   const taxonomyCode = account.TaxonomyCode;
   switch (true) {
     /* Vendas e serviços prestados */
