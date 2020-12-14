@@ -120,23 +120,6 @@ const RenderProcurement = (data) => {
         </CCol>
 
         <CCol sm="6" lg="6" className="mb-4">
-          <CCard className="h-100">
-            <CCardHeader>
-              <h4 className="card-title mb-0">Purchases in Time and Budget</h4>
-              <div className="small text-muted">{data.year}</div>
-            </CCardHeader>
-            <CCardBody>
-              <h4 className="mb-0">Total</h4>
-              <ProgressBar data={data.purchasesInTB.totalPurchases} />
-              <h4>By category</h4>
-              {progressBars}
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-
-      <CRow>
-        <CCol>
           <CCard className="w-100">
             <CCardHeader>
               <h4 className="card-title mb-0">

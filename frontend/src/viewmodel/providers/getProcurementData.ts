@@ -67,9 +67,6 @@ const getSuppliers = async (): Promise<{suppliers: Dataset, numberSuppliers: Arr
 const getSupplierQuality = async (): Promise<Dataset> => {
   const supplierQualityRating: Array<QualityRatingData> = (await getSupplierQualityRatings()).data;
 
-  console.log( supplierQualityRating.slice(0, 12).map((qualityRatingData) => {
-    return qualityRatingData.qualityRating
-  }))
   return {
     datasets: [
       {

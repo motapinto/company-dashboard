@@ -1,9 +1,26 @@
 import React from "react";
 import { CChartLine } from "@coreui/react-chartjs";
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ datasets, callback }) => {
   const defaultOptions = (() => {
     return {
+      tooltips: {
+        enabled: true,
+        callbacks: {
+          label: function (tooltipItem, data) {
+            let label =
+              data.datasets[tooltipItem.datasetIndex].label || "";
+
+            if (label) {
+              label += ": ";
+            }
+
+            label += "$" + formatNumber(tooltipItem.yLabel);
+            return label;
+          },
+        },
+      },
       maintainAspectRatio: true,
       legend: {
         display: true,
@@ -21,8 +38,6 @@ export default ({ datasets, callback }) => {
             ticks: {
               beginAtZero: true,
               maxTicksLimit: 5,
-              stepSize: Math.ceil(250 / 5),
-              max: 250,
               callback: callback,
             },
             gridLines: {

@@ -7,6 +7,7 @@ import GrossNetProfit from "../components/GrossNetProfit";
 import GetProductData from "../../viewmodel/providers/getProductData";
 import ResourceGetter from "../components/ResourceGetter";
 import { match } from "assert";
+import {formatNumber} from "./Procurement";
 const brandSuccess = getStyle("success") || "#4dbd74";
 const brandInfo = getStyle("info") || "#20a8d8";
 
@@ -18,7 +19,7 @@ const RenderProduct = (data) => {
       borderColor: brandInfo,
       pointHoverBackgroundColor: brandInfo,
       borderWidth: 2,
-      data: data.gpm,
+      data: data.gp,
     },
     {
       label: "Net Profit",
@@ -26,7 +27,7 @@ const RenderProduct = (data) => {
       borderColor: brandSuccess,
       pointHoverBackgroundColor: brandSuccess,
       borderWidth: 2,
-      data: data.npm,
+      data: data.np,
     },
   ];
   return (
@@ -70,7 +71,7 @@ const RenderProduct = (data) => {
               <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
-              <h4>{data.annualNetProfit}%</h4>
+              <h4>$ {formatNumber(data.annualNetProfit)}</h4>
             </CCardBody>
           </CCard>
         </CCol>

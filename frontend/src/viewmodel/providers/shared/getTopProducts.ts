@@ -32,7 +32,7 @@ export default async (): Promise<Array<ProductInfo>> => {
 
     const productKey = jsonProduct.itemKey;
     const name = parseItemKey(productKey);
-    
+
     if(productKey == 'TESLAMODELS' || productKey == 'PORTES') continue;
     const details = jsonProduct.complementaryDescription;
 
@@ -78,5 +78,5 @@ export default async (): Promise<Array<ProductInfo>> => {
     }
   }
 
-  return products;
+  return products.sort((a: any, b: any) => b.totalSold - a.totalSold);
 };

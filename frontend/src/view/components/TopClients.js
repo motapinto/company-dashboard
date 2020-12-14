@@ -1,5 +1,6 @@
 import React from "react";
-import { CCard, CCardBody, CDataTable, CCardHeader } from "@coreui/react";
+import {CCard, CCardBody, CDataTable, CCardHeader, CBadge} from "@coreui/react";
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ clientsData, fields }) => {
   return (
@@ -16,8 +17,20 @@ export default ({ clientsData, fields }) => {
           hover
           bordered
           pagination
+          scopedSlots={{
+            amount: (item) => (
+              <td className="align-content-end text-right pr-3">
+                {"$ " + formatNumber(item.amount)}
+              </td>
+            ),
+            quantity: (item) => (
+              <td className="align-content-end text-right pr-3">
+                {formatNumber(item.quantity)}
+              </td>
+            ),
+          }}
         />
       </CCardBody>
     </CCard>
   );
-};
+}

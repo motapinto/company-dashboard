@@ -1,5 +1,6 @@
 import React from "react";
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+import {formatNumber} from "../pages/Procurement";
 
 export default ({ ProductInfo }) => {
   return (
@@ -14,10 +15,7 @@ export default ({ ProductInfo }) => {
             Product Key: {ProductInfo.productKey}
           </li>
           <li className="list-group-item">Name: {ProductInfo.name}</li>
-          <li className="list-group-item">Price: {ProductInfo.price}</li>
-          <li className="list-group-item">
-            Total Sold: {ProductInfo.totalSold}
-          </li>
+          <li className="list-group-item">Price: $ {formatNumber(ProductInfo.price)}</li>
           <li className="list-group-item">Details: {ProductInfo.details}</li>
         </ul>
       </CCardBody>

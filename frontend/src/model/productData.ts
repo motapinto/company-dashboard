@@ -10,8 +10,8 @@ export interface ClientInfo {
 export interface ProductData {
   year: number,
   info: ProductInfo;
-  gpm: Array<number>,
-  npm: Array<number>,
+  gp: Array<number>,
+  np: Array<number>,
   clients: Array<ClientInfo>;
   sold: number;
   stock: number;
