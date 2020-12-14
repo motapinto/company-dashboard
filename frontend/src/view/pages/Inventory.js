@@ -5,6 +5,7 @@ import MontlyAvgTurn from "../components/MontlyAvgTurn";
 import TopProducts from "../components/TopProducts";
 import ResourceGetter from "../components/ResourceGetter";
 import getInventoryData from "../../viewmodel/providers/getInventoryData";
+import {formatNumber} from "./Procurement";
 
 const RenderInventory = (data) => {
   const monthlyAvgTurn = {
@@ -44,7 +45,7 @@ const RenderInventory = (data) => {
               <div className="small text-muted">{data.year}</div>
             </CCardHeader>
             <CCardBody>
-              <h4>{data.assets}€</h4>
+              <h4>$ {formatNumber(data.assets)}</h4>
             </CCardBody>
           </CCard>
           <CCard>

@@ -233,3 +233,12 @@ export const getDashboardKPI = async (): Promise<
     console.error("Could not get revenue and expenses!");
   }
 };
+
+export const getAllProducts = async (): Promise<AxiosResponse<any>|undefined> => {
+  try {
+    return await axios.get(jasminAPI + `/materialsCore/materialsItems/extension`);
+  } catch (error) {
+    console.error("Could not get products!");
+  }
+}
+

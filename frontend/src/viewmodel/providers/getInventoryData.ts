@@ -1,6 +1,6 @@
 import InventoryData from "../../model/inventoryData";
 import getTopProducts from "./shared/getTopProducts";
-import { getHeader } from "./requests"
+import {getAllProducts, getHeader} from "./requests"
 
 const getDaysToSell = async (): Promise<number> => {
   return 20999;
@@ -31,10 +31,14 @@ const getmonthlyAvgInv = async (): Promise<Array<number>> => {
 };
 
 export default async (): Promise<InventoryData> => {
+  const products = await getAllProducts();
+
+  console.log(products?.data)
+
   return {
     year: await getHeader(),
     daysToSell: await getDaysToSell(),
-    assets: await getAssets(),
+    assets: products?.data.reduce((accumulator: any, current: any) => accumulator + current.materialsItemWarehouses.reduce((previous: any, currentWh: any) => previous + currentWh.inventoryBalance.amount, 0), 0),
     replacedTotal: await getReplacedTotal(),
     replaced: await getReplaced(),
     sold: await getSold(),

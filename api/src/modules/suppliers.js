@@ -50,7 +50,7 @@ export default (server, db) => {
             }
 
             const account = db.GeneralLedgerAccounts.Account.find((account) => account.AccountID === supplierElement.AccountID)
-            if(!account || account.TaxonomyCode < 37 || account.TaxonomyCode > 42) continue;
+            if(!account || account.TaxonomyCode !== 37) continue;
 
             suppliers.push({
                 companyName: supplierElement.CompanyName,
@@ -113,7 +113,7 @@ export default (server, db) => {
 
             let supplied = supplier.openingDebitBalance;
             supplier.debitLines.forEach((debitLine) => {
-                supplied += debitLine.DebitAmount;              
+                supplied += debitLine.DebitAmount;
             });
 
             if(supplied === 0 && ordered === 0) supplied = 1;
