@@ -17,12 +17,6 @@ export default (server, db) => {
     res.json(accounts);
   });
 
-  server.get("/GeneralAccounts/GrossTotal", (req, res) => {
-    res.json({
-      grossTotal: getGrossSales(db.GeneralLedgerEntries.Journal),
-    });
-  });
-
   server.get("/GeneralAccounts/COGS", (req, res) => {
     let inventory = 0;
     let purchased = 0;
@@ -179,34 +173,38 @@ export default (server, db) => {
     db.GeneralLedgerEntries.Journal.forEach((journal) => {
       journal.Transaction.forEach((transaction) => {
         const transactionYear = transaction.TransactionDate.slice(0, 4);
-        if(transactionYear != year) return;
+        if (transactionYear != year) return;
 
         const month = parseInt(transaction.TransactionDate.slice(5, 7)) - 1;
 
         const debitLine = transaction.Lines.DebitLine;
         const creditLine = transaction.Lines.CreditLine;
 
-        if(debitLine instanceof Array) {
+        if (debitLine instanceof Array) {
           debitLine.forEach((line) => {
-            if(isVatDeducted(db, line.AccountID)) vatDeducted[month] += line.DebitAmount;
-          })
+            if (isVatDeducted(db, line.AccountID))
+              vatDeducted[month] += line.DebitAmount;
+          });
         } else {
-          if(isVatDeducted(db, debitLine.AccountID)) vatDeducted[month] += debitLine.DebitAmount;
+          if (isVatDeducted(db, debitLine.AccountID))
+            vatDeducted[month] += debitLine.DebitAmount;
         }
 
-        if(creditLine instanceof Array) {
+        if (creditLine instanceof Array) {
           creditLine.forEach((line) => {
-            if(isVatPaid(db, line.AccountID)) vatPaid[month] += line.CreditAmount;
-          })
+            if (isVatPaid(db, line.AccountID))
+              vatPaid[month] += line.CreditAmount;
+          });
         } else {
-          if(isVatPaid(db, creditLine.AccountID)) vatPaid[month] += creditLine.CreditAmount;
+          if (isVatPaid(db, creditLine.AccountID))
+            vatPaid[month] += creditLine.CreditAmount;
         }
       });
     });
 
     res.json({
       paid: vatPaid,
-      deducted: vatDeducted
+      deducted: vatDeducted,
     });
   });
 
@@ -215,14 +213,14 @@ export default (server, db) => {
     function processLine(line, type) {
       if (line.AccountID.indexOf(account_filter) != 0) return 0;
       return type == "credit"
-          ? Number.parseInt(line.CreditAmount)
-          : Number.parseInt(line.DebitAmount);
+        ? Number.parseInt(line.CreditAmount)
+        : Number.parseInt(line.DebitAmount);
     }
 
     let transactionDate = new Date(transaction.TransactionDate);
     if (
-        (startDate != null && transactionDate < startDate) ||
-        (endDate != null && transactionDate > endDate)
+      (startDate != null && transactionDate < startDate) ||
+      (endDate != null && transactionDate > endDate)
     ) {
       return {
         totalCredit: 0,
@@ -233,8 +231,8 @@ export default (server, db) => {
     let totalCredit = 0;
     let totalDebit = 0;
     if (
-        transaction.Lines.CreditLine &&
-        Array.isArray(transaction.Lines.CreditLine)
+      transaction.Lines.CreditLine &&
+      Array.isArray(transaction.Lines.CreditLine)
     ) {
       totalCredit += transaction.Lines.CreditLine.map((line) => {
         return processLine(line, "credit");
@@ -244,8 +242,8 @@ export default (server, db) => {
     }
 
     if (
-        transaction.Lines.DebitLine &&
-        Array.isArray(transaction.Lines.DebitLine)
+      transaction.Lines.DebitLine &&
+      Array.isArray(transaction.Lines.DebitLine)
     ) {
       totalDebit += transaction.Lines.DebitLine.map((line) => {
         return processLine(line, "debit");
@@ -267,20 +265,20 @@ export default (server, db) => {
       if (Array.isArray(journal.Transaction)) {
         for (let i = 0; i < journal.Transaction.length; i++) {
           let ret = processTransaction(
-              journal.Transaction[i],
-              account_id_filter,
-              startDate,
-              endDate
+            journal.Transaction[i],
+            account_id_filter,
+            startDate,
+            endDate
           );
           totalCredit += ret.totalCredit;
           totalDebit += ret.totalDebit;
         }
       } else if (journal.Transaction) {
         let ret = processTransaction(
-            journal.Transaction,
-            account_id_filter,
-            startDate,
-            endDate
+          journal.Transaction,
+          account_id_filter,
+          startDate,
+          endDate
         );
         totalCredit += ret.totalCredit;
         totalDebit += ret.totalDebit;
@@ -294,12 +292,18 @@ export default (server, db) => {
   }
 };
 
-
 function isVatPaid(db, accountID) {
   const account = getAccount(db, accountID);
 
   switch (account.TaxonomyCode) {
-    case 71: case 76: case 77: case 81: case 82: case 84: case 85: return true;
+    case 71:
+    case 76:
+    case 77:
+    case 81:
+    case 82:
+    case 84:
+    case 85:
+      return true;
   }
 
   return false;
@@ -309,7 +313,11 @@ function isVatDeducted(db, accountID) {
   const account = getAccount(db, accountID);
 
   switch (account.TaxonomyCode) {
-    case 73: case 74: case 79: case 80: return true;
+    case 73:
+    case 74:
+    case 79:
+    case 80:
+      return true;
   }
 
   return false;
