@@ -169,7 +169,7 @@ export const getAOV = async (): Promise<any> => {
 
 export const getCOGS = async (): Promise<any> => {
   try {
-    return await axios.get(saftAPI + "/GeneralAccounts/COGS");
+    return await axios.get(saftAPI + "/SalesReport/COGS");
   } catch (error) {
     console.error("Could not get COGS!");
     return [];
@@ -212,9 +212,11 @@ export const getVat = async (): Promise<AxiosResponse<any> | undefined> => {
   } catch (error) {
     console.error("Could not get vat!");
   }
-}
+};
 
-export const getPurchaseOrderTimes = async (): Promise<AxiosResponse<any>|undefined> => {
+export const getPurchaseOrderTimes = async (): Promise<
+  AxiosResponse<any> | undefined
+> => {
   try {
     return await axios.get(saftAPI + `/GeneralAccounts/OrderTime`);
   } catch (error) {

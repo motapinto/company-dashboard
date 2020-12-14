@@ -1,12 +1,13 @@
-import jsonServer from 'json-server';
-import cors from 'cors';
-import salesController from './modules/sales.js';
-import generalAccountsController from './modules/generalAccounts.js';
-import headerController from './modules/header.js';
-import suppliersController from './modules/suppliers.js';
-import balanceSheetController from './modules/balanceSheet.js';
-import revenueAndExpensesController from './modules/revenueAndExpenses.js';
-import dashboardController from './modules/dashboard.js';
+import jsonServer from "json-server";
+import cors from "cors";
+import salesController from "./modules/sales.js";
+import generalAccountsController from "./modules/generalAccounts.js";
+import headerController from "./modules/header.js";
+import suppliersController from "./modules/suppliers.js";
+import balanceSheetController from "./modules/balanceSheet.js";
+import revenueAndExpensesController from "./modules/revenueAndExpenses.js";
+import dashboardController from "./modules/dashboard.js";
+import salesReport from "./modules/salesReport.js";
 
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
@@ -19,6 +20,7 @@ server.get("/echo", (req, res) => {
   res.jsonp(req.query);
 });
 
+salesReport(server, db);
 dashboardController(server, db);
 generalAccountsController(server, db);
 salesController(server, db);
