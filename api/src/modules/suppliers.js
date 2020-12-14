@@ -64,7 +64,6 @@ export default (server, db) => {
 
         db.GeneralLedgerEntries.Journal.forEach((journal) => {
             journal.Transaction.forEach((transaction) => {
-                const transactionDate = transaction.TransactionDate;
 
                 // Debit lines
                 if (transaction.Lines.DebitLine.hasOwnProperty("RecordID")) {
@@ -106,11 +105,7 @@ export default (server, db) => {
             });
         });
 
-
-
         res.json(suppliers.map((supplier) => {
-            let qualityRating = 100;
-
             let ordered = supplier.openingCreditBalance;
             supplier.creditLines.forEach((creditLine) => {
                 ordered += creditLine.CreditAmount;
@@ -118,23 +113,17 @@ export default (server, db) => {
 
             let supplied = supplier.openingDebitBalance;
             supplier.debitLines.forEach((debitLine) => {
-                supplied += debitLine.DebitAmount;
-
-                const orderedNow = orderedUntil(supplier.openingCreditBalance, supplier.creditLines, debitLine.SystemEntryDate);
-                if(orderedNow > supplied) {
-                    qualityRating -= (orderedNow - supplied) / ordered
-                }
+                supplied += debitLine.DebitAmount;              
             });
 
             if(supplied === 0 && ordered === 0) supplied = 1;
             if(ordered === 0) ordered = 1;
 
-                return {
-                    companyName: supplier.companyName,
-                    accountID: supplier.accountID,
-                    qualityRating: Math.min(supplied / ordered, 1.0)
-                    // qualityRating: qualityRating
-                }
+            return {
+                companyName: supplier.companyName,
+                accountID: supplier.accountID,
+                qualityRating: Math.min(supplied / ordered, 1.0)
+            }
         }).sort((a, b) => a.qualityRating - b.qualityRating));
     });
 }

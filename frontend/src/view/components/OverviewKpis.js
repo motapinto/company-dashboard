@@ -30,12 +30,12 @@ export default ({ kpis, year }) => {
         </CRow>
         <CRow className="mt-sm-0 mt-md-5 mb-3">
           <CCol md="4" className="text-center mb-xs-4 mb-sm-4 mb-md-0">
-            <h4>Earning Growth Rate</h4>
-            <h4>{kpis.egr.toFixed(2) + "%"}</h4>
+            <h4>EBITDA</h4>
+            <h4>{"$ " + MoneyFormat(kpis.ebitda)}</h4>
           </CCol>
           <CCol md="4" className="text-center mb-xs-4 mb-sm-4 mb-md-0">
-            <h4>Revenue Growth Rate</h4>
-            <h4>{kpis.rgr.toFixed(2) + "%"}</h4>
+            <h4>Net Income</h4>
+            <h4>{"$ " + MoneyFormat(kpis.netIncome)}</h4>
           </CCol>
           <CCol md="4" className="text-center">
             <h4>Net Profit Margin </h4>

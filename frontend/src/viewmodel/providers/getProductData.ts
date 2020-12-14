@@ -16,19 +16,14 @@ function separateProductKey(productKey: string) {
 
 const getInfo = async (productKey: string): Promise<{p: ProductInfo, c: any, s: any}> => {
   const jsonProductInfo = await getProductInfo(productKey);
-
   const priceListLines = jsonProductInfo.data.priceListLines;
-
-  const price =
-    priceListLines.reduce((accumulator: number, priceListLine: any) => {
-      return accumulator + priceListLine.priceAmount.amount;
-    }, 0) / priceListLines.length;
+  const price = priceListLines.reduce((accumulator: number, priceListLine: any) => {
+    return accumulator + priceListLine.priceAmount.amount;
+  }, 0) / priceListLines.length;
 
   let totalSold = 0;
   const jsonOrders = await getOrdersRequest();
-
   const costumers: Array<any> = [];
-
   const sales: Array<any> = [];
 
   for (let i = 0; i < jsonOrders.data.length; i++) {
@@ -98,7 +93,6 @@ const getProfit = async (sales: any, year: any): Promise<{gp: Array<number>, np:
 
 const getStock = async (productId: string): Promise<number> => {
   const currentStockInfo = (await getProductStock(productId))?.data;
-
   return currentStockInfo.materialsItemWarehouses.reduce((previous: number, current: any) => previous + current.stockBalance, 0);
 };
 

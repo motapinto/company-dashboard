@@ -85,8 +85,6 @@ const getSupplierQuality = async (): Promise<Dataset> => {
 const getPurchaseOrder = async (): Promise<Array<Data>> => {
   const times = (await getPurchaseOrderTimes())?.data;
 
-  console.log(times)
-
   return [
     {
       label: "Product Order Cycle Time (days)",

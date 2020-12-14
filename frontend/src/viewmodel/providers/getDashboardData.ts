@@ -21,8 +21,8 @@ const getOverviewKpis = async (): Promise<OverviewKpis> => {
     sgt: dashboard.grossTotal,
     snt: dashboard.netTotal,
     gpm: dashboard.gpm,
-    egr: dashboard.egr,
-    rgr: dashboard.rgr,
+    netIncome: dashboard.netIncome,
+    ebitda: dashboard.ebitda,
     npm: dashboard.npm,
   };
 };

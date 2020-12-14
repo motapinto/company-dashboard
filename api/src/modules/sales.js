@@ -169,7 +169,7 @@ export default (server, db) => {
     res.json(regions);
   });
 
-  server.get("/sales/AOV", (req, res) => {
+  server.get("/sales/AOV", (_req, res) => {
     let aov = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let orderCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -206,7 +206,7 @@ export default (server, db) => {
     });
   });
 
-  server.get("/sales/sales-summary", (req, res) => {
+  server.get("/sales/sales-summary", (_req, res) => {
     let monthlySales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     db.GeneralLedgerEntries.Journal.forEach((journal) => {

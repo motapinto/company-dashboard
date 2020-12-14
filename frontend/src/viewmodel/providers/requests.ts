@@ -226,7 +226,7 @@ export const getDashboardKPI = async (): Promise<
   AxiosResponse<any> | undefined
 > => {
   try {
-    return await axios.get(saftAPI + `/Dashboard/DashboardKPI`);
+    return await axios.get(saftAPI + `/dashboardKpis`);
   } catch (error) {
     console.error("Could not get revenue and expenses!");
   }
