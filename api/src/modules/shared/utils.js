@@ -41,6 +41,8 @@ export const getGrossNetSales = (db) => {
     }
   }
 
+  console.log(grossSalesMonthly);
+
   return {
     grossSales: grossSalesMonthly.reduce(
       (previousValue, current) => previousValue + current,
@@ -69,11 +71,13 @@ export const updateNetSales = (netSales, account, amount) => {
   }
 };
 
+//TAX SNC 506+507+508+509+/-510-511-512+513+514+515+516+/-517-518
 export const updateGrossSales = (grossSales, account, amount) => {
   const taxonomyCode = account.TaxonomyCode;
   switch (true) {
     /* Vendas e serviços prestados */
-    case taxonomyCode >= 506 && taxonomyCode <= 512:
+    case (taxonomyCode >= 506 && taxonomyCode <= 510) ||
+      (taxonomyCode >= 513 && taxonomyCode <= 516):
       return grossSales + amount;
     default:
       return grossSales;

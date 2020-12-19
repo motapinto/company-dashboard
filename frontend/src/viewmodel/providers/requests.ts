@@ -9,11 +9,8 @@ axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${process.env.REACT_APP_TOKEN}`;
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-axios.defaults.mode = "cors";
-axios.credentials = "cross-site";
 
-const refreshToken = async (): Promise<any> => {
+export const refreshToken = async (): Promise<any> => {
   const formData = new FormData();
   formData.append(
     "client_id",
@@ -29,12 +26,8 @@ const refreshToken = async (): Promise<any> => {
   );
 
   const response = await axios.post(
-    "https://identity.primaverabss.com/connect/token",
-    {
-      client_id: (process.env.REACT_APP_CLIENT_ID ?? "").toString(),
-      client_secret: (process.env.REACT_APP_CLIENT_SECRET ?? "").toString(),
-      grant_type: (process.env.REACT_APP_GRANT_TYPE ?? "").toString(),
-    }
+    "https://cors-anywhere.herokuapp.com/https://identity.primaverabss.com/connect/token",
+    formData
   );
 
   axios.defaults.headers.common[
@@ -234,11 +227,14 @@ export const getDashboardKPI = async (): Promise<
   }
 };
 
-export const getAllProducts = async (): Promise<AxiosResponse<any>|undefined> => {
+export const getAllProducts = async (): Promise<
+  AxiosResponse<any> | undefined
+> => {
   try {
-    return await axios.get(jasminAPI + `/materialsCore/materialsItems/extension`);
+    return await axios.get(
+      jasminAPI + `/materialsCore/materialsItems/extension`
+    );
   } catch (error) {
     console.error("Could not get products!");
   }
-}
-
+};

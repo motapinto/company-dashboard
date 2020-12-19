@@ -8,6 +8,12 @@ import { getMonthlySales, getHeader, getDashboardKPI } from "./requests";
 
 const getSales = async (): Promise<Data> => {
   const salesByRegionData = (await getMonthlySales()).data;
+
+  let total = 0;
+  for (let i = 0; i < 12; i++) {
+    total += salesByRegionData.monthlySales[i];
+  }
+  console.log(total);
   return {
     label: "Monthly Sales",
     data: salesByRegionData.monthlySales,
