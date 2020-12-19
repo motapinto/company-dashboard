@@ -6,9 +6,6 @@ const jasminAPI = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENA
 const saftAPI = process.env.SAFT_API_URL || "http://localhost:5000";
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
-axios.defaults.headers.common[
-  "Authorization"
-] = `Bearer ${process.env.REACT_APP_TOKEN}`;
 
 export const refreshToken = async (): Promise<any> => {
   const formData = new FormData();
@@ -38,9 +35,8 @@ export const refreshToken = async (): Promise<any> => {
 export const getProductsRequest = async (): Promise<any> => {
   try {
     return await axios.get(jasminAPI + "/salescore/salesitems");
-  } catch (e) {
-    await refreshToken();
-    return await axios.get(jasminAPI + "/salescore/salesitems");
+  } catch (error) {
+    console.error("Could not productsRequest!");
   }
 };
 

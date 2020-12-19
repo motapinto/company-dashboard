@@ -41,8 +41,6 @@ export const getGrossNetSales = (db) => {
     }
   }
 
-  console.log(grossSalesMonthly);
-
   return {
     grossSales: grossSalesMonthly.reduce(
       (previousValue, current) => previousValue + current,

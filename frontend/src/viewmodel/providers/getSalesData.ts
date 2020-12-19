@@ -4,14 +4,6 @@ import getTopProducts from "./shared/getTopProducts";
 import { getSalesRegion } from "./shared/getSalesByRegion";
 import { getAOV, getCOGS, getHeader } from "./requests";
 
-const axios = require("axios").default;
-
-const url = `${process.env.REACT_APP_URL}/api/${process.env.REACT_APP_TENANT}/${process.env.REACT_APP_ORGANIZATION}`;
-axios.defaults.headers.common[
-  "Authorization"
-] = `Bearer ${process.env.REACT_APP_TOKEN}`;
-axios.defaults.headers.common["Content-Type"] = "application/json";
-
 const assembleCOGS = async (): Promise<Array<number>> => {
   const request = await getCOGS();
   return request.data.cogs;
