@@ -3,6 +3,5 @@
 .DS_Store
 .idea
 .vscode
-.env
 npm-debug.log*
 debug.log
