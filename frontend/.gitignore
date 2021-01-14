@@ -1,8 +1,0 @@
-/node_modules
-/build
-.DS_Store
-.idea
-.vscode
-npm-debug.log*
-debug.log
-.eslintcache
