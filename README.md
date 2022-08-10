@@ -11,9 +11,12 @@ You can read our presentation [here](https://github.com/motapinto/company-dashbo
 
 ## Gallery
 <p>
-<img src="https://imgur.com/Kfm03kh.jpg" height="275px" width="275px">
-<img src="https://imgur.com/AtwOxP1.jpg" height="275px" width="275px">
-<img src="https://imgur.com/iqj0TKi.jpg" height="275px" width="275px">
+<img src="images/screenshot-localhost-3000-1608377384123.png" height="420px" width="500px">
+<img src="images/screenshot-localhost-3000-1608377538271.png" height="420px" width="500px">
+<img src="images/screenshot-localhost-3000-1608377556678.png" height="420px" width="500px">
+<img src="images/screenshot-localhost-3000-1608377564516.png" height="420px" width="500px">
+<img src="images/screenshot-localhost-3000-1608377604625.png" height="420px" width="500px">
+<img src="images/screenshot-localhost-3000-1608377622609.png" height="420px" width="500px">
 </p>
 
 ## Usage
